@@ -12,4 +12,4 @@ Please proceed to [projects](https://github.com/JakeSiewJK64/SWE20001/projects) 
 
 ## Rules
 1. Please refrain from sharing code or sensitive information to users not associated with the project.
-2. Any additions or problems need fixing please create an [issue](https://github.com/JakeSiewJK64/SWE20001/issues) or add into the _Suggestions_ card in [projects](https://github.com/JakeSiewJK64/SWE20001/projects).
+2. Any additions or problems need fixing please create an [issue](https://github.com/JakeSiewJK64/SWE20001/issues/new) or add into the _Suggestions_ card in [projects](https://github.com/JakeSiewJK64/SWE20001/projects/1).
