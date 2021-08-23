@@ -13,3 +13,4 @@ Please proceed to [projects](https://github.com/JakeSiewJK64/SWE20001/projects/1
 ## Rules
 1. Please refrain from sharing code or sensitive information to users not associated with the project.
 2. Any additions or problems need fixing please create an [issue](https://github.com/JakeSiewJK64/SWE20001/issues/new) or add into the _Suggestions_ card in [projects](https://github.com/JakeSiewJK64/SWE20001/projects/1).
+3. In Projects, upon choosing a task please assign yourself and give an estimate time for completion. Drag the card from _**To-Dos**_ into _**In Progress**_.
