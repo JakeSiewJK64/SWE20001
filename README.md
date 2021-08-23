@@ -8,7 +8,7 @@
 ![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
 ![Windows 10](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
 
-Please proceed to [projects](https://github.com/JakeSiewJK64/SWE20001/projects) for more details about progress and pending to-dos.
+Please proceed to [projects](https://github.com/JakeSiewJK64/SWE20001/projects/1) for more details about progress and pending to-dos.
 
 ## Rules
 1. Please refrain from sharing code or sensitive information to users not associated with the project.
