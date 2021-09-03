@@ -8,6 +8,16 @@ namespace CleanArchitecture.Infrastructure.Persistence
 {
     public static class ApplicationDbContextSeed
     {
+        public static async Task SeedDefaultUserAsync(UserManager<ApplicationUser> userManager)
+        {
+            var defaultUser = new ApplicationUser { UserName = "jakeAdminLocal@gmail.com", Email = "jakeAdminLocal@gmail.com" };
+
+            if (userManager.Users.All(u => u.UserName != defaultUser.UserName))
+            {
+                await userManager.CreateAsync(defaultUser, "welcome123");
+                await userManager.AddToRoleAsync(defaultUser, "Administrator");
+            }
+        }
         public static async Task SeedDefaultRole(RoleManager<ApplicationRole> roleManager)
         {
             if (!roleManager.Roles.Any())
@@ -18,17 +28,6 @@ namespace CleanArchitecture.Infrastructure.Persistence
                 await roleManager.CreateAsync(adminRole);
                 await roleManager.CreateAsync(supportRole);
                 await roleManager.CreateAsync(userRole);
-            }
-        }
-
-        public static async Task SeedDefaultUserAsync(UserManager<ApplicationUser> userManager)
-        {
-            var defaultUser = new ApplicationUser { UserName = "jakeAdminLocal@gmail.com", Email = "jakeAdminLocal@gmail.com" };
-
-            if (userManager.Users.All(u => u.UserName != defaultUser.UserName))
-            {
-                await userManager.CreateAsync(defaultUser, "welcome123");
-                await userManager.AddToRoleAsync(defaultUser, "Administrator");
             }
         }
 

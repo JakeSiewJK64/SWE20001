@@ -8,19 +8,6 @@ namespace CleanArchitecture.Infrastructure.Persistence
 {
     public static class ApplicationDbContextSeed
     {
-        public static async Task SeedDefaultRole(RoleManager<ApplicationRole> roleManager)
-        {
-            if (!roleManager.Roles.Any())
-            {
-                var adminRole = new ApplicationRole { Name = "Administrator", Description = "Highest level access" };
-                var supportRole = new ApplicationRole { Name = "Support", Description = "Support level access" };
-                var userRole = new ApplicationRole { Name = "User", Description = "for branch access" };
-                await roleManager.CreateAsync(adminRole);
-                await roleManager.CreateAsync(supportRole);
-                await roleManager.CreateAsync(userRole);
-            }
-        }
-
         public static async Task SeedDefaultUserAsync(UserManager<ApplicationUser> userManager)
         {
             var defaultUser = new ApplicationUser { UserName = "jakeAdminLocal@gmail.com", Email = "jakeAdminLocal@gmail.com" };

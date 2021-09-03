@@ -3,7 +3,7 @@
   "UseInMemoryDatabase": false,
   "ConnectionStrings": {
     "azurestorage": "",
-    "DefaultConnection": "Server=localhost\\SQLEXPRESS;Database=SWE20001;Trusted_Connection=True;"
+    "DefaultConnection": "Server=localhost\\SQLEXPRESS;Database=ArknightsDb;Trusted_Connection=True;"
   },
   "Logging": {
     "LogLevel": {

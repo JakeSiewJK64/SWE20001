@@ -31,9 +31,7 @@ namespace CleanArchitecture.WebUI
                     }                   
 
                     var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
-                    var roleManager = services.GetRequiredService<RoleManager<ApplicationRole>>();
 
-                    await ApplicationDbContextSeed.SeedDefaultRole(roleManager);
                     await ApplicationDbContextSeed.SeedDefaultUserAsync(userManager);
                     await ApplicationDbContextSeed.SeedSampleDataAsync(context);
                 }
