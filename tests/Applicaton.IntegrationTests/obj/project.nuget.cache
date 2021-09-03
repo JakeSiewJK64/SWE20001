@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "MIjspYan3fbnCJ3S+Be3I2c0tAPt/HLB3MTHehqe+drzT0cLlNnEzf875/Rp6MvGBN2SP5cQA6LDdvgVc6ZJxg==",
+  "dgSpecHash": "/bL2V6sTPKngDkheNGd0HBrm32w9XMJZ1cPNSFGZ5qPTb3vyXufDAPKhf+e1vg/DfU/TPljyFx8KY3n0l1ZcvA==",
   "success": true,
-  "projectFilePath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\DotnetCleanArchitectureTemplate-master\\tests\\Applicaton.IntegrationTests\\Application.IntegrationTests.csproj",
+  "projectFilePath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\tests\\Applicaton.IntegrationTests\\Application.IntegrationTests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\joeka\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\joeka\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",

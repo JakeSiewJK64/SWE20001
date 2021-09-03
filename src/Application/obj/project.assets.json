@@ -5804,11 +5804,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\DotnetCleanArchitectureTemplate-master\\src\\Application\\Application.csproj",
+      "projectUniqueName": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\Application\\Application.csproj",
       "projectName": "CleanArchitecture.Application",
-      "projectPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\DotnetCleanArchitectureTemplate-master\\src\\Application\\Application.csproj",
+      "projectPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\Application\\Application.csproj",
       "packagesPath": "C:\\Users\\joeka\\.nuget\\packages\\",
-      "outputPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\DotnetCleanArchitectureTemplate-master\\src\\Application\\obj\\",
+      "outputPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\Application\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -5828,8 +5828,8 @@
         "netstandard2.1": {
           "targetAlias": "netstandard2.1",
           "projectReferences": {
-            "E:\\GitHub\\JakeSiewJK64\\SWE20001\\DotnetCleanArchitectureTemplate-master\\src\\Domain\\Domain.csproj": {
-              "projectPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\DotnetCleanArchitectureTemplate-master\\src\\Domain\\Domain.csproj"
+            "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\Domain\\Domain.csproj": {
+              "projectPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\Domain\\Domain.csproj"
             }
           }
         }

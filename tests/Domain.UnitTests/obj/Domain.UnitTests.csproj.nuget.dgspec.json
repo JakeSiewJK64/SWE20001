@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\GitHub\\JakeSiewJK64\\SWE20001\\DotnetCleanArchitectureTemplate-master\\tests\\Domain.UnitTests\\Domain.UnitTests.csproj": {}
+    "E:\\GitHub\\JakeSiewJK64\\SWE20001\\tests\\Domain.UnitTests\\Domain.UnitTests.csproj": {}
   },
   "projects": {
-    "E:\\GitHub\\JakeSiewJK64\\SWE20001\\DotnetCleanArchitectureTemplate-master\\src\\Domain\\Domain.csproj": {
+    "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\DotnetCleanArchitectureTemplate-master\\src\\Domain\\Domain.csproj",
+        "projectUniqueName": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\Domain\\Domain.csproj",
         "projectName": "CleanArchitecture.Domain",
-        "projectPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\DotnetCleanArchitectureTemplate-master\\src\\Domain\\Domain.csproj",
+        "projectPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\Domain\\Domain.csproj",
         "packagesPath": "C:\\Users\\joeka\\.nuget\\packages\\",
-        "outputPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\DotnetCleanArchitectureTemplate-master\\src\\Domain\\obj\\",
+        "outputPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -61,14 +61,14 @@
         }
       }
     },
-    "E:\\GitHub\\JakeSiewJK64\\SWE20001\\DotnetCleanArchitectureTemplate-master\\tests\\Domain.UnitTests\\Domain.UnitTests.csproj": {
+    "E:\\GitHub\\JakeSiewJK64\\SWE20001\\tests\\Domain.UnitTests\\Domain.UnitTests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\DotnetCleanArchitectureTemplate-master\\tests\\Domain.UnitTests\\Domain.UnitTests.csproj",
+        "projectUniqueName": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\tests\\Domain.UnitTests\\Domain.UnitTests.csproj",
         "projectName": "CleanArchitecture.Domain.UnitTests",
-        "projectPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\DotnetCleanArchitectureTemplate-master\\tests\\Domain.UnitTests\\Domain.UnitTests.csproj",
+        "projectPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\tests\\Domain.UnitTests\\Domain.UnitTests.csproj",
         "packagesPath": "C:\\Users\\joeka\\.nuget\\packages\\",
-        "outputPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\DotnetCleanArchitectureTemplate-master\\tests\\Domain.UnitTests\\obj\\",
+        "outputPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\tests\\Domain.UnitTests\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -88,8 +88,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "E:\\GitHub\\JakeSiewJK64\\SWE20001\\DotnetCleanArchitectureTemplate-master\\src\\Domain\\Domain.csproj": {
-                "projectPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\DotnetCleanArchitectureTemplate-master\\src\\Domain\\Domain.csproj"
+              "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\Domain\\Domain.csproj": {
+                "projectPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\Domain\\Domain.csproj"
               }
             }
           }

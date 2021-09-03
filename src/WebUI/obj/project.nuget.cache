@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "F2YLDykSmYdmZEqJN1N4KfL0ZMfJejU6HIjTOqpnfuBwphFbYTGgWBkEdk+wj+iatjpJN6n1BgPElJM5f6gX8w==",
+  "dgSpecHash": "lpBZvtYpuNyklqjpI/YH/fMldKxLh33OWKe5aRHQCSpZT1vb96NE1/tPp6TE+pHoEz263/jqton797FFh+mBiw==",
   "success": true,
-  "projectFilePath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\DotnetCleanArchitectureTemplate-master\\src\\WebUI\\WebUI.csproj",
+  "projectFilePath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\WebUI\\WebUI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\joeka\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\joeka\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",

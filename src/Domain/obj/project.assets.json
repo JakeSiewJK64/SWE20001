@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\DotnetCleanArchitectureTemplate-master\\src\\Domain\\Domain.csproj",
+      "projectUniqueName": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\Domain\\Domain.csproj",
       "projectName": "CleanArchitecture.Domain",
-      "projectPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\DotnetCleanArchitectureTemplate-master\\src\\Domain\\Domain.csproj",
+      "projectPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\Domain\\Domain.csproj",
       "packagesPath": "C:\\Users\\joeka\\.nuget\\packages\\",
-      "outputPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\DotnetCleanArchitectureTemplate-master\\src\\Domain\\obj\\",
+      "outputPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\Domain\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

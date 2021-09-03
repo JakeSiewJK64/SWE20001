@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "MV4hxk+lorfeLw0TzVSgZxd0a2nC/dMcjxgAKutso8zUy3uPnx0ZuJvd3o8rgMViYIaxaIDKLh71w0BslwDeHQ==",
+  "dgSpecHash": "JxhLfUmwIsrIwb5NKsKBVcn86MRxi/IFovUp/uXHoyPzE43fLLQV49xudRbpIt94ypQvMGU4Dyze/IWQL1DmYw==",
   "success": true,
-  "projectFilePath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\DotnetCleanArchitectureTemplate-master\\tests\\Domain.UnitTests\\Domain.UnitTests.csproj",
+  "projectFilePath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\tests\\Domain.UnitTests\\Domain.UnitTests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\joeka\\.nuget\\packages\\fluentassertions\\5.10.3\\fluentassertions.5.10.3.nupkg.sha512",
     "C:\\Users\\joeka\\.nuget\\packages\\microsoft.codecoverage\\16.4.0\\microsoft.codecoverage.16.4.0.nupkg.sha512",

@@ -1,0 +1,12 @@
+E:\GitHub\JakeSiewJK64\SWE20001\src\Application\bin\Debug\netstandard2.1\CleanArchitecture.Application.deps.json
+E:\GitHub\JakeSiewJK64\SWE20001\src\Application\bin\Debug\netstandard2.1\CleanArchitecture.Application.dll
+E:\GitHub\JakeSiewJK64\SWE20001\src\Application\bin\Debug\netstandard2.1\CleanArchitecture.Application.pdb
+E:\GitHub\JakeSiewJK64\SWE20001\src\Application\bin\Debug\netstandard2.1\CleanArchitecture.Domain.dll
+E:\GitHub\JakeSiewJK64\SWE20001\src\Application\bin\Debug\netstandard2.1\CleanArchitecture.Domain.pdb
+E:\GitHub\JakeSiewJK64\SWE20001\src\Application\obj\Debug\netstandard2.1\Application.csprojAssemblyReference.cache
+E:\GitHub\JakeSiewJK64\SWE20001\src\Application\obj\Debug\netstandard2.1\Application.AssemblyInfoInputs.cache
+E:\GitHub\JakeSiewJK64\SWE20001\src\Application\obj\Debug\netstandard2.1\Application.AssemblyInfo.cs
+E:\GitHub\JakeSiewJK64\SWE20001\src\Application\obj\Debug\netstandard2.1\Application.csproj.CoreCompileInputs.cache
+E:\GitHub\JakeSiewJK64\SWE20001\src\Application\obj\Debug\netstandard2.1\Application.csproj.CopyComplete
+E:\GitHub\JakeSiewJK64\SWE20001\src\Application\obj\Debug\netstandard2.1\CleanArchitecture.Application.dll
+E:\GitHub\JakeSiewJK64\SWE20001\src\Application\obj\Debug\netstandard2.1\CleanArchitecture.Application.pdb

@@ -12429,11 +12429,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\DotnetCleanArchitectureTemplate-master\\tests\\Applicaton.IntegrationTests\\Application.IntegrationTests.csproj",
+      "projectUniqueName": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\tests\\Applicaton.IntegrationTests\\Application.IntegrationTests.csproj",
       "projectName": "CleanArchitecture.Application.IntegrationTests",
-      "projectPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\DotnetCleanArchitectureTemplate-master\\tests\\Applicaton.IntegrationTests\\Application.IntegrationTests.csproj",
+      "projectPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\tests\\Applicaton.IntegrationTests\\Application.IntegrationTests.csproj",
       "packagesPath": "C:\\Users\\joeka\\.nuget\\packages\\",
-      "outputPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\DotnetCleanArchitectureTemplate-master\\tests\\Applicaton.IntegrationTests\\obj\\",
+      "outputPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\tests\\Applicaton.IntegrationTests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -12453,8 +12453,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "E:\\GitHub\\JakeSiewJK64\\SWE20001\\DotnetCleanArchitectureTemplate-master\\src\\WebUI\\WebUI.csproj": {
-              "projectPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\DotnetCleanArchitectureTemplate-master\\src\\WebUI\\WebUI.csproj"
+            "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\WebUI\\WebUI.csproj": {
+              "projectPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\WebUI\\WebUI.csproj"
             }
           }
         }
