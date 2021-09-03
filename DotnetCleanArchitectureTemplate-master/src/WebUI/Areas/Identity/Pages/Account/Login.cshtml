@@ -1,0 +1,73 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+}
+<div class="main-content">
+    <div class="container">
+        <div class="row" style="padding-top: 10%; ">
+            <div class="card shadow p-3 mb-5 bg-white rounded"
+                style="margin: auto; width: 400px; height: 560px; padding: 0.5em; text-align: center; ">
+                <div class="card-body" style="text-align: center">
+                    <section>
+                        <img src="/assets/images/rhodes_island.png" style="height: 200px">
+
+                        <h3 class="card-category" style="text-align: center; font-size: 15px;">
+                            This website requires you to sign
+                            in
+                            with your Gmail account
+                        </h3>
+                        @{
+                            if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                            {
+                                <div>
+                                    <p>
+                                        There are no external authentication services configured. See <a
+                                        href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
+                                        for details on setting up this ASP.NET application to support logging in via external
+                                        services.
+                                    </p>
+                                </div>
+                            }
+                            else
+                            {
+                                <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl"
+                            method="post" class="form-horizontal">
+                                    <div>
+                                        <p>
+                                            @foreach (var provider in Model.ExternalLogins)
+                                            {
+                                                <button type="submit" class="btn btn-warning" name="provider" value="@provider.Name"
+                                            title="Log in using your @provider.DisplayName account">Google</button>
+                                            }
+                                        </p>
+                                    </div>
+                                </form>
+                                <form id="account" method="post">
+                                    <div asp-validation-summary="All" class="text-danger"></div>
+                                    <p>
+                                        <label>Don't have a BP account? Login here: </label>
+                                    <div style="margin-top: 10px; ">
+                                        <input name="Email" placeholder="E-mail" type="email" asp-for="Input.Email"
+                                    class="form-control" />
+                                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                    </div>
+                                    <div style="margin-top: 10px; ">
+                                        <input name="Password" placeholder="Password" type="password" asp-for="Input.Password"
+                                    class="form-control" />
+                                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                    </div>
+                                    <div style="margin-top: 10px; ">
+                                        <button type="Submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                    </p>
+                                </form>
+                            }
+                        }
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
