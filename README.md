@@ -1,18 +1,72 @@
-# 🎄SWE20001: Managing Software Projects🎄
-![Markdown](https://img.shields.io/badge/markdown-%23000000.svg?style=for-the-badge&logo=markdown&logoColor=white)
-![Visual Studio Code](https://img.shields.io/badge/VisualStudioCode-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
-![Visual Studio](https://img.shields.io/badge/VisualStudio-5C2D91.svg?style=for-the-badge&logo=visual-studio&logoColor=white)
-![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
-![Discord](https://img.shields.io/badge/%3CServer%3E-%237289DA.svg?style=for-the-badge&logo=discord&logoColor=white)
-![Stack Overflow](https://img.shields.io/badge/-Stackoverflow-FE7A16?style=for-the-badge&logo=stack-overflow&logoColor=white)
-![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
-![Windows 10](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
+ <img align="left" width="116" height="116" src="https://raw.githubusercontent.com/jasontaylordev/CleanArchitecture/master/.github/icon.png" />
+ 
+ # Clean Architecture Solution Template
+![.NET Core](https://github.com/jasontaylordev/CleanArchitecture/workflows/.NET%20Core/badge.svg) [![Build status](https://codingflow.visualstudio.com/CleanArchitecture/_apis/build/status/CleanArchitecture-CI)](https://codingflow.visualstudio.com/CleanArchitecture/_build/latest?definitionId=23) [![Clean.Architecture.Solution.Template NuGet Package](https://img.shields.io/badge/nuget-1.1.1-blue)](https://www.nuget.org/packages/Clean.Architecture.Solution.Template) [![NuGet](https://img.shields.io/nuget/dt/Clean.Architecture.Solution.Template.svg)](https://www.nuget.org/packages/Clean.Architecture.Solution.Template) [![Twitter Follow](https://img.shields.io/twitter/follow/jasontaylordev.svg?style=social&label=Follow)](https://twitter.com/jasontaylordev)
 
-Please proceed to [projects](https://github.com/JakeSiewJK64/SWE20001/projects/1) for more details about progress and pending to-dos.
+<br/>
 
-## Rules
-1. Please refrain from sharing code or sensitive information to users not associated with the project.
-2. Any additions or problems need fixing please create an [issue](https://github.com/JakeSiewJK64/SWE20001/issues/new) or add into the _Suggestions_ card in [projects](https://github.com/JakeSiewJK64/SWE20001/projects/1).
-3. In Projects, upon choosing a task please assign yourself and give an estimate time for completion. Drag the card from _**To-Dos**_ into _**In Progress**_.
-4. If you have completed your assigned task, please drag the card into __**Completed**__ and inform in the WhatsApp Group.
-5. Please check the [projects](https://github.com/JakeSiewJK64/SWE20001/projects/1) regularly for updates.
+This is a solution template for creating a Single Page App (SPA) with Angular and ASP.NET Core following the principles of Clean Architecture. Create a new project based on this template by clicking the above **Use this template** button or by installing and running the associated NuGet package (see Getting Started for full details). 
+
+
+## Technologies
+* .NET 5.0
+* ASP NET 5.0
+* Entity Framework Core 5.0
+* Angular 11
+* MediatR
+* AutoMapper
+* FluentValidation
+* NUnit, FluentAssertions, Moq & Respawn
+
+## Getting Started
+
+1. Rename the Project to kick start new project development
+2. Ensure the following files are updated
+- Solution
+- Namespace
+
+### Database Configuration
+
+The template is configured to use an in-memory database by default. This ensures that all users will be able to run the solution without needing to set up additional infrastructure (e.g. SQL Server).
+
+If you would like to use SQL Server, you will need to update **WebUI/appsettings.json** as follows:
+
+```json
+  "UseInMemoryDatabase": false,
+```
+
+Verify that the **DefaultConnection** connection string within **appsettings.json** points to a valid SQL Server instance. 
+
+When you run the application the database will be automatically created (if necessary) and the latest migrations will be applied.
+
+### Database Migrations
+
+To use `dotnet-ef` for your migrations please add the following flags to your command (values assume you are executing from repository root)
+
+- `--project src/Infrastructure` (optional if in this folder)
+- `--startup-project src/WebUI`
+- `--output-dir Persistence/Migrations`
+
+For example, to add a new migration from the root folder:
+
+ `dotnet ef migrations add "SampleMigration" --project src\Infrastructure --startup-project src\WebUI --output-dir Persistence\Migrations`
+
+## Overview
+
+### Domain
+
+This will contain all entities, enums, exceptions, interfaces, types and logic specific to the domain layer.
+
+
+### Application
+
+This layer contains all application logic. It is dependent on the domain layer, but has no dependencies on any other layer or project. This layer defines interfaces that are implemented by outside layers. For example, if the application need to access a notification service, a new interface would be added to application and an implementation would be created within infrastructure.
+
+
+### Infrastructure
+
+This layer contains classes for accessing external resources such as file systems, web services, smtp, and so on. These classes should be based on interfaces defined within the application layer.
+
+### WebUI
+
+This layer is a single page application based on Angular 9 and ASP.NET Core 3.1. This layer depends on both the Application and Infrastructure layers, however, the dependency on Infrastructure is only to support dependency injection. Therefore only *Startup.cs* should reference Infrastructure.
