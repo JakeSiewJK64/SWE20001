@@ -1,0 +1,31 @@
+
+{
+  "UseInMemoryDatabase": false,
+  "ConnectionStrings": {
+    "azurestorage": "",
+    "DefaultConnection": "Server=localhost\\SQLEXPRESS;Database=ArknightsDb;Trusted_Connection=True;"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Warning"
+    }
+  },
+  "IdentityServer": {
+    "Clients": {
+      "CleanArchitecture.WebUI": {
+        "Profile": "IdentityServerSPA"
+      }
+    }
+  },
+  "Authentication": {
+    "Google": {
+      "ClientId": "760014299230-vu360025ag2qukph3fqrq4b9q11u9jjc.apps.googleusercontent.com",
+      "ClientSecret": "Kprdu-igtx_a7QuCnrLL0hLj",
+      "ApiKey": "AIzaSyADOxGVw6QCfoCPqGi_I1NP29HpQ2BYDeE"
+    }
+  },
+  "ServiceKeys": {
+    "Mandrill": "9RPMBP-fhHv51wGrDAc7nQ"
+  },
+  "AllowedHosts": "*"
+}
