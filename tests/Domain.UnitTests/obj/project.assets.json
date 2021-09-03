@@ -4736,23 +4736,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\joeka\\.nuget\\packages\\": {},
+    "C:\\Users\\USER\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\DotnetCleanArchitectureTemplate-master\\tests\\Domain.UnitTests\\Domain.UnitTests.csproj",
+      "projectUniqueName": "D:\\ReposMSP\\SWE20001\\tests\\Domain.UnitTests\\Domain.UnitTests.csproj",
       "projectName": "CleanArchitecture.Domain.UnitTests",
-      "projectPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\DotnetCleanArchitectureTemplate-master\\tests\\Domain.UnitTests\\Domain.UnitTests.csproj",
-      "packagesPath": "C:\\Users\\joeka\\.nuget\\packages\\",
-      "outputPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\DotnetCleanArchitectureTemplate-master\\tests\\Domain.UnitTests\\obj\\",
+      "projectPath": "D:\\ReposMSP\\SWE20001\\tests\\Domain.UnitTests\\Domain.UnitTests.csproj",
+      "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
+      "outputPath": "D:\\ReposMSP\\SWE20001\\tests\\Domain.UnitTests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\joeka\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4766,8 +4766,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "E:\\GitHub\\JakeSiewJK64\\SWE20001\\DotnetCleanArchitectureTemplate-master\\src\\Domain\\Domain.csproj": {
-              "projectPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\DotnetCleanArchitectureTemplate-master\\src\\Domain\\Domain.csproj"
+            "D:\\ReposMSP\\SWE20001\\src\\Domain\\Domain.csproj": {
+              "projectPath": "D:\\ReposMSP\\SWE20001\\src\\Domain\\Domain.csproj"
             }
           }
         }
@@ -4814,7 +4814,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
       }
     }
   }

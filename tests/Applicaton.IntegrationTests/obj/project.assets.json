@@ -4069,7 +4069,10 @@
         },
         "runtime": {
           "bin/placeholder/CleanArchitecture.Infrastructure.dll": {}
-        }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       },
       "CleanArchitecture.WebUI/1.0.0": {
         "type": "project",
@@ -12423,23 +12426,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\joeka\\.nuget\\packages\\": {},
+    "C:\\Users\\USER\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\DotnetCleanArchitectureTemplate-master\\tests\\Applicaton.IntegrationTests\\Application.IntegrationTests.csproj",
+      "projectUniqueName": "D:\\ReposMSP\\SWE20001\\tests\\Applicaton.IntegrationTests\\Application.IntegrationTests.csproj",
       "projectName": "CleanArchitecture.Application.IntegrationTests",
-      "projectPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\DotnetCleanArchitectureTemplate-master\\tests\\Applicaton.IntegrationTests\\Application.IntegrationTests.csproj",
-      "packagesPath": "C:\\Users\\joeka\\.nuget\\packages\\",
-      "outputPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\DotnetCleanArchitectureTemplate-master\\tests\\Applicaton.IntegrationTests\\obj\\",
+      "projectPath": "D:\\ReposMSP\\SWE20001\\tests\\Applicaton.IntegrationTests\\Application.IntegrationTests.csproj",
+      "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
+      "outputPath": "D:\\ReposMSP\\SWE20001\\tests\\Applicaton.IntegrationTests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\joeka\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -12453,8 +12456,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "E:\\GitHub\\JakeSiewJK64\\SWE20001\\DotnetCleanArchitectureTemplate-master\\src\\WebUI\\WebUI.csproj": {
-              "projectPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\DotnetCleanArchitectureTemplate-master\\src\\WebUI\\WebUI.csproj"
+            "D:\\ReposMSP\\SWE20001\\src\\WebUI\\WebUI.csproj": {
+              "projectPath": "D:\\ReposMSP\\SWE20001\\src\\WebUI\\WebUI.csproj"
             }
           }
         }
@@ -12505,11 +12508,14 @@
         "assetTargetFallback": true,
         "warn": true,
         "frameworkReferences": {
+          "Microsoft.AspNetCore.App": {
+            "privateAssets": "none"
+          },
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
       }
     }
   }

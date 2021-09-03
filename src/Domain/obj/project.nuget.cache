@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "knMiBQ9QNrpIoeO7s8ZYuzDvVGZzmQxZp86/xWRg0W45kfV/MAJ6GxiBVs4n78bIMcv06MNH+BXjspxJ67O20A==",
+  "dgSpecHash": "xDQiWYccUCIG99fY0hL6y+DKJa4hvtPUQUO7IaN1bMTiQrEH+gSxZ2amewRiCCUJJJ2YGmitNbvEPS1zB1UgRg==",
   "success": true,
-  "projectFilePath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\DotnetCleanArchitectureTemplate-master\\src\\Domain\\Domain.csproj",
+  "projectFilePath": "D:\\ReposMSP\\SWE20001\\src\\Domain\\Domain.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
