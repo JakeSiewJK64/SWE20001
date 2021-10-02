@@ -92,7 +92,7 @@ namespace CleanArchitecture.WebUI.Areas.Identity.Pages.Account
             }
 
             var email = info.Principal.FindFirstValue(ClaimTypes.Email);
-            if (!email.EndsWith("@doctor2u.my") && !email.EndsWith("@bphealthcare.com") && !email.EndsWith("@gmail.com"))
+            if (!email.EndsWith("@gmail.com"))
             {
                 ErrorMessage = $"Error from external provider: Only BP Healthcare email allowed to login";
                 return RedirectToPage("./Login", new { ReturnUrl = returnUrl });
@@ -105,7 +105,7 @@ namespace CleanArchitecture.WebUI.Areas.Identity.Pages.Account
                 _logger.LogInformation("{Name} logged in with {LoginProvider} provider.", info.Principal.Identity.Name, info.LoginProvider);
 
                 var user = await _userManager.FindByEmailAsync(email);
-                if (email.EndsWith("@doctor2u.my") || email.EndsWith("@bphealthcare.com")|| email.EndsWith("@gmail.com"))
+                if (email.EndsWith("@gmail.com"))
                 {
                     try
                     {
