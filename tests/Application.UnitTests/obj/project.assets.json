@@ -9994,24 +9994,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\justi\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\joeka\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Projects\\ManagingSoftwareProjects\\SWE20001\\tests\\Application.UnitTests\\Application.UnitTests.csproj",
+      "projectUniqueName": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\tests\\Application.UnitTests\\Application.UnitTests.csproj",
       "projectName": "CleanArchitecture.Application.UnitTests",
-      "projectPath": "D:\\Projects\\ManagingSoftwareProjects\\SWE20001\\tests\\Application.UnitTests\\Application.UnitTests.csproj",
-      "packagesPath": "C:\\Users\\justi\\.nuget\\packages\\",
-      "outputPath": "D:\\Projects\\ManagingSoftwareProjects\\SWE20001\\tests\\Application.UnitTests\\obj\\",
+      "projectPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\tests\\Application.UnitTests\\Application.UnitTests.csproj",
+      "packagesPath": "C:\\Users\\joeka\\.nuget\\packages\\",
+      "outputPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\tests\\Application.UnitTests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\justi\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\joeka\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -10025,11 +10024,11 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "D:\\Projects\\ManagingSoftwareProjects\\SWE20001\\src\\Application\\Application.csproj": {
-              "projectPath": "D:\\Projects\\ManagingSoftwareProjects\\SWE20001\\src\\Application\\Application.csproj"
+            "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\Application\\Application.csproj": {
+              "projectPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\Application\\Application.csproj"
             },
-            "D:\\Projects\\ManagingSoftwareProjects\\SWE20001\\src\\Infrastructure\\Infrastructure.csproj": {
-              "projectPath": "D:\\Projects\\ManagingSoftwareProjects\\SWE20001\\src\\Infrastructure\\Infrastructure.csproj"
+            "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\Infrastructure\\Infrastructure.csproj": {
+              "projectPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\Infrastructure\\Infrastructure.csproj"
             }
           }
         }
@@ -10080,7 +10079,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }
