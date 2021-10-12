@@ -1,23 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\WebUI\\WebUI.csproj": {}
+    "D:\\Projects\\ManagingSoftwareProjects\\SWE20001\\src\\WebUI\\WebUI.csproj": {}
   },
   "projects": {
-    "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\Application\\Application.csproj": {
+    "D:\\Projects\\ManagingSoftwareProjects\\SWE20001\\src\\Application\\Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\Application\\Application.csproj",
+        "projectUniqueName": "D:\\Projects\\ManagingSoftwareProjects\\SWE20001\\src\\Application\\Application.csproj",
         "projectName": "CleanArchitecture.Application",
-        "projectPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\Application\\Application.csproj",
-        "packagesPath": "C:\\Users\\joeka\\.nuget\\packages\\",
-        "outputPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\Application\\obj\\",
+        "projectPath": "D:\\Projects\\ManagingSoftwareProjects\\SWE20001\\src\\Application\\Application.csproj",
+        "packagesPath": "C:\\Users\\justi\\.nuget\\packages\\",
+        "outputPath": "D:\\Projects\\ManagingSoftwareProjects\\SWE20001\\src\\Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\joeka\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\justi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -31,8 +32,8 @@
           "netstandard2.1": {
             "targetAlias": "netstandard2.1",
             "projectReferences": {
-              "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\Domain\\Domain.csproj": {
-                "projectPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\Domain\\Domain.csproj"
+              "D:\\Projects\\ManagingSoftwareProjects\\SWE20001\\src\\Domain\\Domain.csproj": {
+                "projectPath": "D:\\Projects\\ManagingSoftwareProjects\\SWE20001\\src\\Domain\\Domain.csproj"
               }
             }
           }
@@ -95,24 +96,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\Domain\\Domain.csproj": {
+    "D:\\Projects\\ManagingSoftwareProjects\\SWE20001\\src\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\Domain\\Domain.csproj",
+        "projectUniqueName": "D:\\Projects\\ManagingSoftwareProjects\\SWE20001\\src\\Domain\\Domain.csproj",
         "projectName": "CleanArchitecture.Domain",
-        "projectPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\Domain\\Domain.csproj",
-        "packagesPath": "C:\\Users\\joeka\\.nuget\\packages\\",
-        "outputPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\Domain\\obj\\",
+        "projectPath": "D:\\Projects\\ManagingSoftwareProjects\\SWE20001\\src\\Domain\\Domain.csproj",
+        "packagesPath": "C:\\Users\\justi\\.nuget\\packages\\",
+        "outputPath": "D:\\Projects\\ManagingSoftwareProjects\\SWE20001\\src\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\joeka\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\justi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -152,24 +154,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\Infrastructure\\Infrastructure.csproj": {
+    "D:\\Projects\\ManagingSoftwareProjects\\SWE20001\\src\\Infrastructure\\Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\Infrastructure\\Infrastructure.csproj",
+        "projectUniqueName": "D:\\Projects\\ManagingSoftwareProjects\\SWE20001\\src\\Infrastructure\\Infrastructure.csproj",
         "projectName": "CleanArchitecture.Infrastructure",
-        "projectPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\Infrastructure\\Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\joeka\\.nuget\\packages\\",
-        "outputPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\Infrastructure\\obj\\",
+        "projectPath": "D:\\Projects\\ManagingSoftwareProjects\\SWE20001\\src\\Infrastructure\\Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\justi\\.nuget\\packages\\",
+        "outputPath": "D:\\Projects\\ManagingSoftwareProjects\\SWE20001\\src\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\joeka\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\justi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -183,8 +186,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\Application\\Application.csproj": {
-                "projectPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\Application\\Application.csproj"
+              "D:\\Projects\\ManagingSoftwareProjects\\SWE20001\\src\\Application\\Application.csproj": {
+                "projectPath": "D:\\Projects\\ManagingSoftwareProjects\\SWE20001\\src\\Application\\Application.csproj"
               }
             }
           }
@@ -263,24 +266,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\WebUI\\WebUI.csproj": {
+    "D:\\Projects\\ManagingSoftwareProjects\\SWE20001\\src\\WebUI\\WebUI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\WebUI\\WebUI.csproj",
+        "projectUniqueName": "D:\\Projects\\ManagingSoftwareProjects\\SWE20001\\src\\WebUI\\WebUI.csproj",
         "projectName": "CleanArchitecture.WebUI",
-        "projectPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\WebUI\\WebUI.csproj",
-        "packagesPath": "C:\\Users\\joeka\\.nuget\\packages\\",
-        "outputPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\WebUI\\obj\\",
+        "projectPath": "D:\\Projects\\ManagingSoftwareProjects\\SWE20001\\src\\WebUI\\WebUI.csproj",
+        "packagesPath": "C:\\Users\\justi\\.nuget\\packages\\",
+        "outputPath": "D:\\Projects\\ManagingSoftwareProjects\\SWE20001\\src\\WebUI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\joeka\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\justi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -294,11 +298,11 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\Application\\Application.csproj": {
-                "projectPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\Application\\Application.csproj"
+              "D:\\Projects\\ManagingSoftwareProjects\\SWE20001\\src\\Application\\Application.csproj": {
+                "projectPath": "D:\\Projects\\ManagingSoftwareProjects\\SWE20001\\src\\Application\\Application.csproj"
               },
-              "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\Infrastructure\\Infrastructure.csproj": {
-                "projectPath": "E:\\GitHub\\JakeSiewJK64\\SWE20001\\src\\Infrastructure\\Infrastructure.csproj"
+              "D:\\Projects\\ManagingSoftwareProjects\\SWE20001\\src\\Infrastructure\\Infrastructure.csproj": {
+                "projectPath": "D:\\Projects\\ManagingSoftwareProjects\\SWE20001\\src\\Infrastructure\\Infrastructure.csproj"
               }
             }
           }
@@ -349,13 +353,13 @@
             },
             "NSwag.AspNetCore": {
               "target": "Package",
-              "version": "[13.11.1, )"
+              "version": "[13.13.2, )"
             },
             "NSwag.MSBuild": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[13.11.1, )"
+              "version": "[13.13.2, )"
             }
           },
           "imports": [
@@ -376,7 +380,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }
