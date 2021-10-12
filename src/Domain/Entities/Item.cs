@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using CleanArchitecture.Domain.Common;
 
 namespace CleanArchitecture.Domain.Entities
@@ -15,7 +13,6 @@ namespace CleanArchitecture.Domain.Entities
 
         public Item()
         {
-
         }
 
         public int ItemId { get => _itemId; set => _itemId = value; }
