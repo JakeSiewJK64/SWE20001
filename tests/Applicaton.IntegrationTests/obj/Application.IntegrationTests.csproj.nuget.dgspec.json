@@ -352,13 +352,13 @@
             },
             "NSwag.AspNetCore": {
               "target": "Package",
-              "version": "[13.11.1, )"
+              "version": "[13.13.2, )"
             },
             "NSwag.MSBuild": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[13.11.1, )"
+              "version": "[13.13.2, )"
             }
           },
           "imports": [
