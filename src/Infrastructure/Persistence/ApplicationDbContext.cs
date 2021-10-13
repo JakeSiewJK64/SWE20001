@@ -30,6 +30,8 @@ namespace CleanArchitecture.Infrastructure.Persistence
 
         public DbSet<TodoList> TodoLists { get; set; }
         public DbSet<ApplicationRole> ApplicationRoles { get; set; }
+        public DbSet<Item> Items { get; set; }
+        public DbSet<SalesRecord> SalesRecord { get; set; }
         public DbSet<TodoItem> TodoItems { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
