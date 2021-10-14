@@ -14,13 +14,13 @@ import { RouterModule } from '@angular/router';
         CdkTableModule,
         MaterialModule,
         RouterModule,
-        FlexLayoutModule,
+        FlexLayoutModule
     ],
     declarations: [
     ],
     exports: [
-        // Modules
         CommonModule,
+        FlexLayoutModule,
         FormsModule,
         ReactiveFormsModule,
         MaterialModule,
