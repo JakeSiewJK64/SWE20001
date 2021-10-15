@@ -56,5 +56,20 @@ namespace CleanArchitecture.Infrastructure.Persistence
                 await context.SaveChangesAsync();
             }
         }
+
+        public static async Task SeedSampleItems(ApplicationDbContext context)
+        {
+            if (!context.Items.Any())
+            {
+                context.Items.Add(new Item { Quantity = 100, ItemName = "Acetaminophen (Tylenol)", Manufacturer_Id = 1, IsDeleted = false, ManufacturerName = "Rhodes Island Pharmaceuticals Ltd.", CostPrice = 10.99f, SellPrice = 12.99f, Status = Domain.Enums.Status.Full });
+                context.Items.Add(new Item { Quantity = 90, ItemName = "Aspirin", Manufacturer_Id = 1, IsDeleted = false, ManufacturerName = "Rhodes Island Pharmaceuticals Ltd.", CostPrice = 10.99f, SellPrice = 12.99f, Status = Domain.Enums.Status.Full });
+                context.Items.Add(new Item { Quantity = 90, ItemName = "naproxen", Manufacturer_Id = 1, IsDeleted = false, ManufacturerName = "Rhodes Island Pharmaceuticals Ltd.", CostPrice = 10.99f, SellPrice = 12.99f, Status = Domain.Enums.Status.Full });
+                context.Items.Add(new Item { Quantity = 70, ItemName = "ibuprofen", Manufacturer_Id = 1, IsDeleted = false, ManufacturerName = "Rhodes Island Pharmaceuticals Ltd.", CostPrice = 10.99f, SellPrice = 12.99f, Status = Domain.Enums.Status.Full });
+                context.Items.Add(new Item { Quantity = 70, ItemName = "Folic Acid", Manufacturer_Id = 1, IsDeleted = false, ManufacturerName = "Rhodes Island Pharmaceuticals Ltd.", CostPrice = 10.99f, SellPrice = 12.99f, Status = Domain.Enums.Status.Full });
+                context.Items.Add(new Item { Quantity = 50, ItemName = "Iron Suppliments", Manufacturer_Id = 1, IsDeleted = false, ManufacturerName = "Rhodes Island Pharmaceuticals Ltd.", CostPrice = 10.99f, SellPrice = 12.99f, Status = Domain.Enums.Status.Full });
+                context.Items.Add(new Item { Quantity = 40, ItemName = "Alprazolam", Manufacturer_Id = 1, IsDeleted = false, ManufacturerName = "Rhodes Island Pharmaceuticals Ltd.", CostPrice = 10.99f, SellPrice = 12.99f, Status = Domain.Enums.Status.Full });
+                await context.SaveChangesAsync();
+            }
+        }
     }
 }
