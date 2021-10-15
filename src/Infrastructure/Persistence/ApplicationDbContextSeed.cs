@@ -1,6 +1,7 @@
 ﻿using CleanArchitecture.Domain.Entities;
 using CleanArchitecture.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -68,6 +69,19 @@ namespace CleanArchitecture.Infrastructure.Persistence
                 context.Items.Add(new Item { Quantity = 70, ItemName = "Folic Acid", Manufacturer_Id = 1, IsDeleted = false, ManufacturerName = "Rhodes Island Pharmaceuticals Ltd.", CostPrice = 10.99f, SellPrice = 12.99f, Status = Domain.Enums.Status.Full });
                 context.Items.Add(new Item { Quantity = 50, ItemName = "Iron Suppliments", Manufacturer_Id = 1, IsDeleted = false, ManufacturerName = "Rhodes Island Pharmaceuticals Ltd.", CostPrice = 10.99f, SellPrice = 12.99f, Status = Domain.Enums.Status.Full });
                 context.Items.Add(new Item { Quantity = 40, ItemName = "Alprazolam", Manufacturer_Id = 1, IsDeleted = false, ManufacturerName = "Rhodes Island Pharmaceuticals Ltd.", CostPrice = 10.99f, SellPrice = 12.99f, Status = Domain.Enums.Status.Full });
+                await context.SaveChangesAsync();
+            }
+        }
+
+        public static async Task SeedSampleSales(ApplicationDbContext context)
+        {
+            if (!context.SalesRecord.Any())
+            {
+                context.SalesRecord.Add(new SalesRecord { Date = new DateTime(2021, 2, 22, 0, 0, 0).ToString("yyyy/MM/dd HH:mm:ss"), Items = "[{\"ItemId\":1,\"QuantityPurchased\":\"10\"},{\"ItemId\":2,\"QuantityPurchased\":\"20\"}]" });
+                context.SalesRecord.Add(new SalesRecord { Date = new DateTime(2021, 3, 2, 0, 0, 0).ToString("yyyy/MM/dd HH:mm:ss"), Items = "[{\"ItemId\":1,\"QuantityPurchased\":\"10\"},{\"ItemId\":2,\"QuantityPurchased\":\"20\"}]" });
+                context.SalesRecord.Add(new SalesRecord { Date = new DateTime(2021, 2, 13, 0, 0, 0).ToString("yyyy/MM/dd HH:mm:ss"), Items = "[{\"ItemId\":1,\"QuantityPurchased\":\"10\"},{\"ItemId\":2,\"QuantityPurchased\":\"20\"}]" });
+                context.SalesRecord.Add(new SalesRecord { Date = new DateTime(2021, 10, 20, 0, 0, 0).ToString("yyyy/MM/dd HH:mm:ss"), Items = "[{\"ItemId\":1,\"QuantityPurchased\":\"10\"},{\"ItemId\":2,\"QuantityPurchased\":\"20\"}]" });
+                context.SalesRecord.Add(new SalesRecord { Date = new DateTime(2021, 6, 10, 0, 0, 0).ToString("yyyy/MM/dd HH:mm:ss"), Items = "[{\"ItemId\":1,\"QuantityPurchased\":\"10\"},{\"ItemId\":2,\"QuantityPurchased\":\"20\"}]" });
                 await context.SaveChangesAsync();
             }
         }
