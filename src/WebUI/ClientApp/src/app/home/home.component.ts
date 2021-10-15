@@ -1,6 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {MatTable} from '@angular/material/table';
-
+import {EditSalesDialogComponent} from '../_dialog/edit-sales-dialog/edit-sales-dialog.component';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 export interface SalesRecord {
   Sales_ID : number;
   Date: number;
@@ -32,8 +33,13 @@ const ELEMENT_DATA: SalesRecord[] = [
 export class HomeComponent {
   displayedColumns: string[] = ['Sales_ID', 'Date', 'Employee_ID', 'Item_ID', 'Quantity', 'Remarks', 'isDeleted'];
   dataSource = ELEMENT_DATA;
+  dialogref : any;
 
   @ViewChild(MatTable) table: MatTable<SalesRecord>;
+
+  constructor(private dialogservice: MatDialog){
+
+  }
 
   addData() {
     const randomElementIndex = Math.floor(Math.random() * ELEMENT_DATA.length);
@@ -41,8 +47,12 @@ export class HomeComponent {
     this.table.renderRows();
   }
 
-  removeData() {
-    this.dataSource.pop();
-    this.table.renderRows();
+  openeditdialog() {
+    this.dialogref=this.dialogservice.open(EditSalesDialogComponent, {
+      width:  '250px',
+    })
   }
+
+
+
 }
