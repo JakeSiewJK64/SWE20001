@@ -28,6 +28,7 @@ namespace CleanArchitecture.Infrastructure.Identity
             var userRoles = await UserManager.GetRolesAsync(user);
 
             var role = userRoles.FirstOrDefault();
+            if (role == null) role = "User";
             var claims = new List<Claim>();
             claims.Add(new Claim(JwtClaimTypes.Role, role));
             claims.Add(new Claim(JwtClaimTypes.Email, user.Email));
