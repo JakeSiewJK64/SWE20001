@@ -18,17 +18,21 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { SharedModule } from './shared/shared.module';
 import { EditSalesDialogComponent } from './_dialog/edit-sales-dialog/edit-sales-dialog.component';
+import { InventoryComponent } from './inventory/inventory.component';
+import { SalesComponent } from './sales/sales.component';
 
 @NgModule({
-  declarations: [
+  declarations: [		
     AppComponent,
     NavMenuComponent,
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
     TodoComponent,
-    EditSalesDialogComponent
-  ],
+    EditSalesDialogComponent,
+      InventoryComponent,
+      SalesComponent
+   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     FontAwesomeModule,
@@ -38,6 +42,8 @@ import { EditSalesDialogComponent } from './_dialog/edit-sales-dialog/edit-sales
     ApiAuthorizationModule,
     RouterModule.forRoot([
     { path: '', component: HomeComponent, pathMatch: 'full' },
+    { path: 'inventory', component: InventoryComponent },
+    { path: 'sales', component: SalesComponent },
     { path: 'counter', component: CounterComponent },
     { path: 'fetch-data', component: FetchDataComponent },
     { path: 'todo', component: TodoComponent, canActivate: [AuthorizeGuard] },
