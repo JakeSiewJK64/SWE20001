@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {MatTable} from '@angular/material/table';
-import {EditSalesDialogComponent} from '../_dialog/edit-sales-dialog/edit-sales-dialog.component';
+import { SalesDetailsComponentComponent } from '../sales-dialogs/sales-details-component/sales-details-component.component';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 export interface SalesRecord {
   Sales_ID : number;
@@ -48,7 +48,7 @@ export class HomeComponent {
   }
 
   openeditdialog() {
-    this.dialogref=this.dialogservice.open(EditSalesDialogComponent, {
+    this.dialogref=this.dialogservice.open(SalesDetailsComponentComponent, {
       width:  '250px',
     })
   }

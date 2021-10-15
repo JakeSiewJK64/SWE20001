@@ -17,7 +17,6 @@ import { AuthorizeInterceptor } from 'src/api-authorization/authorize.intercepto
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { SharedModule } from './shared/shared.module';
-import { EditSalesDialogComponent } from './_dialog/edit-sales-dialog/edit-sales-dialog.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { SalesComponent } from './sales/sales.component';
 
@@ -29,7 +28,6 @@ import { SalesComponent } from './sales/sales.component';
     CounterComponent,
     FetchDataComponent,
     TodoComponent,
-    EditSalesDialogComponent,
       InventoryComponent,
       SalesComponent
    ],
