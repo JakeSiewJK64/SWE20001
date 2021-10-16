@@ -8,12 +8,14 @@ namespace CleanArchitecture.Domain.Entities
     {
         private int _itemId, _quantity, _batchId, _manufacturer_Id;
         private Status _status;
+        private ItemCategory _itemCategory;
         private float _costPrice, _sellPrice;
         private string _itemName, _manufacturerName, _remarks;
         private DateTime _restockDate, _expDate;
         private bool _isDeleted;
 
         public Item() { }
+        public ItemCategory ItemCategory { get => _itemCategory; set => _itemCategory = value; }
         public int ItemId { get => _itemId; set => _itemId = value; }
         public int Quantity { get => _quantity; set => _quantity = value; }
         public int BatchId { get => _batchId; set => _batchId = value; }
