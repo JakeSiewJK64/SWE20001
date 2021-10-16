@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { SalesDto, SalesListClient } from 'src/app/cleanarchitecture-api';
+import { ItemCategory, SalesDto, SalesListClient } from 'src/app/cleanarchitecture-api';
 import { EditSalesDetailsComponentComponent } from '../edit-sales-details-component/edit-sales-details-component.component';
 
 @Component({
@@ -14,16 +14,16 @@ export class SalesDetailsComponentComponent implements OnInit {
     private dialogservice: MatDialog, 
     private dialogRef: MatDialogRef<SalesDetailsComponentComponent>,
     @Inject(MAT_DIALOG_DATA) public data: SalesDto) { }
-    displayedColumns: string[] = ['ItemID', 'Name', 'Quantity', 'ItemDetail'];
+    displayedColumns: string[] = ['ItemID', 'Name', 'Type', 'Quantity'];
   salesDate: Date = new Date(this.data._date);
   dataSource: any;
+  ItemType = ItemCategory;
   ngOnInit() {
     this.load();
   }
 
   load() {
     this.dataSource = this.data._salesItemList;
-    console.log(this.data);
   }
 
   saveSales() {
