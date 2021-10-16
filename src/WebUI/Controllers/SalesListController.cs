@@ -12,13 +12,13 @@ namespace CleanArchitecture.WebUI.Controllers
     public class SalesListController : ApiController
     {
         [HttpGet]
-        public async Task<ActionResult<List<SalesRecord>>> GetAllSalesRecordsQuery()
+        public async Task<ActionResult<List<SalesDto>>> GetAllSalesRecordsQuery()
         {
             return await Mediator.Send(new GetAllSalesQuery());
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<SalesRecord>>> GetSalesByIdQuery(string searchCriteria) 
+        public async Task<ActionResult<List<SalesDto>>> GetSalesByIdQuery(string searchCriteria) 
             => Ok(await Mediator.Send(new GetSalesByIdQuery { SearchCriteria = searchCriteria }));
 
         [HttpPost]

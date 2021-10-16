@@ -1,6 +1,8 @@
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using CleanArchitecture.Application.Common.Helpers;
 using CleanArchitecture.Application.Common.Interfaces;
+using CleanArchitecture.Application.Common.Models;
 using CleanArchitecture.Application.Sales.Commands.GetSales;
 using CleanArchitecture.Domain.Entities;
 using CleanArchitecture.Domain.Enums;
@@ -14,12 +16,12 @@ using System.Threading.Tasks;
 
 namespace CleanArchitecture.Application.Sales.Queries.GetSalesByIdQuery
 {
-    public class GetSalesByIdQuery : IRequest<List<SalesRecord>>
+    public class GetSalesByIdQuery : IRequest<List<SalesDto>>
     {
         public string SearchCriteria { get; set; }
     }
 
-    public class GetSalesQueryHandler : IRequestHandler<GetSalesByIdQuery, List<SalesRecord>>
+    public class GetSalesQueryHandler : IRequestHandler<GetSalesByIdQuery, List<SalesDto>>
     {
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
@@ -30,19 +32,37 @@ namespace CleanArchitecture.Application.Sales.Queries.GetSalesByIdQuery
             _mapper = mapper;
         }
 
-        public async Task<List<SalesRecord>> Handle(GetSalesByIdQuery request, CancellationToken cancellationToken)
+        public async Task<List<SalesDto>> Handle(GetSalesByIdQuery request, CancellationToken cancellationToken)
         {
             try
             {
-                return await _context.SalesRecord
-                    .Where(x => x.SalesRecordId.Equals(int.Parse(request.SearchCriteria))
-                        || x.Remarks.Contains(request.SearchCriteria)
-                        || x.LastModifiedBy.Contains(request.SearchCriteria)
-                        || x.Items.Contains(request.SearchCriteria)
-                    ).ToListAsync(cancellationToken);
+                var sales = await _context.SalesRecord
+                    .Where(x => x.SalesRecordId == int.Parse(request.SearchCriteria) ||
+                        x.Remarks.Contains(request.SearchCriteria) ||
+                        x.EmployeeId.Equals(int.Parse(request.SearchCriteria)) &&
+                        !x.IsDeleted
+                    )
+                    .ProjectTo<SalesDto>(_mapper.ConfigurationProvider)
+                    .ToListAsync();
+                foreach (SalesDto s in sales)
+                {
+                    var items = new List<SalesItemListDto>();
+                    foreach (SalesItemListDto d in s._items.ToObject<List<SalesItemListDto>>())
+                    {
+                        d.Item = _context.Items.Where(x => x.ItemId.Equals(d.ItemId)).First();
+                        items.Add(new SalesItemListDto
+                        {
+                            Item = d.Item,
+                            ItemId = d.ItemId,
+                            Quantity = d.Quantity
+                        });
+                    }
+                    s._items = items.ToStringJSON();
+                }
+                return sales;
             } catch(Exception e)
             {
-                return new List<SalesRecord>();
+                return new List<SalesDto>();
             }
         }
     }
