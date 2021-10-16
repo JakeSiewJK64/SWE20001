@@ -16,3 +16,13 @@ html {
 .box-shadow {
   box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
+
+.pharmacy-logo {
+  width: 3rem;
+  height: auto;
+  margin: 5px;
+}
+
+.home-def-button {
+  cursor: pointer;
+}

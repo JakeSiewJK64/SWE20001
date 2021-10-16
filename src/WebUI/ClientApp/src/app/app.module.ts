@@ -19,18 +19,20 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { SharedModule } from './shared/shared.module';
 import { InventoryComponent } from './inventory/inventory.component';
 import { SalesComponent } from './sales/sales.component';
+import { SalesDetailsComponentComponent } from './sales/_dialogs/sales-details-component/sales-details-component.component';
 
 @NgModule({
-  declarations: [		
+  declarations: [
     AppComponent,
     NavMenuComponent,
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
     TodoComponent,
-      InventoryComponent,
-      SalesComponent
-   ],
+    InventoryComponent,
+    SalesComponent,
+    SalesDetailsComponentComponent
+  ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     FontAwesomeModule,
@@ -39,13 +41,13 @@ import { SalesComponent } from './sales/sales.component';
     FormsModule,
     ApiAuthorizationModule,
     RouterModule.forRoot([
-    { path: '', component: HomeComponent, pathMatch: 'full' },
-    { path: 'inventory', component: InventoryComponent },
-    { path: 'sales', component: SalesComponent },
-    { path: 'counter', component: CounterComponent },
-    { path: 'fetch-data', component: FetchDataComponent },
-    { path: 'todo', component: TodoComponent, canActivate: [AuthorizeGuard] },
-], { relativeLinkResolution: 'legacy' }),
+      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: 'inventory', component: InventoryComponent },
+      { path: 'sales', component: SalesComponent },
+      { path: 'counter', component: CounterComponent },
+      { path: 'fetch-data', component: FetchDataComponent },
+      { path: 'todo', component: TodoComponent, canActivate: [AuthorizeGuard] },
+    ], { relativeLinkResolution: 'legacy' }),
     BrowserAnimationsModule,
     ModalModule.forRoot()
   ],

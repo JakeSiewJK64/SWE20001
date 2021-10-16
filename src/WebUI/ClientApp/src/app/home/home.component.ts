@@ -1,58 +1,50 @@
-import {Component, ViewChild} from '@angular/core';
-import {MatTable} from '@angular/material/table';
-import { SalesDetailsComponentComponent } from '../sales-dialogs/sales-details-component/sales-details-component.component';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-export interface SalesRecord {
-  Sales_ID : number;
-  Date: number;
-  Employee_ID: number;
-  Item_ID: number;
-  Quantity : number
-  Remarks: string;
-  isDeleted: boolean;
-}
-
-const ELEMENT_DATA: SalesRecord[] = [
-  {Sales_ID: 1, Date: 1, Employee_ID: 123, Item_ID: 321, Quantity: 666, Remarks:'remarks', isDeleted:true},
-  {Sales_ID: 2, Date: 1, Employee_ID: 123, Item_ID: 321, Quantity: 666, Remarks:'remarks', isDeleted:true},
-  {Sales_ID: 3, Date: 1, Employee_ID: 123, Item_ID: 321, Quantity: 666, Remarks:'remarks', isDeleted:true},
-  {Sales_ID: 4, Date: 1, Employee_ID: 123, Item_ID: 321, Quantity: 666, Remarks:'remarks', isDeleted:true},
-  {Sales_ID: 5, Date: 1, Employee_ID: 123, Item_ID: 321, Quantity: 666, Remarks:'remarks', isDeleted:true},
-  {Sales_ID: 6, Date: 1, Employee_ID: 123, Item_ID: 321, Quantity: 666, Remarks:'remarks', isDeleted:true},
-  {Sales_ID: 7, Date: 1, Employee_ID: 123, Item_ID: 321, Quantity: 666, Remarks:'remarks', isDeleted:true},
-  {Sales_ID: 8, Date: 1, Employee_ID: 123, Item_ID: 321, Quantity: 666, Remarks:'remarks', isDeleted:true},
-  {Sales_ID: 9, Date: 1, Employee_ID: 123, Item_ID: 321, Quantity: 666, Remarks:'remarks', isDeleted:true},
-  {Sales_ID: 10, Date: 1, Employee_ID: 123, Item_ID: 321, Quantity: 666, Remarks:'remarks', isDeleted:true},
-];
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatTable } from '@angular/material/table';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { SalesDto, SalesListClient, SalesRecord } from '../cleanarchitecture-api';
+import { SalesDetailsComponentComponent } from '../sales/_dialogs/sales-details-component/sales-details-component.component';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
-  displayedColumns: string[] = ['Sales_ID', 'Date', 'Employee_ID', 'Item_ID', 'Quantity', 'Remarks', 'isDeleted'];
-  dataSource = ELEMENT_DATA;
-  dialogref : any;
+export class HomeComponent implements OnInit {
+  displayedColumns: string[] = ['Sales_ID', 'Date', 'Employee_ID', 'Remarks', 'isDeleted', 'CreatedBy'];
+  dataSource: any;
+  dialogref: any;
+  isLoading: boolean = false;
+  date: Date = new Date();
 
   @ViewChild(MatTable) table: MatTable<SalesRecord>;
 
-  constructor(private dialogservice: MatDialog){
+  constructor(private salesService: SalesListClient, private dialogservice: MatDialog) {
+  }
 
+  ngOnInit(): void {
+    this.load();
+  }
+
+  load() {
+    this.isLoading = true;
+    this.salesService.getAllSalesRecordsQuery().subscribe(x => this.dataSource = x);
+    this.isLoading = false;
   }
 
   addData() {
-    const randomElementIndex = Math.floor(Math.random() * ELEMENT_DATA.length);
-    this.dataSource.push(ELEMENT_DATA[randomElementIndex]);
-    this.table.renderRows();
   }
 
-  openeditdialog() {
-    this.dialogref=this.dialogservice.open(SalesDetailsComponentComponent, {
-      width:  '250px',
+  openEditDialog(data: any) {
+    this.dialogref = this.dialogservice.open(SalesDetailsComponentComponent, {
+      width: '1000px',
+      data: data
     })
   }
 
-
-
+  openEditDialogNew() {
+    this.dialogref = this.dialogservice.open(SalesDetailsComponentComponent, {
+      width: '1000px',
+      data: new SalesDto()
+    })
+  }
 }
