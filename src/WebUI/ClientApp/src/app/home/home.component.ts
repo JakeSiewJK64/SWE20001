@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTable } from '@angular/material/table';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { SalesDto, SalesListClient, SalesRecord } from '../cleanarchitecture-api';
+import { SalesDto, SalesListClient } from '../cleanarchitecture-api';
 import { SalesDetailsComponentComponent } from '../sales/_dialogs/sales-details-component/sales-details-component.component';
 
 @Component({
@@ -10,13 +10,13 @@ import { SalesDetailsComponentComponent } from '../sales/_dialogs/sales-details-
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  displayedColumns: string[] = ['Sales_ID', 'Date', 'Employee_ID', 'Remarks', 'isDeleted', 'CreatedBy'];
+  displayedColumns: string[] = ['Sales_ID', 'Date', 'Employee_ID', 'Remarks', 'isDeleted', 'CreatedBy', 'LastModifiedBy'];
   dataSource: any;
   dialogref: any;
   isLoading: boolean = false;
   date: Date = new Date();
 
-  @ViewChild(MatTable) table: MatTable<SalesRecord>;
+  @ViewChild(MatTable) table: MatTable<SalesDto>;
 
   constructor(private salesService: SalesListClient, private dialogservice: MatDialog) {
   }
