@@ -32,7 +32,7 @@ namespace CleanArchitecture.Application.Sales.Queries.UpsertSalesCommand
             var salesToAdd = new SalesRecord
             {
                 SalesRecordId = request.salesObj._salesRecordId,
-                Date = new DateTime().ToString(),
+                Date = request.salesObj._date,
                 CreatedBy = request.salesObj.CreatedBy,
                 EmployeeId = request.salesObj._employeeId,
                 Remarks = request.salesObj._remarks,

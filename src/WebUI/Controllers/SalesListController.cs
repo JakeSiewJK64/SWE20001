@@ -22,7 +22,7 @@ namespace CleanArchitecture.WebUI.Controllers
             => Ok(await Mediator.Send(new GetSalesByIdQuery { SearchCriteria = searchCriteria }));
 
         [HttpPost]
-        public async Task<ActionResult<List<SalesRecord>>> UpsertSalesCommand(SalesDto salesDto)
+        public async Task<ActionResult<int>> UpsertSalesCommand(SalesDto salesDto)
             => Ok(await Mediator.Send(new UpsertSalesCommand { salesObj = salesDto }));
     }
 }

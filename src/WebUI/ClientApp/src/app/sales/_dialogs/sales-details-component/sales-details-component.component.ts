@@ -1,8 +1,13 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ItemCategory, SalesDto, SalesListClient } from 'src/app/cleanarchitecture-api';
+import { Item, ItemCategory, SalesDto, SalesItemListDto, SalesListClient } from 'src/app/cleanarchitecture-api';
 import { EditSalesDetailsComponentComponent } from '../edit-sales-details-component/edit-sales-details-component.component';
 
+export class CustomSalesItemDto {
+  itemId: number;
+  item: Item;
+  quantity: number;
+}
 @Component({
   selector: 'app-sales-details-component',
   templateUrl: './sales-details-component.component.html',
@@ -11,13 +16,18 @@ import { EditSalesDetailsComponentComponent } from '../edit-sales-details-compon
 export class SalesDetailsComponentComponent implements OnInit {
 
   constructor(private saleService: SalesListClient,
-    private dialogservice: MatDialog, 
+    private dialogservice: MatDialog,
     private dialogRef: MatDialogRef<SalesDetailsComponentComponent>,
     @Inject(MAT_DIALOG_DATA) public data: SalesDto) { }
-    displayedColumns: string[] = ['ItemID', 'Name', 'Type', 'Quantity'];
+
+  displayedColumns: string[] = ['ItemID', 'Name', 'Type', 'Quantity'];
   salesDate: Date = new Date(this.data._date);
   dataSource: any;
+  sendData: SalesDto = new SalesDto();
   ItemType = ItemCategory;
+  itemList: CustomSalesItemDto[] = Array<CustomSalesItemDto>()
+  customItem: CustomSalesItemDto = new CustomSalesItemDto();
+
   ngOnInit() {
     this.load();
   }
@@ -27,8 +37,21 @@ export class SalesDetailsComponentComponent implements OnInit {
   }
 
   saveSales() {
-    this.data._date = this.salesDate.toString();
-    this.saleService.upsertSalesCommand(this.data).subscribe(x => console.log(x));
+    this.data._salesItemList.forEach(x => {
+      this.customItem = new CustomSalesItemDto()
+      this.customItem.itemId = x.itemId
+      this.customItem.quantity = x.quantity
+      this.itemList.push(this.customItem)
+    })
+    this.data._items = JSON.stringify(this.itemList).replace('"', '\"');
+
+    this.sendData._salesItemList = [];
+    this.sendData._remarks = this.data._remarks;
+    this.sendData._date = this.salesDate.toString();
+    this.sendData._employeeId = this.data._employeeId;
+    this.sendData._items = this.data._items;
+    this.sendData._salesRecordId = this.data._salesRecordId;
+    this.saleService.upsertSalesCommand(this.sendData).subscribe(x => console.log(x));
   }
 
   closeDialog() {
