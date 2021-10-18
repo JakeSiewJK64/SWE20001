@@ -5,6 +5,7 @@ using CleanArchitecture.Application.TodoLists.Queries.ExportTodos;
 using CleanArchitecture.Application.TodoLists.Queries.GetTodos;*/
 
 using CleanArchitecture.Application.Sales.Commands.GetSales;
+using CleanArchitecture.Application.Sales.Commands.GenerateSalesReport;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -20,13 +21,13 @@ namespace CleanArchitecture.WebUI.Controllers
             return await Mediator.Send(new GetSales());
         }
 
-       /* [HttpGet("{id}")]
-        public async Task<FileResult> Get(int id)
+       [HttpGet("{date}")]
+        public async Task<FileResult> Get(string date)
         {
-            var vm = await Mediator.Send(new ExportTodosQuery { ListId = id });
+            var vm = await Mediator.Send(new ExportSalesReportQuery { Date = date });
 
             return File(vm.Content, vm.ContentType, vm.FileName);
-        }*/
+        }
 
        /* [HttpPost]
         public async Task<ActionResult<int>> Create(CreateTodoListCommand command)
