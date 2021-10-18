@@ -1,8 +1,6 @@
-﻿using CleanArchitecture.Application.Sales.Commands.GetSales;
-using CleanArchitecture.Application.Sales.Queries.GetAllSalesQuery;
-using CleanArchitecture.Application.Sales.Queries.GetSalesByIdQuery;
-using CleanArchitecture.Application.Sales.Queries.UpsertSalesCommand;
-using CleanArchitecture.Domain.Entities;
+using CleanArchitecture.Application.Sales.Commands.GetSales;
+using CleanArchitecture.Application.Sales.Commands.GenerateSalesReport;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -24,5 +22,13 @@ namespace CleanArchitecture.WebUI.Controllers
         [HttpPost]
         public async Task<ActionResult<int>> UpsertSalesCommand(SalesDto salesDto)
             => Ok(await Mediator.Send(new UpsertSalesCommand { salesObj = salesDto }));
+
+            [HttpGet("{date}")]
+        public async Task<FileResult> Get(string date)
+        {
+            var vm = await Mediator.Send(new ExportSalesReportQuery { Date = date });
+
+            return File(vm.Content, vm.ContentType, vm.FileName);
+        }
     }
 }
