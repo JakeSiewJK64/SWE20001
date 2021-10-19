@@ -20,6 +20,7 @@ import { SharedModule } from './shared/shared.module';
 import { InventoryComponent } from './inventory/inventory.component';
 import { SalesComponent } from './sales/sales.component';
 import { SalesDetailsComponentComponent } from './sales/_dialogs/sales-details-component/sales-details-component.component';
+import { EditSalesDetailsComponentComponent } from './sales/_dialogs/edit-sales-details-component/edit-sales-details-component.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { SalesDetailsComponentComponent } from './sales/_dialogs/sales-details-c
     TodoComponent,
     InventoryComponent,
     SalesComponent,
-    SalesDetailsComponentComponent
+    SalesDetailsComponentComponent,
+    EditSalesDetailsComponentComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

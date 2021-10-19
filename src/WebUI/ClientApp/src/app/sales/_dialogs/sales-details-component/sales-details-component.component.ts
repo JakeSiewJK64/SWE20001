@@ -1,5 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { TdDialogService } from '@covalent/core/dialogs';
 import { AuthorizeService } from 'src/api-authorization/authorize.service';
 import { Item, ItemCategory, SalesDto, SalesItemListDto, SalesListClient } from 'src/app/cleanarchitecture-api';
 import { EditSalesDetailsComponentComponent } from '../edit-sales-details-component/edit-sales-details-component.component';
@@ -16,9 +18,10 @@ export class CustomSalesItemDto {
 export class SalesDetailsComponentComponent implements OnInit {
 
   constructor(private saleService: SalesListClient,
-    private dialogservice: MatDialog,
+    private dialogService: MatDialog,
     private userClient: AuthorizeService,
     private dialogRef: MatDialogRef<SalesDetailsComponentComponent>,
+    private snackbar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data: SalesDto) { }
 
   displayedColumns: string[] = ['ItemID', 'Name', 'Type', 'Quantity'];
@@ -34,10 +37,22 @@ export class SalesDetailsComponentComponent implements OnInit {
   }
 
   load() {
+    if(this.data._salesItemList == undefined) this.data._salesItemList = new Array<SalesItemListDto>();
     this.dataSource = this.data._salesItemList;
   }
 
+  addSalesItem() {
+    this.dialogService.open(EditSalesDetailsComponentComponent, {
+      width: '800px',
+    })
+  }
+
   saveSales() {
+    if(this.data._salesItemList.length < 1)  {
+      this.snackbar.open("Sales Items cannot be empty!", "OK", { duration: 5000 });
+      return;
+    }
+
     this.data._salesItemList.forEach(x => {
       this.customItem = new CustomSalesItemDto()
       this.customItem.itemId = x.itemId
@@ -62,11 +77,4 @@ export class SalesDetailsComponentComponent implements OnInit {
   closeDialog() {
     this.dialogRef.close();
   }
-
-  // openEditSalesDetailsDialog() {
-  //   this.dialogref = this.dialogservice.open(EditSalesDetailsComponentComponent, {
-  //     width: '250px',
-  //   })
-  // }
-
 }

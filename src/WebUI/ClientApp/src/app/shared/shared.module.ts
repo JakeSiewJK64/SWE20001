@@ -7,6 +7,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
 import { SplitStringPipe } from './services/splitstring.service';
 import { EnumpipeService } from './services/enumpipe.service';
+import { CovalentModule } from './covalent.module';
 
 @NgModule({
     imports: [
@@ -15,6 +16,7 @@ import { EnumpipeService } from './services/enumpipe.service';
         ReactiveFormsModule,
         CdkTableModule,
         MaterialModule,
+        CovalentModule,
         RouterModule,
         FlexLayoutModule
     ],
@@ -23,6 +25,7 @@ import { EnumpipeService } from './services/enumpipe.service';
         SplitStringPipe,
     ],
     exports: [
+        CovalentModule,
         CommonModule,
         FlexLayoutModule,
         EnumpipeService,

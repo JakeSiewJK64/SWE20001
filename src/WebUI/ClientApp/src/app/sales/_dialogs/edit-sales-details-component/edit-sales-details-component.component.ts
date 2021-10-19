@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { SalesItemListDto, SalesListClient } from 'src/app/cleanarchitecture-api';
 
 @Component({
   selector: 'app-edit-sales-details-component',
@@ -7,9 +12,38 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditSalesDetailsComponentComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    @Inject(MAT_DIALOG_DATA) private data: SalesItemListDto,
+    private salesClient: SalesListClient,
+    private dialogRef: MatDialog) { }
+  formControl = new FormControl();
+  options: Observable<string[]>;
+  itemOptions = ["Acetaminophen (Tylenol)", "Aspirin", "naproxen", "ibuprofen", "Folic Acid", "Iron Supplements", "Alprazolam"];
 
   ngOnInit() {
+    this.load();
+  }
+
+  load() {
+    this.getAllInventoryItems("");
+  }
+
+  getAllInventoryItems(searchCriteria: string) {
+    this.options = this.formControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this.filterOptions(value))
+    );
+  }
+
+  filterOptions(value: string): string[] {
+    return this.itemOptions.filter(option => option.toLowerCase().includes(value.toLowerCase()))
+  }
+
+  save() {
+  }
+
+  cancel() {
+    this.dialogRef.closeAll();
   }
 
 }

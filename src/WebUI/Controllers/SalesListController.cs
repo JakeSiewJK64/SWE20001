@@ -24,7 +24,7 @@ namespace CleanArchitecture.WebUI.Controllers
             => Ok(await Mediator.Send(new UpsertSalesCommand { salesObj = salesDto }));
 
         [HttpGet("{date}")]
-        public async Task<FileResult> Get(string date)
+        public async Task<FileResult> GenerateMonthlySalesReportCommand(string date)
         {
             var vm = await Mediator.Send(new ExportSalesReportQuery { Date = date });
             return File(vm.Content, vm.ContentType, vm.FileName);
