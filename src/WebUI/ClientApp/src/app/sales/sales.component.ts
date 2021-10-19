@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { SalesDetailsComponentComponent } from '../sales-dialogs/sales-details-component/sales-details-component.component';
+import { SalesDetailsComponentComponent } from './_dialogs/sales-details-component/sales-details-component.component';
 
 @Component({
   selector: 'app-sales',
