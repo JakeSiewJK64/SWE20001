@@ -3,7 +3,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TdDialogService } from '@covalent/core/dialogs';
 import { AuthorizeService } from 'src/api-authorization/authorize.service';
-import { Item, ItemCategory, SalesDto, SalesItemListDto, SalesListClient } from 'src/app/cleanarchitecture-api';
+import { Item, ItemCategory, SalesDto, SalesItemListDto, SalesListClient, UserClient } from 'src/app/cleanarchitecture-api';
 import { EditSalesDetailsComponentComponent } from '../edit-sales-details-component/edit-sales-details-component.component';
 
 export class CustomSalesItemDto {
@@ -19,7 +19,7 @@ export class SalesDetailsComponentComponent implements OnInit {
 
   constructor(private saleService: SalesListClient,
     private dialogService: MatDialog,
-    private userClient: AuthorizeService,
+    private userService: UserClient,
     private dialogRef: MatDialogRef<SalesDetailsComponentComponent>,
     private snackbar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data: SalesDto) { }
@@ -31,6 +31,7 @@ export class SalesDetailsComponentComponent implements OnInit {
   ItemType = ItemCategory;
   itemList: CustomSalesItemDto[] = Array<CustomSalesItemDto>()
   customItem: CustomSalesItemDto = new CustomSalesItemDto();
+  empName: string = "";
 
   ngOnInit() {
     this.load();
@@ -38,6 +39,7 @@ export class SalesDetailsComponentComponent implements OnInit {
 
   load() {
     if(this.data._salesItemList == undefined) this.data._salesItemList = new Array<SalesItemListDto>();
+    this.getUserById(this.data._employeeId);
     this.dataSource = this.data._salesItemList;
   }
 
@@ -45,6 +47,11 @@ export class SalesDetailsComponentComponent implements OnInit {
     this.dialogService.open(EditSalesDetailsComponentComponent, {
       width: '800px',
     })
+  }
+
+  getUserById(id: string){
+    var returnName;
+    this.userService.getUserByIdQuery(id).subscribe(x => this.empName = x.userName);
   }
 
   saveSales() {

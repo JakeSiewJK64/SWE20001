@@ -8,7 +8,7 @@ namespace CleanArchitecture.Application.Sales.Commands.GetSales
     public class SalesDto : AuditableEntity
     {
         public int _salesRecordId { get; set; }
-        public int _employeeId { get; set; }
+        public string _employeeId { get; set; }
         public string _items { get; set; }
         public List<SalesItemListDto> _salesItemList
         {
