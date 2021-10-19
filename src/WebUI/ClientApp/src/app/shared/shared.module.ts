@@ -5,6 +5,9 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { MaterialModule } from './material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
+import { SplitStringPipe } from './services/splitstring.service';
+import { EnumpipeService } from './services/enumpipe.service';
+import { CovalentModule } from './covalent.module';
 
 @NgModule({
     imports: [
@@ -13,14 +16,20 @@ import { RouterModule } from '@angular/router';
         ReactiveFormsModule,
         CdkTableModule,
         MaterialModule,
+        CovalentModule,
         RouterModule,
         FlexLayoutModule
     ],
     declarations: [
+        EnumpipeService,
+        SplitStringPipe,
     ],
     exports: [
+        CovalentModule,
         CommonModule,
         FlexLayoutModule,
+        EnumpipeService,
+        SplitStringPipe,
         FormsModule,
         ReactiveFormsModule,
         MaterialModule,

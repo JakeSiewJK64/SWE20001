@@ -14,6 +14,72 @@ import { HttpClient, HttpHeaders, HttpResponse, HttpResponseBase } from '@angula
 
 export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
 
+export interface ISalesListClient {
+    get(): Observable<SalesVm>;
+}
+
+@Injectable({
+    providedIn: 'root'
+})
+export class SalesListClient implements ISalesListClient {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+    }
+
+    get(): Observable<SalesVm> {
+        let url_ = this.baseUrl + "/api/SalesList";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGet(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGet(<any>response_);
+                } catch (e) {
+                    return <Observable<SalesVm>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<SalesVm>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGet(response: HttpResponseBase): Observable<SalesVm> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = SalesVm.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<SalesVm>(<any>null);
+    }
+}
+
 export interface ITodoItemsClient {
     create(command: CreateTodoItemCommand): Observable<number>;
     update(id: number, command: UpdateTodoItemCommand): Observable<FileResponse>;
@@ -589,6 +655,190 @@ export class WeatherForecastClient implements IWeatherForecastClient {
     }
 }
 
+export class SalesVm implements ISalesVm {
+    priorityLevels?: PriorityLevelDto[] | undefined;
+    lists?: SalesListDto[] | undefined;
+
+    constructor(data?: ISalesVm) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["priorityLevels"])) {
+                this.priorityLevels = [] as any;
+                for (let item of _data["priorityLevels"])
+                    this.priorityLevels!.push(PriorityLevelDto.fromJS(item));
+            }
+            if (Array.isArray(_data["lists"])) {
+                this.lists = [] as any;
+                for (let item of _data["lists"])
+                    this.lists!.push(SalesListDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): SalesVm {
+        data = typeof data === 'object' ? data : {};
+        let result = new SalesVm();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.priorityLevels)) {
+            data["priorityLevels"] = [];
+            for (let item of this.priorityLevels)
+                data["priorityLevels"].push(item.toJSON());
+        }
+        if (Array.isArray(this.lists)) {
+            data["lists"] = [];
+            for (let item of this.lists)
+                data["lists"].push(item.toJSON());
+        }
+        return data; 
+    }
+}
+
+export interface ISalesVm {
+    priorityLevels?: PriorityLevelDto[] | undefined;
+    lists?: SalesListDto[] | undefined;
+}
+
+export class PriorityLevelDto implements IPriorityLevelDto {
+    value?: number;
+    name?: string | undefined;
+
+    constructor(data?: IPriorityLevelDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.value = _data["value"];
+            this.name = _data["name"];
+        }
+    }
+
+    static fromJS(data: any): PriorityLevelDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new PriorityLevelDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["value"] = this.value;
+        data["name"] = this.name;
+        return data; 
+    }
+}
+
+export interface IPriorityLevelDto {
+    value?: number;
+    name?: string | undefined;
+}
+
+export class SalesListDto implements ISalesListDto {
+    _salesRecordId?: number;
+    sales?: SalesDto[] | undefined;
+
+    constructor(data?: ISalesListDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this._salesRecordId = _data["_salesRecordId"];
+            if (Array.isArray(_data["sales"])) {
+                this.sales = [] as any;
+                for (let item of _data["sales"])
+                    this.sales!.push(SalesDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): SalesListDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new SalesListDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["_salesRecordId"] = this._salesRecordId;
+        if (Array.isArray(this.sales)) {
+            data["sales"] = [];
+            for (let item of this.sales)
+                data["sales"].push(item.toJSON());
+        }
+        return data; 
+    }
+}
+
+export interface ISalesListDto {
+    _salesRecordId?: number;
+    sales?: SalesDto[] | undefined;
+}
+
+export class SalesDto implements ISalesDto {
+    _salesRecordId?: number;
+    _employeeId?: number;
+
+    constructor(data?: ISalesDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this._salesRecordId = _data["_salesRecordId"];
+            this._employeeId = _data["_employeeId"];
+        }
+    }
+
+    static fromJS(data: any): SalesDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new SalesDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["_salesRecordId"] = this._salesRecordId;
+        data["_employeeId"] = this._employeeId;
+        return data; 
+    }
+}
+
+export interface ISalesDto {
+    _salesRecordId?: number;
+    _employeeId?: number;
+}
+
 export class CreateTodoItemCommand implements ICreateTodoItemCommand {
     listId?: number;
     title?: string | undefined;
@@ -729,7 +979,7 @@ export enum PriorityLevel {
 }
 
 export class TodosVm implements ITodosVm {
-    priorityLevels?: PriorityLevelDto[] | undefined;
+    priorityLevels?: PriorityLevelDto2[] | undefined;
     lists?: TodoListDto[] | undefined;
 
     constructor(data?: ITodosVm) {
@@ -746,7 +996,7 @@ export class TodosVm implements ITodosVm {
             if (Array.isArray(_data["priorityLevels"])) {
                 this.priorityLevels = [] as any;
                 for (let item of _data["priorityLevels"])
-                    this.priorityLevels!.push(PriorityLevelDto.fromJS(item));
+                    this.priorityLevels!.push(PriorityLevelDto2.fromJS(item));
             }
             if (Array.isArray(_data["lists"])) {
                 this.lists = [] as any;
@@ -780,15 +1030,15 @@ export class TodosVm implements ITodosVm {
 }
 
 export interface ITodosVm {
-    priorityLevels?: PriorityLevelDto[] | undefined;
+    priorityLevels?: PriorityLevelDto2[] | undefined;
     lists?: TodoListDto[] | undefined;
 }
 
-export class PriorityLevelDto implements IPriorityLevelDto {
+export class PriorityLevelDto2 implements IPriorityLevelDto2 {
     value?: number;
     name?: string | undefined;
 
-    constructor(data?: IPriorityLevelDto) {
+    constructor(data?: IPriorityLevelDto2) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -804,9 +1054,9 @@ export class PriorityLevelDto implements IPriorityLevelDto {
         }
     }
 
-    static fromJS(data: any): PriorityLevelDto {
+    static fromJS(data: any): PriorityLevelDto2 {
         data = typeof data === 'object' ? data : {};
-        let result = new PriorityLevelDto();
+        let result = new PriorityLevelDto2();
         result.init(data);
         return result;
     }
@@ -819,7 +1069,7 @@ export class PriorityLevelDto implements IPriorityLevelDto {
     }
 }
 
-export interface IPriorityLevelDto {
+export interface IPriorityLevelDto2 {
     value?: number;
     name?: string | undefined;
 }

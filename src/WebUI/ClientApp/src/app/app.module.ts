@@ -17,6 +17,10 @@ import { AuthorizeInterceptor } from 'src/api-authorization/authorize.intercepto
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { SharedModule } from './shared/shared.module';
+import { InventoryComponent } from './inventory/inventory.component';
+import { SalesComponent } from './sales/sales.component';
+import { SalesDetailsComponentComponent } from './sales/_dialogs/sales-details-component/sales-details-component.component';
+import { EditSalesDetailsComponentComponent } from './sales/_dialogs/edit-sales-details-component/edit-sales-details-component.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +29,11 @@ import { SharedModule } from './shared/shared.module';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    TodoComponent
+    TodoComponent,
+    InventoryComponent,
+    SalesComponent,
+    SalesDetailsComponentComponent,
+    EditSalesDetailsComponentComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -35,11 +43,13 @@ import { SharedModule } from './shared/shared.module';
     FormsModule,
     ApiAuthorizationModule,
     RouterModule.forRoot([
-    { path: '', component: HomeComponent, pathMatch: 'full' },
-    { path: 'counter', component: CounterComponent },
-    { path: 'fetch-data', component: FetchDataComponent },
-    { path: 'todo', component: TodoComponent, canActivate: [AuthorizeGuard] },
-], { relativeLinkResolution: 'legacy' }),
+      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: 'inventory', component: InventoryComponent },
+      { path: 'sales', component: SalesComponent },
+      { path: 'counter', component: CounterComponent },
+      { path: 'fetch-data', component: FetchDataComponent },
+      { path: 'todo', component: TodoComponent, canActivate: [AuthorizeGuard] },
+    ], { relativeLinkResolution: 'legacy' }),
     BrowserAnimationsModule,
     ModalModule.forRoot()
   ],

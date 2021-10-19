@@ -36,6 +36,8 @@ namespace CleanArchitecture.WebUI
                     await ApplicationDbContextSeed.SeedDefaultRole(roleManager);
                     await ApplicationDbContextSeed.SeedDefaultUserAsync(userManager);
                     await ApplicationDbContextSeed.SeedSampleDataAsync(context);
+                    await ApplicationDbContextSeed.SeedSampleItems(context);
+                    await ApplicationDbContextSeed.SeedSampleSales(context);
                 }
                 catch (Exception ex)
                 {

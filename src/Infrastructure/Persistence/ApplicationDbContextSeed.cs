@@ -77,11 +77,11 @@ namespace CleanArchitecture.Infrastructure.Persistence
         {
             if (!context.SalesRecord.Any())
             {
-                context.SalesRecord.Add(new SalesRecord { Date = new DateTime(2021, 2, 22, 0, 0, 0).ToString("yyyy/MM/dd HH:mm:ss"), Items = "[{\"ItemId\":1,\"QuantityPurchased\":\"10\"},{\"ItemId\":2,\"QuantityPurchased\":\"20\"}]" });
-                context.SalesRecord.Add(new SalesRecord { Date = new DateTime(2021, 3, 2, 0, 0, 0).ToString("yyyy/MM/dd HH:mm:ss"), Items = "[{\"ItemId\":1,\"QuantityPurchased\":\"10\"},{\"ItemId\":2,\"QuantityPurchased\":\"20\"}]" });
-                context.SalesRecord.Add(new SalesRecord { Date = new DateTime(2021, 2, 13, 0, 0, 0).ToString("yyyy/MM/dd HH:mm:ss"), Items = "[{\"ItemId\":1,\"QuantityPurchased\":\"10\"},{\"ItemId\":2,\"QuantityPurchased\":\"20\"}]" });
-                context.SalesRecord.Add(new SalesRecord { Date = new DateTime(2021, 10, 20, 0, 0, 0).ToString("yyyy/MM/dd HH:mm:ss"), Items = "[{\"ItemId\":1,\"QuantityPurchased\":\"10\"},{\"ItemId\":2,\"QuantityPurchased\":\"20\"}]" });
-                context.SalesRecord.Add(new SalesRecord { Date = new DateTime(2021, 6, 10, 0, 0, 0).ToString("yyyy/MM/dd HH:mm:ss"), Items = "[{\"ItemId\":1,\"QuantityPurchased\":\"10\"},{\"ItemId\":2,\"QuantityPurchased\":\"20\"}]" });
+                context.SalesRecord.Add(new SalesRecord { Date = new DateTime(2021, 2, 22, 0, 0, 0).ToString("yyyy/MM/dd HH:mm:ss"), Items = "[{\"itemId\":1,\"quantity\":10},{\"itemId\":2,\"quantity\":20}]" });
+                context.SalesRecord.Add(new SalesRecord { Date = new DateTime(2021, 3, 2, 0, 0, 0).ToString("yyyy/MM/dd HH:mm:ss"), Items = "[{\"itemId\":2,\"quantity\":1},{\"itemId\":3,\"quantity\":1}]" });
+                context.SalesRecord.Add(new SalesRecord { Date = new DateTime(2021, 2, 13, 0, 0, 0).ToString("yyyy/MM/dd HH:mm:ss"), Items = "[{\"itemId\":3,\"quantity\":5},{\"itemId\":5,\"quantity\":2}]" });
+                context.SalesRecord.Add(new SalesRecord { Date = new DateTime(2021, 10, 20, 0, 0, 0).ToString("yyyy/MM/dd HH:mm:ss"), Items = "[{\"itemId\":4,\"quantity\":3},{\"itemId\":1,\"quantity\":3}]" });
+                context.SalesRecord.Add(new SalesRecord { Date = new DateTime(2021, 6, 10, 0, 0, 0).ToString("yyyy/MM/dd HH:mm:ss"), Items = "[{\"itemId\":5,\"quantity\":2},{\"itemId\":3,\"quantity\":1}]" });
                 await context.SaveChangesAsync();
             }
         }
