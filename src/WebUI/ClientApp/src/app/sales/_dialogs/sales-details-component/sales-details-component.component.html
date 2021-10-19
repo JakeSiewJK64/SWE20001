@@ -1,17 +1,19 @@
 <div fxLayout="column" fxFlexFill class="w-100">
   <h1 mat-dialog-title *ngIf="data._salesRecordId">Edit Sales Details {{ data._salesRecordId }}</h1>
   <h1 mat-dialog-title *ngIf="!data._salesRecordId">Add Sales Details</h1>
-  <div fxLayoutGap="10px" fxLayout="row wrap">
-    <mat-form-field appearance="outline" fxFlex>
-      <mat-label>Sales Date</mat-label>
-      <input matInput [(ngModel)]="salesDate" [matDatepicker]="picker" readonly="true"> 
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-  </div>
+  <mat-form-field appearance="outline" fxFlex>
+    <mat-label>Sales Date</mat-label>
+    <input matInput [(ngModel)]="salesDate" [matDatepicker]="picker" readonly="true">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
   <mat-form-field appearance="outline" fxFlex>
     <mat-label>Remarks</mat-label>
     <input matInput type="text" [(ngModel)]="data._remarks">
+  </mat-form-field>
+  <mat-form-field appearance="outline" fxFlex>
+    <mat-label>Employee</mat-label>
+    <input matInput type="text" [(ngModel)]="data._employeeId">
   </mat-form-field>
   <div fxLayout="column">
     <div fxLayoutAlign="end end">
@@ -38,8 +40,10 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
     <mat-dialog-actions fxLayoutAlign="end end" fxLayoutGap="10px">
-      <button mat-flat-button color="warn" (click)="closeDialog()">Cancel</button>
-      <button mat-stroked-button (click)="saveSales()">Save</button>
+      <div class="mr-auto">
+        <button mat-flat-button (click)="closeDialog()">Cancel</button>
+      </div>
+      <button mat-flat-button color="warn" (click)="saveSales()">Save</button>
     </mat-dialog-actions>
   </div>
 </div>

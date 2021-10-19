@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { SalesItemListDto, SalesListClient } from 'src/app/cleanarchitecture-api';
@@ -15,7 +15,7 @@ export class EditSalesDetailsComponentComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: SalesItemListDto,
     private salesClient: SalesListClient,
-    private dialogRef: MatDialog) { }
+    private dialogRef: MatDialogRef<EditSalesDetailsComponentComponent>) { }
   formControl = new FormControl();
   options: Observable<string[]>;
   itemOptions = ["Acetaminophen (Tylenol)", "Aspirin", "naproxen", "ibuprofen", "Folic Acid", "Iron Supplements", "Alprazolam"];
@@ -43,7 +43,6 @@ export class EditSalesDetailsComponentComponent implements OnInit {
   }
 
   cancel() {
-    this.dialogRef.closeAll();
+    this.dialogRef.close();
   }
-
 }
