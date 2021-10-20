@@ -3,11 +3,15 @@
   <p>Date: {{ date }}</p>
   <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
   <div *ngIf="!isLoading">
-    <div fxLayoutAlign="end end">
+    <div fxLayoutAlign="end end" fxLayoutGap="32px">
       <button mat-raised-button (click)="openEditDialogNew()" class="add-sales-button my-2">
         Add Data
       </button>
+      <button mat-raised-button (click)="openEditDialogNew()" class="add-sales-button my-2">
+        Generate
+      </button>
     </div>
+
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%;">
       <ng-container matColumnDef="Sales_ID">
         <th mat-header-cell *matHeaderCellDef>Sales ID</th>
