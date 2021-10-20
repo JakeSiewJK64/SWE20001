@@ -25,7 +25,7 @@ export class SalesDetailsComponentComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: SalesDto) { }
 
   displayedColumns: string[] = ['ItemID', 'Name', 'Type', 'Quantity'];
-  salesDate: Date = new Date(this.data._date);
+  salesDate: Date = new Date(this.data._salesDate);
   dataSource: any;
   sendData: SalesDto = new SalesDto();
   ItemType = ItemCategory;
@@ -71,7 +71,7 @@ export class SalesDetailsComponentComponent implements OnInit {
     this.sendData._salesItemList = [];
     this.sendData.lastModifiedBy = "jake";
     this.sendData._remarks = this.data._remarks;
-    this.sendData._date = this.salesDate.toString();
+    this.sendData._salesDate = this.salesDate;
     this.sendData._employeeId = this.data._employeeId;
     this.sendData._items = this.data._items;
     this.sendData._salesRecordId = this.data._salesRecordId;

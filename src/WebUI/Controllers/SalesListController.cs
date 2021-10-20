@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using CleanArchitecture.Application.Sales.Queries.GetAllSalesQuery;
 using CleanArchitecture.Application.Sales.Queries.GetSalesByIdQuery;
 using CleanArchitecture.Application.Sales.Queries.UpsertSalesCommand;
+using CleanArchitecture.Application.Sales.Queries.PredictSalesOfItemQuery;
+using System;
 
 namespace CleanArchitecture.WebUI.Controllers
 {
@@ -22,9 +24,13 @@ namespace CleanArchitecture.WebUI.Controllers
         [HttpPost]
         public async Task<ActionResult<int>> UpsertSalesCommand(SalesDto salesDto)
             => Ok(await Mediator.Send(new UpsertSalesCommand { salesObj = salesDto }));
+        
+        [HttpPost]
+        public async Task<ActionResult<int>> PredictSalesOfItemQuery(int itemId)
+            => Ok(await Mediator.Send(new PredictSalesOfItemQuery { ItemId = itemId }));
 
         [HttpGet("{date}")]
-        public async Task<FileResult> GenerateMonthlySalesReportCommand(string date)
+        public async Task<FileResult> GenerateMonthlySalesReportCommand(DateTime date)
         {
             var vm = await Mediator.Send(new ExportSalesReportQuery { Date = date });
             return File(vm.Content, vm.ContentType, vm.FileName);

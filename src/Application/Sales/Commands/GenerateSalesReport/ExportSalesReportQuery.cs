@@ -3,6 +3,8 @@ using AutoMapper.QueryableExtensions;
 using CleanArchitecture.Application.Common.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,7 +13,7 @@ namespace CleanArchitecture.Application.Sales.Commands.GenerateSalesReport
 {
     public class ExportSalesReportQuery : IRequest<ExportSalesReportVm>
     {
-        public string Date { get; set; }
+        public DateTime Date { get; set; }
     }
 
     public class ExportSalesReportQueryHandler : IRequestHandler<ExportSalesReportQuery, ExportSalesReportVm>
@@ -30,9 +32,8 @@ namespace CleanArchitecture.Application.Sales.Commands.GenerateSalesReport
         public async Task<ExportSalesReportVm> Handle(ExportSalesReportQuery request, CancellationToken cancellationToken)
         {
             var vm = new ExportSalesReportVm();
-
             var records = await _context.SalesRecord
-                    .Where(d => d.Date == request.Date)
+                    .Where(d => d.SalesDate.Month == request.Date.Month)
                     .ProjectTo<SalesReportFileRecord>(_mapper.ConfigurationProvider)
                     .ToListAsync(cancellationToken);
 
