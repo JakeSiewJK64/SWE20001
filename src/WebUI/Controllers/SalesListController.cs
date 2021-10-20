@@ -8,6 +8,7 @@ using CleanArchitecture.Application.Sales.Queries.GetSalesByIdQuery;
 using CleanArchitecture.Application.Sales.Queries.UpsertSalesCommand;
 using CleanArchitecture.Application.Sales.Queries.PredictSalesOfItemQuery;
 using System;
+using CleanArchitecture.Application.Sales.Queries.PredictSalesOfItemByDateQuery;
 
 namespace CleanArchitecture.WebUI.Controllers
 {
@@ -25,9 +26,13 @@ namespace CleanArchitecture.WebUI.Controllers
         public async Task<ActionResult<int>> UpsertSalesCommand(SalesDto salesDto)
             => Ok(await Mediator.Send(new UpsertSalesCommand { salesObj = salesDto }));
         
-        [HttpPost]
-        public async Task<ActionResult<int>> PredictSalesOfItemQuery(int itemId)
+        [HttpGet]
+        public async Task<ActionResult<int>> PredictSalesOfItemForNextMonthQuery(int itemId)
             => Ok(await Mediator.Send(new PredictSalesOfItemQuery { ItemId = itemId }));
+        
+        [HttpGet]
+        public async Task<ActionResult<int>> PredictSalesOfItemByDateQuery(DateTime inputDate, int itemId)
+            => Ok(await Mediator.Send(new PredictSalesOfItemByDateQuery { InputDate = inputDate, ItemId = itemId }));
 
         [HttpGet("{date}")]
         public async Task<FileResult> GenerateMonthlySalesReportCommand(DateTime date)
