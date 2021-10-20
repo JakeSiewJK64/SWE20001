@@ -18,7 +18,8 @@ export class HomeComponent implements OnInit {
 
   @ViewChild(MatTable) table: MatTable<SalesDto>;
 
-  constructor(private salesService: SalesListClient, private dialogservice: MatDialog) {
+  constructor(private salesService: SalesListClient, 
+    private dialogservice: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -32,6 +33,21 @@ export class HomeComponent implements OnInit {
   }
 
   addData() {
+  }
+
+  generateCSV() {
+    console.log("generating CSV");
+    this.salesService.generateMonthlySalesReportCommand(new Date()).subscribe(x => {
+      var url = window.URL.createObjectURL(x.data);
+      var a = document.createElement('a');
+      document.body.appendChild(a);
+      a.setAttribute('style', 'display: none');
+      a.href = url;
+      a.download = x.fileName;
+      a.click();
+      window.URL.revokeObjectURL(url);
+      a.remove();
+    });
   }
 
   openEditDialog(data: any) {
