@@ -8,8 +8,8 @@ using CleanArchitecture.Application.Sales.Queries.GetSalesByIdQuery;
 using CleanArchitecture.Application.Sales.Queries.UpsertSalesCommand;
 using CleanArchitecture.Application.Sales.Queries.PredictSalesOfItemQuery;
 using System;
-using CleanArchitecture.Application.Sales.Queries.PredictSalesOfItemByDateQuery;
 using CleanArchitecture.Application.Sales.Queries.PredictSalesForGroupOfItemQuery;
+using CleanArchitecture.Application.Common.Models;
 
 namespace CleanArchitecture.WebUI.Controllers
 {
@@ -27,18 +27,14 @@ namespace CleanArchitecture.WebUI.Controllers
         public async Task<ActionResult<int>> UpsertSalesCommand(SalesDto salesDto)
             => Ok(await Mediator.Send(new UpsertSalesCommand { salesObj = salesDto }));
 
-        [HttpGet]
-        public async Task<ActionResult<int>> PredictSalesForGroupOfItemQuery(List<int> itemId)
-            => Ok(await Mediator.Send(new PredictSalesForGroupOfItemQuery { ItemIds = itemId }));
+        [HttpPost]
+        public async Task<ActionResult<List<SalesGroupItemModel>>> PredictSalesForGroupOfItemQuery(List<int> itemId, DateTime _currentDate)
+            => Ok(await Mediator.Send(new PredictSalesForGroupOfItemQuery { ItemIds = itemId, CurrentDate = _currentDate }));
 
         [HttpGet]
-        public async Task<ActionResult<int>> PredictSalesOfItemForNextMonthQuery(int itemId)
-            => Ok(await Mediator.Send(new PredictSalesOfItemQuery { ItemId = itemId }));
+        public async Task<ActionResult<int>> PredictSalesOfItemForNextMonthQuery(int itemId, DateTime currentDate)
+            => Ok(await Mediator.Send(new PredictSalesOfItemQuery { ItemId = itemId, CurrentDate = currentDate }));
         
-        [HttpGet]
-        public async Task<ActionResult<int>> PredictSalesOfItemByDateQuery(DateTime inputDate, int itemId)
-            => Ok(await Mediator.Send(new PredictSalesOfItemByDateQuery { InputDate = inputDate, ItemId = itemId }));
-
         [HttpGet("{date}")]
         public async Task<FileResult> GenerateMonthlySalesReportCommand(DateTime date)
         {

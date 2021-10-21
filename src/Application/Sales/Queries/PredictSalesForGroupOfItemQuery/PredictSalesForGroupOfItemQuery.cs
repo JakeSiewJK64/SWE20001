@@ -16,6 +16,7 @@ namespace CleanArchitecture.Application.Sales.Queries.PredictSalesForGroupOfItem
     public class PredictSalesForGroupOfItemQuery : IRequest<List<SalesGroupItemModel>>
     {
         public List<int> ItemIds = new List<int>();
+        public DateTime CurrentDate;
     }
 
     public class PredictSalesForGroupOfItemQueryHandler : IRequestHandler<PredictSalesForGroupOfItemQuery, List<SalesGroupItemModel>>
@@ -38,11 +39,11 @@ namespace CleanArchitecture.Application.Sales.Queries.PredictSalesForGroupOfItem
             List<SalesItemListDto> salesItemList = new List<SalesItemListDto>();
             foreach (SalesDto salesdto in salesOrders)
             {
-                foreach (SalesItemListDto s in salesdto._salesItemList)
+                if (salesdto._salesDate.Month.Equals(request.CurrentDate.Month) && salesdto._salesDate.Year.Equals(request.CurrentDate.Year))
                 {
-                    if (request.ItemIds.Contains(s.ItemId) && salesdto._salesDate.Month.Equals(DateTime.Now.Month))
+                    foreach (SalesItemListDto s in salesdto._salesItemList)
                     {
-                        salesItemList.Add(s);
+                        if (request.ItemIds.Contains(s.ItemId)) salesItemList.Add(s);
                     }
                 }
             }
@@ -55,7 +56,6 @@ namespace CleanArchitecture.Application.Sales.Queries.PredictSalesForGroupOfItem
                 {
                     if (sil.ItemId == i)
                     {
-                        itemModel.Item = sil.Item;
                         itemModel.ItemId = sil.ItemId;
                         itemModel.PredictedSales += sil.Quantity;
                         counter++;
@@ -65,7 +65,6 @@ namespace CleanArchitecture.Application.Sales.Queries.PredictSalesForGroupOfItem
                 counter = 0;
                 reportItems.Add(itemModel);
             }
-
             return reportItems;
         }
     }
