@@ -8,8 +8,9 @@
         <mat-icon>add</mat-icon>
         Add Data
       </button>
-      <button mat-raised-button (click)="openEditDialogNew()" class="add-sales-button my-2">
-        Generate
+      <button mat-raised-button (click)="generateCSV()" class="add-sales-button my-2">
+        <mat-icon>description</mat-icon>
+        Generate CSV Report
       </button>
     </div>
 
@@ -24,10 +25,7 @@
         Search
       </button>
       
-      <button mat-raised-button (click)="generateCSV()" class="add-sales-button my-2">
-        <mat-icon>description</mat-icon>
-        Generate CSV Report
-      </button>
+      
     </div>
 
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%;">
