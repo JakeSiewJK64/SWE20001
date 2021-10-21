@@ -10,6 +10,7 @@ using CleanArchitecture.Application.Sales.Queries.PredictSalesOfItemQuery;
 using System;
 using CleanArchitecture.Application.Sales.Queries.PredictSalesForGroupOfItemQuery;
 using CleanArchitecture.Application.Sales.Queries.PredictSalesByItemTypeQuery;
+using CleanArchitecture.Application.Common.Models;
 
 namespace CleanArchitecture.WebUI.Controllers
 {
