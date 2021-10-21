@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 using CleanArchitecture.Application.Sales.Queries.GetAllSalesQuery;
 using CleanArchitecture.Application.Sales.Queries.GetSalesByIdQuery;
 using CleanArchitecture.Application.Sales.Queries.UpsertSalesCommand;
+using CleanArchitecture.Application.Sales.Queries.PredictSalesOfItemQuery;
+using System;
+using CleanArchitecture.Application.Sales.Queries.PredictSalesForGroupOfItemQuery;
+using CleanArchitecture.Application.Common.Models;
 
 namespace CleanArchitecture.WebUI.Controllers
 {
@@ -23,8 +27,16 @@ namespace CleanArchitecture.WebUI.Controllers
         public async Task<ActionResult<int>> UpsertSalesCommand(SalesDto salesDto)
             => Ok(await Mediator.Send(new UpsertSalesCommand { salesObj = salesDto }));
 
+        [HttpPost]
+        public async Task<ActionResult<List<SalesGroupItemModel>>> PredictSalesForGroupOfItemQuery(List<int> itemId, DateTime _currentDate)
+            => Ok(await Mediator.Send(new PredictSalesForGroupOfItemQuery { ItemIds = itemId, CurrentDate = _currentDate }));
+
+        [HttpGet]
+        public async Task<ActionResult<int>> PredictSalesOfItemForNextMonthQuery(int itemId, DateTime currentDate)
+            => Ok(await Mediator.Send(new PredictSalesOfItemQuery { ItemId = itemId, CurrentDate = currentDate }));
+        
         [HttpGet("{date}")]
-        public async Task<FileResult> GenerateMonthlySalesReportCommand(string date)
+        public async Task<FileResult> GenerateMonthlySalesReportCommand(DateTime date)
         {
             var vm = await Mediator.Send(new ExportSalesReportQuery { Date = date });
             return File(vm.Content, vm.ContentType, vm.FileName);

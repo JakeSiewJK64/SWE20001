@@ -62,13 +62,13 @@ namespace CleanArchitecture.Infrastructure.Persistence
         {
             if (!context.Items.Any())
             {
-                context.Items.Add(new Item { Quantity = 100, ItemName = "Acetaminophen (Tylenol)", Manufacturer_Id = 1, IsDeleted = false, ManufacturerName = "Rhodes Island Pharmaceuticals Ltd.", CostPrice = 10.99f, SellPrice = 12.99f, Status = Domain.Enums.Status.Full });
-                context.Items.Add(new Item { Quantity = 90, ItemName = "Aspirin", Manufacturer_Id = 1, IsDeleted = false, ManufacturerName = "Rhodes Island Pharmaceuticals Ltd.", CostPrice = 10.99f, SellPrice = 12.99f, Status = Domain.Enums.Status.Full });
-                context.Items.Add(new Item { Quantity = 90, ItemName = "naproxen", Manufacturer_Id = 1, IsDeleted = false, ManufacturerName = "Rhodes Island Pharmaceuticals Ltd.", CostPrice = 10.99f, SellPrice = 12.99f, Status = Domain.Enums.Status.Full });
-                context.Items.Add(new Item { Quantity = 70, ItemName = "ibuprofen", Manufacturer_Id = 1, IsDeleted = false, ManufacturerName = "Rhodes Island Pharmaceuticals Ltd.", CostPrice = 10.99f, SellPrice = 12.99f, Status = Domain.Enums.Status.Full });
-                context.Items.Add(new Item { Quantity = 70, ItemName = "Folic Acid", Manufacturer_Id = 1, IsDeleted = false, ManufacturerName = "Rhodes Island Pharmaceuticals Ltd.", CostPrice = 10.99f, SellPrice = 12.99f, Status = Domain.Enums.Status.Full });
-                context.Items.Add(new Item { Quantity = 50, ItemName = "Iron Suppliments", Manufacturer_Id = 1, IsDeleted = false, ManufacturerName = "Rhodes Island Pharmaceuticals Ltd.", CostPrice = 10.99f, SellPrice = 12.99f, Status = Domain.Enums.Status.Full });
-                context.Items.Add(new Item { Quantity = 40, ItemName = "Alprazolam", Manufacturer_Id = 1, IsDeleted = false, ManufacturerName = "Rhodes Island Pharmaceuticals Ltd.", CostPrice = 10.99f, SellPrice = 12.99f, Status = Domain.Enums.Status.Full });
+                context.Items.Add(new Item { Quantity = 100, ItemName = "Acetaminophen (Tylenol)", ImageUrl = "https://raw.githubusercontent.com/JakeSiewJK64/ImageWarehouse/main/Pharmacy/Acetaminophe%20(tylenol).jfif", Manufacturer_Id = 1, IsDeleted = false, ManufacturerName = "Rhodes Island Pharmaceuticals Ltd.", CostPrice = 10.99f, SellPrice = 12.99f, Status = Domain.Enums.Status.Full, ItemCategory = Domain.Enums.ItemCategory.Amphetamines });
+                context.Items.Add(new Item { Quantity = 90, ItemName = "Aspirin", ImageUrl= "https://raw.githubusercontent.com/JakeSiewJK64/ImageWarehouse/main/Pharmacy/aspirin.png", Manufacturer_Id = 1, IsDeleted = false, ManufacturerName = "Rhodes Island Pharmaceuticals Ltd.", CostPrice = 10.99f, SellPrice = 12.99f, Status = Domain.Enums.Status.Full, ItemCategory = Domain.Enums.ItemCategory.Analgesics });
+                context.Items.Add(new Item { Quantity = 90, ItemName = "naproxen", ImageUrl= "https://raw.githubusercontent.com/JakeSiewJK64/ImageWarehouse/main/Pharmacy/naproxen.jpg", Manufacturer_Id = 1, IsDeleted = false, ManufacturerName = "Rhodes Island Pharmaceuticals Ltd.", CostPrice = 10.99f, SellPrice = 12.99f, Status = Domain.Enums.Status.Full, ItemCategory = Domain.Enums.ItemCategory.Anesthetics });
+                context.Items.Add(new Item { Quantity = 70, ItemName = "ibuprofen", ImageUrl= "https://raw.githubusercontent.com/JakeSiewJK64/ImageWarehouse/main/Pharmacy/ibuprofen.jpg", Manufacturer_Id = 1, IsDeleted = false, ManufacturerName = "Rhodes Island Pharmaceuticals Ltd.", CostPrice = 10.99f, SellPrice = 12.99f, Status = Domain.Enums.Status.Full, ItemCategory = Domain.Enums.ItemCategory.Antacids });
+                context.Items.Add(new Item { Quantity = 70, ItemName = "Folic Acid", ImageUrl= "https://raw.githubusercontent.com/JakeSiewJK64/ImageWarehouse/main/Pharmacy/folic_acid.jpg", Manufacturer_Id = 1, IsDeleted = false, ManufacturerName = "Rhodes Island Pharmaceuticals Ltd.", CostPrice = 10.99f, SellPrice = 12.99f, Status = Domain.Enums.Status.Full, ItemCategory = Domain.Enums.ItemCategory.Antibacterial });
+                context.Items.Add(new Item { Quantity = 50, ItemName = "Iron Suppliments", ImageUrl= "https://raw.githubusercontent.com/JakeSiewJK64/ImageWarehouse/main/Pharmacy/iron_supplements.png", Manufacturer_Id = 1, IsDeleted = false, ManufacturerName = "Rhodes Island Pharmaceuticals Ltd.", CostPrice = 10.99f, SellPrice = 12.99f, Status = Domain.Enums.Status.Full, ItemCategory = Domain.Enums.ItemCategory.AntiEpileptic });
+                context.Items.Add(new Item { Quantity = 40, ItemName = "Alprazolam", ImageUrl= "https://raw.githubusercontent.com/JakeSiewJK64/ImageWarehouse/main/Pharmacy/Alprazolam.jpg", Manufacturer_Id = 1, IsDeleted = false, ManufacturerName = "Rhodes Island Pharmaceuticals Ltd.", CostPrice = 10.99f, SellPrice = 12.99f, Status = Domain.Enums.Status.Full, ItemCategory = Domain.Enums.ItemCategory.AntiHistamine });
                 await context.SaveChangesAsync();
             }
         }
@@ -77,11 +77,11 @@ namespace CleanArchitecture.Infrastructure.Persistence
         {
             if (!context.SalesRecord.Any())
             {
-                context.SalesRecord.Add(new SalesRecord { Date = new DateTime(2021, 2, 22, 0, 0, 0).ToString("yyyy/MM/dd HH:mm:ss"), Items = "[{\"itemId\":1,\"quantity\":10},{\"itemId\":2,\"quantity\":20}]" });
-                context.SalesRecord.Add(new SalesRecord { Date = new DateTime(2021, 3, 2, 0, 0, 0).ToString("yyyy/MM/dd HH:mm:ss"), Items = "[{\"itemId\":2,\"quantity\":1},{\"itemId\":3,\"quantity\":1}]" });
-                context.SalesRecord.Add(new SalesRecord { Date = new DateTime(2021, 2, 13, 0, 0, 0).ToString("yyyy/MM/dd HH:mm:ss"), Items = "[{\"itemId\":3,\"quantity\":5},{\"itemId\":5,\"quantity\":2}]" });
-                context.SalesRecord.Add(new SalesRecord { Date = new DateTime(2021, 10, 20, 0, 0, 0).ToString("yyyy/MM/dd HH:mm:ss"), Items = "[{\"itemId\":4,\"quantity\":3},{\"itemId\":1,\"quantity\":3}]" });
-                context.SalesRecord.Add(new SalesRecord { Date = new DateTime(2021, 6, 10, 0, 0, 0).ToString("yyyy/MM/dd HH:mm:ss"), Items = "[{\"itemId\":5,\"quantity\":2},{\"itemId\":3,\"quantity\":1}]" });
+                context.SalesRecord.Add(new SalesRecord { EmployeeId = "de464382-bfab-46c0-ad93-8f192571b7f7", SalesDate = new DateTime(2021, 2, 22), Items = "[{\"itemId\":1,\"quantity\":10},{\"itemId\":2,\"quantity\":20}]" });
+                context.SalesRecord.Add(new SalesRecord { EmployeeId = "de464382-bfab-46c0-ad93-8f192571b7f7", SalesDate = new DateTime(2021, 3, 2), Items = "[{\"itemId\":2,\"quantity\":1},{\"itemId\":3,\"quantity\":1}]" });
+                context.SalesRecord.Add(new SalesRecord { EmployeeId = "de464382-bfab-46c0-ad93-8f192571b7f7", SalesDate = new DateTime(2021, 2, 13), Items = "[{\"itemId\":3,\"quantity\":5},{\"itemId\":5,\"quantity\":2}]" });
+                context.SalesRecord.Add(new SalesRecord { EmployeeId = "de464382-bfab-46c0-ad93-8f192571b7f7", SalesDate = new DateTime(2021, 10, 20), Items = "[{\"itemId\":4,\"quantity\":3},{\"itemId\":1,\"quantity\":3}]" });
+                context.SalesRecord.Add(new SalesRecord { EmployeeId = "de464382-bfab-46c0-ad93-8f192571b7f7", SalesDate = new DateTime(2021, 6, 10), Items = "[{\"itemId\":5,\"quantity\":2},{\"itemId\":3,\"quantity\":1}]" });
                 await context.SaveChangesAsync();
             }
         }

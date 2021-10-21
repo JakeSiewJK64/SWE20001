@@ -15,8 +15,6 @@ namespace CleanArchitecture.Application.User.Queries
 
     public class GetSalesQueryHandler : IRequestHandler<GetUserByIdQuery, UserModel>
     {
-        private readonly IApplicationDbContext _context;
-        private readonly IMapper _mapper;
         private readonly IIdentityService _identityService;
 
         public GetSalesQueryHandler(IApplicationDbContext context, IMapper mapper, IIdentityService identityService)
