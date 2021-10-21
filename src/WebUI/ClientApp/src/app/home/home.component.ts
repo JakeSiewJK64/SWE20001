@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTable } from '@angular/material/table';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { SalesDto, SalesListClient } from '../cleanarchitecture-api';
 import { SalesDetailsComponentComponent } from '../sales/_dialogs/sales-details-component/sales-details-component.component';
 
@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
 
   @ViewChild(MatTable) table: MatTable<SalesDto>;
 
-  constructor(private salesService: SalesListClient, 
+  constructor(private salesService: SalesListClient,
     private dialogservice: MatDialog) {
   }
 
