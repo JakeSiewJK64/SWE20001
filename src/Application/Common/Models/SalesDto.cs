@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace CleanArchitecture.Application.Sales.Commands.GetSales
 {
-    public class SalesDto : AuditableEntity
+    public class SalesDto
     {
         public int _salesRecordId { get; set; }
         public string _employeeId { get; set; }
@@ -17,7 +17,11 @@ namespace CleanArchitecture.Application.Sales.Commands.GetSales
             set { }
         }
         public DateTime _salesDate { get; set; }
+        public DateTime _editedOn { get; set; }
+        public DateTime _createdOn { get; set; }
         public string _remarks { get; set; }
+        public string _createdBy { get; set; }
+        public string _editedBy { get; set; }
         public bool _isDeleted { get; set; }
     }
 }

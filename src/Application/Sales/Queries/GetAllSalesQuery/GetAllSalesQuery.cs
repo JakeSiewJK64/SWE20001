@@ -35,10 +35,10 @@ namespace CleanArchitecture.Application.Sales.Queries.GetAllSalesQuery
         {
             var sales = await _context.SalesRecord.ProjectTo<SalesDto>(_mapper.ConfigurationProvider)
                .ToListAsync(cancellationToken);
-            foreach(SalesDto s in sales)
+            foreach (SalesDto s in sales)
             {
                 var items = new List<SalesItemListDto>();
-                foreach(SalesItemListDto d in s._items.ToObject<List<SalesItemListDto>>())
+                foreach (SalesItemListDto d in s._items.ToObject<List<SalesItemListDto>>())
                 {
                     d.Item = _context.Items.Where(x => x.ItemId.Equals(d.ItemId)).First();
                     items.Add(new SalesItemListDto
