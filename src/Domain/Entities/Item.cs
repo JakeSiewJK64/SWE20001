@@ -10,7 +10,7 @@ namespace CleanArchitecture.Domain.Entities
         private Status _status;
         private ItemCategory _itemCategory;
         private float _costPrice, _sellPrice;
-        private string _itemName, _manufacturerName, _remarks;
+        private string _itemName, _manufacturerName, _remarks, _imageUrl;
         private DateTime _restockDate, _expDate;
         private bool _isDeleted;
 
@@ -24,6 +24,7 @@ namespace CleanArchitecture.Domain.Entities
         public float CostPrice { get => _costPrice; set => _costPrice = value; }
         public float SellPrice { get => _sellPrice; set => _sellPrice = value; }
         public string ItemName { get => _itemName; set => _itemName = value; }
+        public string ImageUrl { get => _imageUrl; set => _imageUrl = value; }
         public string ManufacturerName { get => _manufacturerName; set => _manufacturerName = value; }
         public string Remarks { get => _remarks; set => _remarks = value; }
         public DateTime RestockDate { get => _restockDate; set => _restockDate = value; }
