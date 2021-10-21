@@ -16,6 +16,7 @@ namespace CleanArchitecture.Application.Sales.Queries.PredictSalesOfItemQuery
     public class PredictSalesOfItemQuery : IRequest<int>
     {
         public int ItemId { get; set; }
+        public DateTime CurrentDate { get; set; }
     }
 
     public class PredictSalesOfItemQueryHandler : IRequestHandler<PredictSalesOfItemQuery, int>
@@ -33,16 +34,25 @@ namespace CleanArchitecture.Application.Sales.Queries.PredictSalesOfItemQuery
         {
             var salesOrders = await _context.SalesRecord
                 .ProjectTo<SalesDto>(_mapper.ConfigurationProvider)
-                .ToListAsync();                
+                .ToListAsync();
             int totalSales = 0;
-            foreach(SalesDto salesdto in salesOrders)
+            int totalSalesOfItemInMonth = 0;
+            foreach (SalesDto salesdto in salesOrders)
             {
-                foreach(SalesItemListDto s in salesdto._salesItemList)
+                if (salesdto._salesDate.Month.Equals(request.CurrentDate.Month) &&
+                        salesdto._salesDate.Year.Equals(request.CurrentDate.Year))
                 {
-                    if (s.ItemId.Equals(request.ItemId) && salesdto._salesDate.Month.Equals(DateTime.Now.Month)) totalSales += s.Quantity;
+                    foreach (SalesItemListDto s in salesdto._salesItemList)
+                    {
+                        if (s.ItemId.Equals(request.ItemId))
+                        {
+                            totalSales += s.Quantity;
+                            totalSalesOfItemInMonth++;
+                        }
+                    }
                 }
             }
-            return totalSales / salesOrders.Count;
+            return totalSales / totalSalesOfItemInMonth;
         }
     }
 }

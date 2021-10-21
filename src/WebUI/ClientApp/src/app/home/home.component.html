@@ -5,10 +5,12 @@
   <div *ngIf="!isLoading">
     <div fxLayoutAlign="end end" fxLayoutGap="10px">
       <button mat-raised-button (click)="openEditDialogNew()" class="add-sales-button my-2">
+        <mat-icon>add</mat-icon>
         Add Data
       </button>
-      <button mat-raised-button (click)="openEditDialogNew()" class="add-sales-button my-2">
-        Generate
+      <button mat-raised-button (click)="generateCSV()" class="add-sales-button my-2">
+        <mat-icon>description</mat-icon>
+        Generate CSV Report
       </button>
     </div>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%;">
@@ -18,27 +20,27 @@
       </ng-container>
       <ng-container matColumnDef="Date">
         <th mat-header-cell *matHeaderCellDef>Sales Date</th>
-        <td mat-cell *matCellDef="let element">{{ element._date | date: 'yyyy/MM/dd HH:mm:ss' }}</td>
+        <td mat-cell *matCellDef="let element">{{ element._salesDate | date: 'yyyy/MM/dd HH:mm:ss' }}</td>
       </ng-container>
       <ng-container matColumnDef="Employee_ID">
-        <th mat-header-cell *matHeaderCellDef>Employee ID</th>
-        <td mat-cell *matCellDef="let element">{{ element._employeeId }}</td>
+        <th mat-header-cell *matHeaderCellDef>Last Modified By</th>
+        <td mat-cell *matCellDef="let element">{{ element._editedBy }}</td>
       </ng-container>
       <ng-container matColumnDef="Remarks">
         <th mat-header-cell *matHeaderCellDef>Remarks</th>
-        <td mat-cell *matCellDef="let element">{{ element._remarks }}</td>
+        <td mat-cell *matCellDef="let element">{{ element._remarks == null || getRemarksLength(element._remarks.length) ? 'No Remarks' : element._remarks }}</td>
       </ng-container>
       <ng-container matColumnDef="isDeleted">
         <th mat-header-cell *matHeaderCellDef>Deleted</th>
         <td mat-cell *matCellDef="let element">{{ element._isDeleted }}</td>
       </ng-container>
       <ng-container matColumnDef="CreatedBy">
-        <th mat-header-cell *matHeaderCellDef>Created By</th>
-        <td mat-cell *matCellDef="let element">{{ element.createdBy }}</td>
+        <th mat-header-cell *matHeaderCellDef>Created On</th>
+        <td mat-cell *matCellDef="let element">{{ element._createdOn | date: 'yyyy/MM/dd HH:mm:ss'}}</td>
       </ng-container>
       <ng-container matColumnDef="LastModifiedBy">
-        <th mat-header-cell *matHeaderCellDef>Last Modified By</th>
-        <td mat-cell *matCellDef="let element">{{ element.lastModifiedBy }}</td>
+        <th mat-header-cell *matHeaderCellDef>Last Modified On</th>
+        <td mat-cell *matCellDef="let element">{{ element._editedOn | date: 'yyyy/MM/dd HH:mm:ss' }}</td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="openEditDialog(row)" class="sales-record">
