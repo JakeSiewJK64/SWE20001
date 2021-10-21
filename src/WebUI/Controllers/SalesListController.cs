@@ -10,6 +10,7 @@ using CleanArchitecture.Application.Sales.Queries.PredictSalesOfItemQuery;
 using System;
 using CleanArchitecture.Application.Sales.Queries.PredictSalesOfItemByDateQuery;
 using CleanArchitecture.Application.Sales.Queries.PredictSalesForGroupOfItemQuery;
+using CleanArchitecture.Application.Sales.Queries.PredictSalesByItemTypeQuery;
 
 namespace CleanArchitecture.WebUI.Controllers
 {
@@ -26,6 +27,10 @@ namespace CleanArchitecture.WebUI.Controllers
         [HttpPost]
         public async Task<ActionResult<int>> UpsertSalesCommand(SalesDto salesDto)
             => Ok(await Mediator.Send(new UpsertSalesCommand { salesObj = salesDto }));
+
+        [HttpGet]
+        public async Task<ActionResult<int>> PredictSalesByItemTypeQuery(string itemCategory)
+            => Ok(await Mediator.Send(new PredictSalesByItemType { itemCat = itemCategory }));
 
         [HttpGet]
         public async Task<ActionResult<int>> PredictSalesForGroupOfItemQuery(List<int> itemId)
