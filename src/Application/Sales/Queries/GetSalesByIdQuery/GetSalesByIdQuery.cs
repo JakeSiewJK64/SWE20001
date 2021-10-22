@@ -34,36 +34,39 @@ namespace CleanArchitecture.Application.Sales.Queries.GetSalesByIdQuery
 
         public async Task<List<SalesDto>> Handle(GetSalesByIdQuery request, CancellationToken cancellationToken)
         {
-            try
+            int n;
+            var sales = new List<SalesDto>();
+
+            if (int.TryParse(request.SearchCriteria, out n))
             {
-                var sales = await _context.SalesRecord
-                    .Where(x => x.SalesRecordId == int.Parse(request.SearchCriteria) ||
-                        x.Remarks.Contains(request.SearchCriteria) ||
-                        x.EmployeeId.Equals(int.Parse(request.SearchCriteria)) &&
-                        !x.IsDeleted
-                    )
+                sales = await _context.SalesRecord
+                    .Where(x => x.SalesRecordId == int.Parse(request.SearchCriteria) && !x.IsDeleted)
                     .ProjectTo<SalesDto>(_mapper.ConfigurationProvider)
                     .ToListAsync();
-                foreach (SalesDto s in sales)
-                {
-                    var items = new List<SalesItemListDto>();
-                    foreach (SalesItemListDto d in s._items.ToObject<List<SalesItemListDto>>())
-                    {
-                        d.Item = _context.Items.Where(x => x.ItemId.Equals(d.ItemId)).First();
-                        items.Add(new SalesItemListDto
-                        {
-                            Item = d.Item,
-                            ItemId = d.ItemId,
-                            Quantity = d.Quantity
-                        });
-                    }
-                    s._items = items.ToStringJSON();
-                }
-                return sales;
-            } catch(Exception e)
+            } else
             {
-                return new List<SalesDto>();
+                sales = await _context.SalesRecord
+                    .Where(x => x.Remarks.Contains(request.SearchCriteria) && !x.IsDeleted)
+                    .ProjectTo<SalesDto>(_mapper.ConfigurationProvider)
+                    .ToListAsync();
             }
+            
+            foreach (SalesDto s in sales)
+            {
+                var items = new List<SalesItemListDto>();
+                foreach (SalesItemListDto d in s._items.ToObject<List<SalesItemListDto>>())
+                {
+                    d.Item = _context.Items.Where(x => x.ItemId.Equals(d.ItemId)).First();
+                    items.Add(new SalesItemListDto
+                    {
+                        Item = d.Item,
+                        ItemId = d.ItemId,
+                        Quantity = d.Quantity
+                    });
+                }
+                s._items = items.ToStringJSON();
+            }
+            return sales;
         }
     }
 }
