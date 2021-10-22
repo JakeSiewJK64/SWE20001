@@ -17,11 +17,11 @@ namespace CleanArchitecture.WebUI.Controllers
     public class SalesListController : ApiController
     {
         [HttpGet]
-        public async Task<ActionResult<List<SalesDto>>> GetAllSalesRecordsQuery() 
+        public async Task<ActionResult<List<SalesDto>>> GetAllSalesRecordsQuery()
             => Ok(await Mediator.Send(new GetAllSalesQuery()));
 
         [HttpGet]
-        public async Task<ActionResult<List<SalesDto>>> GetSalesByIdQuery(string searchCriteria)
+        public async Task<ActionResult<List<SalesDto>>> GetSalesBySearchCriteriaQuery(string searchCriteria)
             => Ok(await Mediator.Send(new GetSalesByIdQuery { SearchCriteria = searchCriteria }));
 
         [HttpPost]
@@ -31,7 +31,7 @@ namespace CleanArchitecture.WebUI.Controllers
         [HttpPost]
         public async Task<ActionResult<List<SalesGroupItemModel>>> PredictSalesForGroupOfItemQuery(List<int> itemId, DateTime _currentDate)
             => Ok(await Mediator.Send(new PredictSalesForGroupOfItemQuery { ItemIds = itemId, CurrentDate = _currentDate }));
-        
+
         [HttpGet]
         public async Task<ActionResult<int>> PredictSalesByItemTypeQuery(string itemCategory)
             => Ok(await Mediator.Send(new PredictSalesByItemType { itemCat = itemCategory }));
@@ -39,12 +39,9 @@ namespace CleanArchitecture.WebUI.Controllers
         [HttpGet]
         public async Task<ActionResult<int>> PredictSalesOfItemForNextMonthQuery(int itemId, DateTime currentDate)
             => Ok(await Mediator.Send(new PredictSalesOfItemQuery { ItemId = itemId, CurrentDate = currentDate }));
-        
-        [HttpGet("{date}")]
-        public async Task<FileResult> GenerateMonthlySalesReportCommand(DateTime date)
-        {
-            var vm = await Mediator.Send(new ExportSalesReportQuery { Date = date });
-            return File(vm.Content, vm.ContentType, vm.FileName);
-        }
+
+        [HttpGet]
+        public async Task<ActionResult<byte[]>> GenerateMonthlySalesReportCommand(DateTime date) 
+            => Ok(await Mediator.Send(new ExportSalesReportQuery { Date = date }));
     }
 }
