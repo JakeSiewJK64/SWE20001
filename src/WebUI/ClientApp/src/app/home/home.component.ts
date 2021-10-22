@@ -1,11 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
-import { Item, ItemCategory, ItemsListClient, SalesDto, SalesListClient } from '../cleanarchitecture-api';
+import { ExportSalesReportQuery, Item, ItemCategory, ItemsListClient, SalesDto, SalesListClient } from '../cleanarchitecture-api';
 import { SalesDetailsComponentComponent } from '../sales/_dialogs/sales-details-component/sales-details-component.component';
 import { TdDialogService } from '@covalent/core/dialogs';
 import { MatPaginator } from '@angular/material/paginator';
-import { Subject } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -72,7 +71,9 @@ export class HomeComponent implements OnInit {
   }
 
   generateCSV() {
-    this.salesService.generateMonthlySalesReportCommand(new Date()).subscribe(x => {
+    var command: ExportSalesReportQuery;
+    command.date = new Date();
+    this.salesService.generateMonthlySalesReportCommand(command).subscribe(x => {
       var url = window.URL.createObjectURL(x.data);
       var a = document.createElement('a');
       document.body.appendChild(a);
@@ -98,7 +99,7 @@ export class HomeComponent implements OnInit {
       return;
     }
 
-    this.salesService.getSalesByIdQuery(this.filterCriteria).subscribe(x => {
+    this.salesService.getSalesBySearchCriteriaQuery(this.filterCriteria).subscribe(x => {
       if (x.length < 1) {
         this.tdDialogService.openAlert({
           title: 'Oops!',
