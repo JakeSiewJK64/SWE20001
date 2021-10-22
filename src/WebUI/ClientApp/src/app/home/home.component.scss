@@ -13,9 +13,10 @@
     background-color: #ecf0f1;
 }
 
-.abc {
+.search-button {
     height: 20%;
-    margin-top:1rem;
+    width: 8rem;
+    margin-top: 1rem;
     background: #2ecc71;
     color: #fff;
 }
@@ -25,8 +26,13 @@
     background-color: #29a329;
 }
 
-  
-  .full-width {
+.full-width {
     width: 100%;
+}
 
-  }
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}

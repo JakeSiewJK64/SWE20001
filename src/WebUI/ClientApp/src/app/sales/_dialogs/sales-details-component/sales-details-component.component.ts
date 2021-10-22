@@ -27,7 +27,7 @@ export class SalesDetailsComponentComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: SalesDto) { this.getCreatedBy(); }
 
   @ViewChild(MatTable) private table: MatTable<SalesItemListDto>;
-  displayedColumns: string[] = ['ItemID', 'ItemImage', 'Name', 'Type', 'Quantity'];
+  displayedColumns: string[] = ['ItemID', 'ItemImage', 'Name', 'Type', 'Quantity', 'Remove'];
   salesDate: Date = new Date(this.data._salesDate);
   dataSource = [];
   sendData: SalesDto = new SalesDto();
@@ -39,6 +39,11 @@ export class SalesDetailsComponentComponent implements OnInit {
   ngOnInit() {
     this.empName.length
     this.load();
+  }
+
+  removeItem(i: number) {
+    this.dataSource.splice(i, 1);
+    this.table.renderRows();
   }
 
   getRemarksLength(remark: string): boolean {
@@ -56,7 +61,6 @@ export class SalesDetailsComponentComponent implements OnInit {
   }
 
   addSalesItem() {
-    console.log(this.dataSource);
     this.dialogService.open(EditSalesDetailsComponentComponent, {
       width: '800px',
       data: new SalesItemListDto()
