@@ -53,6 +53,7 @@ export class HomeComponent implements OnInit {
   openEditDialog(data: any) {
     this.dialogref = this.dialogservice.open(SalesDetailsComponentComponent, {
       width: '1000px',
+      maxHeight: '600px',
       data: data
     }).afterClosed().subscribe(x => this.load());
   }
