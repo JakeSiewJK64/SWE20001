@@ -1,9 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { TdDialogService } from '@covalent/core/dialogs';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { SalesItemListDto, SalesListClient } from 'src/app/cleanarchitecture-api';
+import { Item, ItemsListClient, SalesItemListDto, SalesListClient } from 'src/app/cleanarchitecture-api';
 
 @Component({
   selector: 'app-edit-sales-details-component',
@@ -13,33 +14,48 @@ import { SalesItemListDto, SalesListClient } from 'src/app/cleanarchitecture-api
 export class EditSalesDetailsComponentComponent implements OnInit {
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) private data: SalesItemListDto,
+    @Inject(MAT_DIALOG_DATA) public data: SalesItemListDto,
     private salesClient: SalesListClient,
-    private dialogRef: MatDialogRef<EditSalesDetailsComponentComponent>) { }
+    private itemClient: ItemsListClient,
+    private dialogService: TdDialogService,
+    private dialogRef: MatDialogRef<EditSalesDetailsComponentComponent>) {
+  }
+
   formControl = new FormControl();
-  options: Observable<string[]>;
-  itemOptions = ["Acetaminophen (Tylenol)", "Aspirin", "naproxen", "ibuprofen", "Folic Acid", "Iron Supplements", "Alprazolam"];
+  options: Observable<Item[]>;
+  itemOptions: Item[] = [];
+  itemQuantity: number;
+  selectedItem: Item = new Item();
 
   ngOnInit() {
     this.load();
   }
 
   load() {
-    this.getAllInventoryItems("");
+    this.getAllInventoryItems();
   }
 
-  getAllInventoryItems(searchCriteria: string) {
+  getAllInventoryItems() {
+    this.itemClient.getAllItemsQuery().subscribe(x => x.forEach(x => this.itemOptions.push(x)));
     this.options = this.formControl.valueChanges.pipe(
       startWith(''),
       map(value => this.filterOptions(value))
     );
   }
 
-  filterOptions(value: string): string[] {
-    return this.itemOptions.filter(option => option.toLowerCase().includes(value.toLowerCase()))
+  selectItem(item: Item) {
+    this.selectedItem = item;
+  }
+
+  filterOptions(value: string): Item[] {
+    return this.itemOptions.filter(option => option.itemName.toLowerCase().includes(value.toLowerCase()));
   }
 
   save() {
+    this.data.item = this.selectedItem;
+    this.data.quantity = this.itemQuantity;
+    this.data.itemId = this.data.item.itemId;
+    this.dialogRef.close(this.data);
   }
 
   cancel() {

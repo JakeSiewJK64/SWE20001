@@ -7,15 +7,14 @@ using CleanArchitecture.Application.Items.GetAllItemsQuery;
 using System;
 
 using CleanArchitecture.Application.Common.Models;
+using CleanArchitecture.Domain.Entities;
 
 namespace CleanArchitecture.WebUI.Controllers
 {
     public class ItemsListController : ApiController
     {
         [HttpGet]
-        public async Task<ActionResult<List<ItemsDto>>> GetAllItemsQuery()
+        public async Task<ActionResult<List<Item>>> GetAllItemsQuery()
             => Ok(await Mediator.Send(new GetAllItemsQuery()));
-
-        
     }
 }
