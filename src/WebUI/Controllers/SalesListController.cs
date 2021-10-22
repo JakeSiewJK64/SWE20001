@@ -37,10 +37,6 @@ namespace CleanArchitecture.WebUI.Controllers
             => Ok(await Mediator.Send(new PredictSalesForGroupOfItemQuery { ItemIds = itemId, CurrentDate = _currentDate }));
 
         [HttpGet]
-        public async Task<ActionResult<int>> PredictSalesByItemTypeQuery(string itemCategory)
-            => Ok(await Mediator.Send(new PredictSalesByItemType { itemCat = itemCategory }));
-
-        [HttpGet]
         public async Task<ActionResult<int>> PredictSalesOfItemForNextMonthQuery(int itemId, DateTime currentDate)
             => Ok(await Mediator.Send(new PredictSalesOfItemQuery { ItemId = itemId, CurrentDate = currentDate }));
 
