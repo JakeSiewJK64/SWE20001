@@ -54,7 +54,10 @@ export class SalesDetailsComponentComponent implements OnInit {
     if (this.data._salesRecordId == null) {
       this.data._createdOn = new Date();
       this.salesDate = this.data._createdOn;
-      this.authService.getUser().subscribe(x => this.data._createdBy = x.name);
+      this.authService.getUser().subscribe(x => {
+        if(x == null) return;
+        this.data._createdBy = x.name
+      });
       this.data._salesItemList = new Array<SalesItemListDto>();
     }
     this.dataSource = this.data._salesItemList;
@@ -65,7 +68,7 @@ export class SalesDetailsComponentComponent implements OnInit {
       width: '800px',
       data: new SalesItemListDto()
     }).afterClosed().subscribe(x => {
-      if(x == null || x == undefined) return;
+      if (x == null || x == undefined) return;
       this.dataSource.push(x);
       this.table.renderRows();
       this.snackbar.open("Item added successfully!", "OK", { duration: 5000 });
@@ -101,8 +104,13 @@ export class SalesDetailsComponentComponent implements OnInit {
     this.sendData._items = this.data._items;
     this.sendData._salesRecordId = this.data._salesRecordId;
     this.sendData._editedOn = new Date();
+    this.sendData._isDeleted = this.data._isDeleted;
     this.saleService.upsertSalesCommand(this.sendData).subscribe(x => {
       console.log(x);
+      if (this.data._isDeleted) {
+        this.snackbar.open("Sales deleted successfully!", "OK", { duration: 5000 });
+        return;
+      }
       this.snackbar.open("Sales Details Saved!", "OK", { duration: 5000 });
       this.dialogRef.close();
     }, err => {
@@ -113,8 +121,18 @@ export class SalesDetailsComponentComponent implements OnInit {
     });
   }
 
-  deleteSales(){
-    
+  deleteSales() {
+    this.dialogService.openConfirm({
+      title: "Delete Sales",
+      message: "Are you sure you want to delete sales record " + this.data._salesRecordId + "?",
+      acceptButton: "Ok",
+      cancelButton: "Cancel"
+    }).afterClosed().subscribe(x => {
+      if (x) {
+        this.data._isDeleted = true;
+        this.saveSales();
+      }
+    });
   }
 
   closeDialog() {

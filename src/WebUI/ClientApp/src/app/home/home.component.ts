@@ -14,7 +14,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  displayedColumns: string[] = ['Sales_ID', 'Date', 'Employee_ID', 'Remarks', 'isDeleted', 'CreatedBy', 'LastModifiedBy'];
+  displayedColumns: string[] = ['Sales_ID', 'Date', 'Employee_ID', 'Remarks', 'CreatedBy', 'LastModifiedBy', 'isDeleted'];
   dataSource: MatTableDataSource<SalesDto> = new MatTableDataSource<SalesDto>();
   dialogref: any;
   isLoading: boolean = false;
