@@ -71,7 +71,7 @@ export class HomeComponent implements OnInit {
   }
 
   generateCSV() {
-    var command: ExportSalesReportQuery;
+    var command: ExportSalesReportQuery = new ExportSalesReportQuery();
     command.date = new Date();
     this.salesService.generateMonthlySalesReportCommand(command).subscribe(x => {
       var url = window.URL.createObjectURL(x.data);
