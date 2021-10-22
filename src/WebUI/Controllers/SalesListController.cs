@@ -40,8 +40,11 @@ namespace CleanArchitecture.WebUI.Controllers
         public async Task<ActionResult<int>> PredictSalesOfItemForNextMonthQuery(int itemId, DateTime currentDate)
             => Ok(await Mediator.Send(new PredictSalesOfItemQuery { ItemId = itemId, CurrentDate = currentDate }));
 
-        [HttpGet]
-        public async Task<ActionResult<byte[]>> GenerateMonthlySalesReportCommand(DateTime date) 
-            => Ok(await Mediator.Send(new ExportSalesReportQuery { Date = date }));
+        [HttpPost]
+        public async Task<FileResult> GenerateMonthlySalesReportCommand([FromBody] ExportSalesReportQuery command)
+        {
+            var (files, fileName) = await Mediator.Send(command);
+            return File(files, "application/octet-stream", fileName);
+        }
     }
 }
