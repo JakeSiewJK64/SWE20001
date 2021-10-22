@@ -91,6 +91,10 @@ export class SalesDetailsComponentComponent implements OnInit {
     });
   }
 
+  deleteSales(){
+    
+  }
+
   closeDialog() {
     this.dialogRef.close();
   }

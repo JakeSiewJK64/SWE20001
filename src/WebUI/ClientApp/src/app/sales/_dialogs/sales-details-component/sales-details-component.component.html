@@ -62,9 +62,11 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
     <mat-dialog-actions fxLayoutAlign="end end" fxLayoutGap="10px">
+      
       <div class="mr-auto">
         <button mat-flat-button (click)="closeDialog()">Cancel</button>
       </div>
+      <button mat-flat-button color="warn" (click)="deleteSales()">Delete</button>
       <button mat-flat-button color="warn" (click)="saveSales()">Save</button>
     </mat-dialog-actions>
   </div>
