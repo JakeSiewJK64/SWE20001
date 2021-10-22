@@ -1,7 +1,10 @@
 <div class="demo-button-container w-100">
   <h1>Personal Healthcare Pharmacy Sales</h1>
   <p>Date: {{ date }}</p>
-  <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+  <div fxLayoutAlign="center center" fxLayout="column" *ngIf="isLoading">
+    <mat-spinner [diameter]="30"></mat-spinner>
+    <span>Loading Sales Records</span>
+  </div>
   <div *ngIf="!isLoading">
     <div fxLayoutAlign="end end" fxLayoutGap="12px">
       <button mat-raised-button (click)="openEditDialogNew()" class="add-sales-button my-2">
