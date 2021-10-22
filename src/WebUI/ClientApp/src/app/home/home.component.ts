@@ -6,6 +6,7 @@ import { SalesDetailsComponentComponent } from '../sales/_dialogs/sales-details-
 import { TdDialogService } from '@covalent/core/dialogs';
 import { MatPaginator } from '@angular/material/paginator';
 import { Subject } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-home',
@@ -27,6 +28,7 @@ export class HomeComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
   constructor(private salesService: SalesListClient,
+    private snackbar: MatSnackBar,
     private tdDialogService: TdDialogService,
     private dialogservice: MatDialog) {
   }
@@ -50,7 +52,6 @@ export class HomeComponent implements OnInit {
   }
 
   generateCSV() {
-    console.log("generating CSV");
     this.salesService.generateMonthlySalesReportCommand(new Date()).subscribe(x => {
       var url = window.URL.createObjectURL(x.data);
       var a = document.createElement('a');
@@ -61,10 +62,22 @@ export class HomeComponent implements OnInit {
       a.click();
       window.URL.revokeObjectURL(url);
       a.remove();
+      this.snackbar.open("Generating CSV Report", "OK", { duration: 5000 });
+    }, err => {
+      this.tdDialogService.openAlert({
+        title: "Oops!",
+        message: err
+      })
     });
   }
 
   filterSales() {
+    
+    if(this.filterCriteria.length < 1) {
+      this.load();
+      return;
+    }
+
     this.salesService.getSalesByIdQuery(this.filterCriteria).subscribe(x => {
       if (x.length < 1) {
         this.tdDialogService.openAlert({

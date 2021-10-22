@@ -54,7 +54,7 @@ export class SalesDetailsComponentComponent implements OnInit {
     if (this.data._salesRecordId == null) {
       this.data._createdOn = new Date();
       this.salesDate = this.data._createdOn;
-      this.data._createdBy = this.empName;
+      this.authService.getUser().subscribe(x => this.data._createdBy = x.name);
       this.data._salesItemList = new Array<SalesItemListDto>();
     }
     this.dataSource = this.data._salesItemList;
@@ -65,8 +65,10 @@ export class SalesDetailsComponentComponent implements OnInit {
       width: '800px',
       data: new SalesItemListDto()
     }).afterClosed().subscribe(x => {
+      if(x == null || x == undefined) return;
       this.dataSource.push(x);
       this.table.renderRows();
+      this.snackbar.open("Item added successfully!", "OK", { duration: 5000 });
     })
   }
 
@@ -90,13 +92,12 @@ export class SalesDetailsComponentComponent implements OnInit {
       this.itemList.push(this.customItem)
     })
     this.data._items = JSON.stringify(this.itemList).replace('"', '\"');
-
     this.sendData._salesItemList = [];
     this.sendData._remarks = this.data._remarks;
     this.sendData._salesDate = this.salesDate;
     this.sendData._employeeId = this.data._employeeId;
     this.sendData._createdBy = this.data._createdBy;
-    this.sendData._editedBy = this.data._editedBy;
+    this.sendData._editedBy = this.empName;
     this.sendData._items = this.data._items;
     this.sendData._salesRecordId = this.data._salesRecordId;
     this.sendData._editedOn = new Date();
@@ -104,6 +105,11 @@ export class SalesDetailsComponentComponent implements OnInit {
       console.log(x);
       this.snackbar.open("Sales Details Saved!", "OK", { duration: 5000 });
       this.dialogRef.close();
+    }, err => {
+      this.dialogService.openAlert({
+        title: "Oops!",
+        message: err
+      });
     });
   }
 
