@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
-import { SalesDto, SalesListClient } from '../cleanarchitecture-api';
+import { Item, ItemCategory, ItemsListClient, SalesDto, SalesListClient } from '../cleanarchitecture-api';
 import { SalesDetailsComponentComponent } from '../sales/_dialogs/sales-details-component/sales-details-component.component';
 import { TdDialogService } from '@covalent/core/dialogs';
 import { MatPaginator } from '@angular/material/paginator';
@@ -19,16 +19,23 @@ export class HomeComponent implements OnInit {
   dialogref: any;
   isLoading: boolean = false;
   filterCriteria: string;
+  itemList: Item[] = [];
+  itemCategoryLists = ItemCategory;
   date: Date = new Date();
   page: number;
   pageSize: number;
   totalRecord: number;
+  productNameFilter: string;
+  productCategoryFilter: string;
+  predictedProductSales: number;
+  predictedItemCategorySales: number;
 
   @ViewChild(MatTable) table: MatTable<SalesDto>;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
   constructor(private salesService: SalesListClient,
     private snackbar: MatSnackBar,
+    private itemService: ItemsListClient,
     private tdDialogService: TdDialogService,
     private dialogservice: MatDialog) {
   }
@@ -43,12 +50,25 @@ export class HomeComponent implements OnInit {
 
   load() {
     this.isLoading = true;
+    this.getItems();
     this.salesService.getAllSalesRecordsQuery().subscribe(x => {
       this.dataSource = new MatTableDataSource(x);
       this.totalRecord = x.length;
       this.dataSource.paginator = this.paginator;
       this.isLoading = false;
     });
+  }
+
+  predictProductSales(itemId: number){
+    this.salesService.predictSalesOfItemForNextMonthQuery(itemId, new Date()).subscribe(x => {
+      this.predictedProductSales = x;
+    })
+  }
+  
+  predictItemTypeSales(cat: string){
+    this.salesService.predictSalesByItemTypeQuery(cat).subscribe(x => {
+      this.predictedItemCategorySales = x;
+    })
   }
 
   generateCSV() {
@@ -92,6 +112,12 @@ export class HomeComponent implements OnInit {
       this.isLoading = false;
     });
     this.isLoading = false;
+  }
+
+  getItems() {
+    this.itemService.getAllItemsQuery().subscribe(x => {
+      this.itemList = x;
+    });
   }
 
   onPageChanged(pageEvent: any) {

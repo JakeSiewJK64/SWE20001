@@ -48,7 +48,7 @@ namespace CleanArchitecture.Application.Sales.Queries.PredictSalesByItemTypeQuer
                     }
                 }
             }
-
+            if (totalSales == 0 || counter == 0) return 0;
             return totalSales/counter;
         }
     }

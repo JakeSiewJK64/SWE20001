@@ -6,6 +6,36 @@
     <span>Loading Sales Records</span>
   </div>
   <div *ngIf="!isLoading">
+    <div fxLayout="column wrap" fxLayoutGap="10px">
+      <mat-form-field appearance="outline" fxFlex>
+        <mat-label>Product</mat-label>
+        <mat-select [(ngModel)]="productNameFilter">
+          <mat-option *ngFor="let item of itemList" [value]="item.itemName"
+            (onSelectionChange)="predictProductSales(item.itemId)">
+            {{ item.itemName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="custom-container" fxLayoutAlign="center center" fxLayout="column"
+        *ngIf="predictedProductSales != null">
+        <span class="m-2">Predicted Sales for : {{ productNameFilter }}</span>
+        <span class="m-1">{{ predictedProductSales }}</span>
+      </div>
+      <mat-form-field appearance="outline">
+        <mat-label>Item Categories</mat-label>
+        <mat-select [(ngModel)]="productCategoryFilter">
+          <mat-option *ngFor="let category of itemCategoryLists | enumpipe" [value]="category.value"
+            (onSelectionChange)="predictItemTypeSales(category.value)">
+            {{ category.value | splitString }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="custom-container" fxLayoutAlign="center center" fxLayout="column"
+        *ngIf="predictedItemCategorySales != null">
+        <span class="m-2">Predicted Sales for Item Type : {{ productCategoryFilter }}</span>
+        <span class="m-1">{{ predictedItemCategorySales }}</span>
+      </div>
+    </div>
     <div fxLayoutAlign="end end" fxLayoutGap="12px">
       <button mat-raised-button (click)="openEditDialogNew()" class="add-sales-button my-2">
         <mat-icon>add</mat-icon>

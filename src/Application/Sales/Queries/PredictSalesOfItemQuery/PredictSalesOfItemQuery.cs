@@ -52,6 +52,7 @@ namespace CleanArchitecture.Application.Sales.Queries.PredictSalesOfItemQuery
                     }
                 }
             }
+            if (totalSales == 0 || totalSalesOfItemInMonth == 0) return 0;
             return totalSales / totalSalesOfItemInMonth;
         }
     }

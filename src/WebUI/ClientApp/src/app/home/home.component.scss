@@ -36,3 +36,11 @@
     left: 0;
     width: 100%;
 }
+
+.custom-container {
+    border-left: solid #2ECC71 5px;
+    border-top: solid #BDC3C7 1px;
+    border-right: solid #BDC3C7 1px;
+    border-bottom: solid #BDC3C7 1px;
+    border-radius: 10px;
+}
