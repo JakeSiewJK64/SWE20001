@@ -13,7 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  displayedColumns: string[] = ['Sales_ID', 'Date', 'Employee_ID', 'Remarks', 'CreatedBy', 'LastModifiedBy', 'isDeleted'];
+  displayedColumns: string[] = ['Sales_ID', 'Employee_ID', 'Remarks', 'Date', 'CreatedBy', 'LastModifiedBy', 'isDeleted'];
   dataSource: MatTableDataSource<SalesDto> = new MatTableDataSource<SalesDto>();
   dialogref: any;
   isLoading: boolean = false;
@@ -83,7 +83,7 @@ export class HomeComponent implements OnInit {
       a.click();
       window.URL.revokeObjectURL(url);
       a.remove();
-      this.snackbar.open("Generating CSV Report", "OK", { duration: 5000 });
+      this.snackbar.open("Report generated successfully!", "OK", { duration: 5000 });
     }, err => {
       this.tdDialogService.openAlert({
         title: "Oops!",

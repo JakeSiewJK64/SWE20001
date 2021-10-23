@@ -36,7 +36,9 @@ namespace CleanArchitecture.Application.Sales.Commands.GenerateSalesReport
         public async Task<(byte[], string)> Handle(ExportSalesReportQuery request, CancellationToken cancellationToken)
         {
             var records = await _context.SalesRecord
-                    .Where(d => d.SalesDate.Month == request.Date.Month && d.SalesDate.Year == request.Date.Year)
+                    .Where(d => d.SalesDate.Month == request.Date.Month 
+                        && d.SalesDate.Year == request.Date.Year
+                        && !d.IsDeleted)
                     .ProjectTo<SalesDto>(_mapper.ConfigurationProvider)
                     .ToListAsync(cancellationToken);
             var itemListings = await _context.Items.ToListAsync();

@@ -1,3 +1,7 @@
+body {
+    overflow: scroll;
+}
+
 .add-sales-button {
     background: #2ecc71;
     color: #fff;
@@ -21,7 +25,7 @@
     color: #fff;
 }
 
-.abc:hover {
+.search-button:hover {
     cursor: pointer;
     background-color: #29a329;
 }
@@ -38,9 +42,9 @@
 }
 
 .custom-container {
-    border-left: solid #2ECC71 5px;
-    border-top: solid #BDC3C7 1px;
-    border-right: solid #BDC3C7 1px;
-    border-bottom: solid #BDC3C7 1px;
+    border-left: solid #2ecc71 5px;
+    border-top: solid #bdc3c7 1px;
+    border-right: solid #bdc3c7 1px;
+    border-bottom: solid #bdc3c7 1px;
     border-radius: 10px;
 }

@@ -16,7 +16,7 @@
   <mat-dialog-actions class="w-100">
     <button mat-raised-button (click)="cancel()">Cancel</button>
     <div class="ml-auto">
-      <button mat-raised-button color="warn" (click)="save()">Add</button>
+      <button mat-raised-button color="warn" (click)="save()" [disabled]="itemQuantity == null">Add</button>
     </div>
   </mat-dialog-actions>
 </div>
