@@ -10,18 +10,16 @@
     <div fxLayout="row wrap" fxLayoutGap="10px">
       <mat-form-field appearance="outline" fxFlex>
         <mat-label>Product</mat-label>
-        <mat-select [(ngModel)]="productNameFilter">
-          <mat-option *ngFor="let item of itemList" [value]="item.itemName"
-            (onSelectionChange)="predictProductSales(item.itemId)">
+        <mat-select (selectionChange)="predictProductSales()" [(ngModel)]="productIdFilter">
+          <mat-option *ngFor="let item of itemList" [value]="item.itemId">
             {{ item.itemName }}
           </mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field appearance="outline" fxFlex>
         <mat-label>Item Categories</mat-label>
-        <mat-select [(ngModel)]="productCategoryFilter">
-          <mat-option *ngFor="let category of itemCategoryLists | enumpipe" [value]="category.value"
-            (onSelectionChange)="predictItemTypeSales(category.value)">
+        <mat-select (selectionChange)="predictItemTypeSales()" [(ngModel)]="productCategoryFilter">
+          <mat-option *ngFor="let category of itemCategoryLists | enumpipe" [value]="category.value">
             {{ category.value | splitString }}
           </mat-option>
         </mat-select>

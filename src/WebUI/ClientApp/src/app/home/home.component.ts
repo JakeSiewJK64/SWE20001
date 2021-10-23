@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
   page: number;
   pageSize: number;
   totalRecord: number;
-  productNameFilter: string;
+  productIdFilter: number;
   productCategoryFilter: string;
   predictedProductSales: number;
   predictedItemCategorySales: number;
@@ -58,14 +58,14 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  predictProductSales(itemId: number){
-    this.salesService.predictSalesOfItemForNextMonthQuery(itemId, new Date()).subscribe(x => {
+  predictProductSales(){
+    this.salesService.predictSalesOfItemForNextMonthQuery(this.productIdFilter, new Date()).subscribe(x => {
       this.predictedProductSales = x;
     })
   }
   
-  predictItemTypeSales(cat: string){
-    this.salesService.predictSalesByItemTypeQuery(cat).subscribe(x => {
+  predictItemTypeSales(){
+    this.salesService.predictSalesByItemTypeQuery(this.productCategoryFilter).subscribe(x => {
       this.predictedItemCategorySales = x;
     })
   }
