@@ -29,6 +29,10 @@ export class HomeComponent implements OnInit {
   predictedProductSales: number;
   predictedItemCategorySales: number;
 
+  highestSellingItem: string;
+  highestSellingItemCategory: string;
+  totalSalesCurrentMonth: number;
+
   @ViewChild(MatTable) table: MatTable<SalesDto>;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
@@ -50,6 +54,9 @@ export class HomeComponent implements OnInit {
   load() {
     this.isLoading = true;
     this.getItems();
+    this.getTotalSalesCurrentMonth();
+    this.getHighestSellingItem();
+    this.getHighestSellingItemCategory();
     this.salesService.getAllSalesRecordsQuery().subscribe(x => {
       this.dataSource = new MatTableDataSource(x);
       this.totalRecord = x.length;
@@ -58,13 +65,25 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  predictProductSales(){
+  getTotalSalesCurrentMonth() {
+    this.salesService.getTotalSalesForCurrentMonth(new Date()).subscribe(x => this.totalSalesCurrentMonth = x);
+  }
+
+  getHighestSellingItem() {
+    this.salesService.getHighestSellingItemQuery(new Date()).subscribe(x => this.highestSellingItem = x);
+  }
+
+  getHighestSellingItemCategory() {
+    this.salesService.getHighestSellingItemCategoryQuery(new Date()).subscribe(x => this.highestSellingItemCategory = x);
+  }
+
+  predictProductSales() {
     this.salesService.predictSalesOfItemForNextMonthQuery(this.productIdFilter, new Date()).subscribe(x => {
       this.predictedProductSales = x;
     })
   }
-  
-  predictItemTypeSales(){
+
+  predictItemTypeSales() {
     this.salesService.predictSalesByItemTypeQuery(this.productCategoryFilter).subscribe(x => {
       this.predictedItemCategorySales = x;
     })
@@ -93,8 +112,8 @@ export class HomeComponent implements OnInit {
   }
 
   filterSales() {
-    
-    if(this.filterCriteria.length < 1) {
+
+    if (this.filterCriteria.length < 1) {
       this.load();
       return;
     }

@@ -6,6 +6,26 @@
     <span>Loading Sales Records</span>
   </div>
   <div *ngIf="!isLoading">
+    <div fxLayout="row wrap" fxLayoutGap="10px">
+      <div class="container total-sales-container" fxFlex>
+        <div class="text-center p-3" fxLayout="column">
+          <h2>Total Sales This Month</h2>
+          <span>{{ totalSalesCurrentMonth }}</span>
+        </div>
+      </div>
+      <div class="container highest-sales-item-container" fxFlex>
+        <div class="text-center p-3" fxLayout="column">
+          <h2>Most Sold Item This Month</h2>
+          <span>{{ highestSellingItem }}</span>
+        </div>
+      </div>
+      <div class="container highest-sales-itemtype-container" fxFlex>
+        <div class="text-center p-3" fxLayout="column">
+          <h2>Most Sold Item Category This Month</h2>
+          <span>{{ highestSellingItemCategory }}</span>
+        </div>
+      </div>
+    </div>
     <h1>Sales Forecast</h1>
     <div fxLayout="row wrap" fxLayoutGap="10px">
       <mat-form-field appearance="outline" fxFlex>
