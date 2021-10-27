@@ -3,8 +3,6 @@ using AutoMapper.QueryableExtensions;
 using CleanArchitecture.Application.Common.Helpers;
 using CleanArchitecture.Application.Common.Interfaces;
 using CleanArchitecture.Application.Sales.Commands.GetSales;
-using CsvHelper;
-using LINQtoCSV;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -43,7 +41,7 @@ namespace CleanArchitecture.Application.Sales.Commands.GenerateSalesReport
                     .ToListAsync(cancellationToken);
             var itemListings = await _context.Items.ToListAsync();
 
-            var csvFile = ReportServices.GenerateCSVReport(itemListings, records, new DateTime());
+            var csvFile = ReportServices.GenerateCSVReport(itemListings, records, request.Date);
             return (csvFile.Item1, csvFile.Item2);
         }
     }
