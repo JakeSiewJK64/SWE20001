@@ -13,7 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  displayedColumns: string[] = ['Sales_ID', 'Date', 'Employee_ID', 'Remarks', 'CreatedBy', 'LastModifiedBy', 'isDeleted'];
+  displayedColumns: string[] = ['Sales_ID', 'Employee_ID', 'Remarks', 'Date', 'CreatedBy', 'LastModifiedBy', 'isDeleted'];
   dataSource: MatTableDataSource<SalesDto> = new MatTableDataSource<SalesDto>();
   dialogref: any;
   isLoading: boolean = false;
@@ -24,10 +24,14 @@ export class HomeComponent implements OnInit {
   page: number;
   pageSize: number;
   totalRecord: number;
-  productNameFilter: string;
+  productIdFilter: number;
   productCategoryFilter: string;
   predictedProductSales: number;
   predictedItemCategorySales: number;
+
+  highestSellingItem: string;
+  highestSellingItemCategory: string;
+  totalSalesCurrentMonth: number;
 
   @ViewChild(MatTable) table: MatTable<SalesDto>;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
@@ -50,6 +54,9 @@ export class HomeComponent implements OnInit {
   load() {
     this.isLoading = true;
     this.getItems();
+    this.getTotalSalesCurrentMonth();
+    this.getHighestSellingItem();
+    this.getHighestSellingItemCategory();
     this.salesService.getAllSalesRecordsQuery().subscribe(x => {
       this.dataSource = new MatTableDataSource(x);
       this.totalRecord = x.length;
@@ -58,20 +65,32 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  predictProductSales(itemId: number){
-    this.salesService.predictSalesOfItemForNextMonthQuery(itemId, new Date()).subscribe(x => {
+  getTotalSalesCurrentMonth() {
+    this.salesService.getTotalSalesForCurrentMonth(new Date()).subscribe(x => this.totalSalesCurrentMonth = x);
+  }
+
+  getHighestSellingItem() {
+    this.salesService.getHighestSellingItemQuery(new Date()).subscribe(x => this.highestSellingItem = x);
+  }
+
+  getHighestSellingItemCategory() {
+    this.salesService.getHighestSellingItemCategoryQuery(new Date()).subscribe(x => this.highestSellingItemCategory = x);
+  }
+
+  predictProductSales() {
+    this.salesService.predictSalesOfItemForNextMonthQuery(this.productIdFilter, new Date()).subscribe(x => {
       this.predictedProductSales = x;
     })
   }
-  
-  predictItemTypeSales(cat: string){
-    this.salesService.predictSalesByItemTypeQuery(cat).subscribe(x => {
+
+  predictItemTypeSales() {
+    this.salesService.predictSalesByItemTypeQuery(this.productCategoryFilter).subscribe(x => {
       this.predictedItemCategorySales = x;
     })
   }
 
   generateCSV() {
-    var command: ExportSalesReportQuery;
+    var command: ExportSalesReportQuery = new ExportSalesReportQuery();
     command.date = new Date();
     this.salesService.generateMonthlySalesReportCommand(command).subscribe(x => {
       var url = window.URL.createObjectURL(x.data);
@@ -83,7 +102,7 @@ export class HomeComponent implements OnInit {
       a.click();
       window.URL.revokeObjectURL(url);
       a.remove();
-      this.snackbar.open("Generating CSV Report", "OK", { duration: 5000 });
+      this.snackbar.open("Report generated successfully!", "OK", { duration: 5000 });
     }, err => {
       this.tdDialogService.openAlert({
         title: "Oops!",
@@ -93,8 +112,8 @@ export class HomeComponent implements OnInit {
   }
 
   filterSales() {
-    
-    if(this.filterCriteria.length < 1) {
+
+    if (this.filterCriteria.length < 1) {
       this.load();
       return;
     }
