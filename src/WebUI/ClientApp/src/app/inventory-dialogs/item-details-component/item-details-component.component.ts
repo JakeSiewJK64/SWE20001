@@ -1,6 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthorizeService } from 'src/api-authorization/authorize.service';
+import { ItemsDto, ItemsListClient,ItemCategory, SalesDto, SalesItemListDto, SalesListClient, UserClient } from 'src/app/cleanarchitecture-api';
 import { EditItemDetailsComponentComponent } from '../edit-item-details-component/edit-item-details-component.component';
+
+export class CustomSalesItemDto {
+  itemId: number;
+  quantity: number;
+}
 
 @Component({
   selector: 'app-item-details-component',
@@ -8,17 +16,61 @@ import { EditItemDetailsComponentComponent } from '../edit-item-details-componen
   styleUrls: ['./item-details-component.component.css']
 })
 export class ItemDetailsComponentComponent implements OnInit {
-  dialogref : any;
+  constructor(private saleService: SalesListClient,
+    private ItemService: ItemsListClient,
+    private dialogService: MatDialog,
+    private authService: AuthorizeService,
+    private userService: UserClient,
+    // private dialogRef: MatDialogRef<ItemDetailsComponentComponent>,
+    private snackbar: MatSnackBar,
+    ) 
+    { this.getCreatedBy(); }
 
-  constructor(private dialogservice: MatDialog) { }
+  displayedColumns: string[] = ['ItemID', 'ItemImage', 'Name', 'Type', 'Quantity'];
+  dataSource: any;
+  sendData: SalesDto = new SalesDto();
+  ItemType = ItemCategory;
+  itemList: CustomSalesItemDto[] = Array<CustomSalesItemDto>()
+  customItem: CustomSalesItemDto = new CustomSalesItemDto();
+  empName: string = "";
 
   ngOnInit() {
+    this.empName.length
+    this.load();
+  }
+  // openEditItemDetailsDialog() {
+  //   this.dialogRef=this.dialogService.open(ItemDetailsComponentComponent, {
+  //     width:  '250px',
+  //   })
+  // }
+
+  getRemarksLength(remark: string): boolean {
+    return remark.length <= 0;
   }
 
-  openEditItemDetailsDialog() {
-    this.dialogref=this.dialogservice.open(EditItemDetailsComponentComponent, {
-      width:  '250px',
+  load() {
+    // if (this.data._salesItemList == undefined) this.data._salesItemList = new Array<SalesItemListDto>();
+    // this.dataSource = this.data._salesItemList;
+    // if (this.data._salesRecordId == null) {
+    //   this.data._createdOn = new Date();
+    //   this.data._createdBy = this.empName;
+    // }
+  }
+
+  addSalesItem() {
+    this.dialogService.open(EditItemDetailsComponentComponent, {
+      width: '800px',
     })
   }
 
-}
+  getCreatedBy() {
+    this.authService.getUser().subscribe(x => {
+      this.empName = x.name;
+    });
+  }
+
+  }
+  
+
+ 
+
