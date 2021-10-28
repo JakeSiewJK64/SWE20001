@@ -2,7 +2,7 @@
   <h1 mat-dialog-title *ngIf="data._salesRecordId">Edit Sales Details #{{ data._salesRecordId }}</h1>
   <h1 mat-dialog-title *ngIf="!data._salesRecordId">Add Sales Details</h1>
   <div class="ml-auto">
-    <button mat-flat-button color="warn" (click)="deleteSales()" [disabled]="data._isDeleted">{{ data._isDeleted ? 'Deleted' : 'Delete Sales' }}</button>
+    <button mat-flat-button color="warn" (click)="deleteSales()" [disabled]="data._isDeleted || data._salesRecordId == null">{{ data._isDeleted ? 'Deleted' : 'Delete Sales' }}</button>
   </div>
 </div>
 <div fxLayout="column" fxFlexFill class="w-100">
