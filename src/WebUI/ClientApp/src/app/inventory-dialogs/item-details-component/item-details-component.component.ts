@@ -3,7 +3,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthorizeService } from 'src/api-authorization/authorize.service';
 import { ItemsDto, ItemsListClient, ItemCategory, SalesDto, SalesItemListDto, SalesListClient, UserClient } from 'src/app/cleanarchitecture-api';
-import { EditItemDetailsComponentComponent } from '../edit-item-details-component/edit-item-details-component.component';
+//import { EditItemDetailsComponentComponent } from '../edit-item-details-component/edit-item-details-component.component';
 
 @Component({
   selector: 'app-item-details-component',
@@ -16,8 +16,9 @@ export class ItemDetailsComponentComponent implements OnInit {
     // private dialogService: MatDialog,
     private authService: AuthorizeService,
     private userService: UserClient,
-    // private dialogRef: MatDialogRef<ItemDetailsComponentComponent>,
+   private dialogRef: MatDialogRef<ItemDetailsComponentComponent>,
     private snackbar: MatSnackBar,
+   
   ) {
   }
 
@@ -45,8 +46,26 @@ export class ItemDetailsComponentComponent implements OnInit {
   }
 
   save() {
+   //remove unneeded 
+    this.model._itemCategory;
+    this.model._quantity;
+    this.model._batchId;
+    this.model._manufacturer_Id;
+    this.model._costPrice;
+    this.model._sellPrice;
+    this.model._itemName;
+    this.model._imageUrl;
+    this.model._manufacturerName;
+    this.model._remarks;
+    this.model._restockDate;
+    this.model._expDate;
+    this.model._isDeleted;
+    
+    
     this.ItemService.upsertItemsCommand(this.model).subscribe(x => {
       console.log(x);
+      this.snackbar.open("Item Saved!", "OK", { duration: 5000 });
+      this.dialogRef.close();
     })
   }
 }
