@@ -1,20 +1,25 @@
-<div fxLayout="column" fxFlexFill class="w-100">
+<div fxLayout="row wrap">
   <h1 mat-dialog-title *ngIf="data._salesRecordId">Edit Sales Details #{{ data._salesRecordId }}</h1>
   <h1 mat-dialog-title *ngIf="!data._salesRecordId">Add Sales Details</h1>
+  <div class="ml-auto">
+    <button mat-flat-button color="warn" (click)="deleteSales()" [disabled]="data._isDeleted || data._salesRecordId == null">{{ data._isDeleted ? 'Deleted' : 'Delete Sales' }}</button>
+  </div>
+</div>
+<div fxLayout="column" fxFlexFill class="w-100">
   <mat-form-field appearance="outline" fxFlex>
     <mat-label>Sales Date</mat-label>
-    <input matInput [(ngModel)]="salesDate" [matDatepicker]="picker" readonly="true">
+    <input matInput [(ngModel)]="salesDate" [matDatepicker]="picker" readonly="true" [disabled]="data._isDeleted || data._salesRecordId != null">
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
   <mat-form-field appearance="outline" fxFlex>
-    <mat-label>Remarks</mat-label>
+    <mat-label>Remarks (Optional)</mat-label>
     <input matInput type="text" [(ngModel)]="data._remarks">
   </mat-form-field>
   <div fxLayout="row wrap" fxLayoutGap="5px">
     <mat-form-field appearance="outline" fxFlex>
       <mat-label>CreatedOn</mat-label>
-      <input matInput type="text" [(ngModel)]="data._createdOn" [readonly]="true">
+      <input matInput type="text" [(ngModel)]="data._salesDate" [readonly]="true">
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex>
       <mat-label>CreatedBy</mat-label>
@@ -33,13 +38,13 @@
   </div>
   <div fxLayout="column">
     <div fxLayoutAlign="end end">
-      <button mat-flat-button (click)="addSalesItem()">Add Item</button>
+      <button mat-flat-button (click)="addSalesItem()" [disabled]="data._isDeleted">Add Item</button>
     </div>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z1">
       <ng-container matColumnDef="ItemImage">
         <th mat-header-cell *matHeaderCellDef> Item Image </th>
         <td mat-cell *matCellDef="let item">
-          <img [src]="item.item.imageUrl" class="item-profile" alt="">
+          <img [src]="item.item.imageUrl" class="item-profile" alt="" draggable="false">
         </td>
       </ng-container>
       <ng-container matColumnDef="ItemID">
@@ -58,14 +63,22 @@
         <th mat-header-cell *matHeaderCellDef> Type </th>
         <td mat-cell *matCellDef="let item"> {{ ItemType[item.item.itemCategory] }} </td>
       </ng-container>
+      <ng-container matColumnDef="Remove">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let item; let i = index">
+          <button mat-icon-button (click)="removeItem(i)" [disabled]="data._isDeleted">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <mat-dialog-actions fxLayoutAlign="end end" fxLayoutGap="10px">
-      <div class="mr-auto">
-        <button mat-flat-button (click)="closeDialog()">Cancel</button>
-      </div>
-      <button mat-flat-button color="warn" (click)="saveSales()">Save</button>
-    </mat-dialog-actions>
   </div>
 </div>
+<mat-dialog-actions fxLayoutAlign="end end" fxLayoutGap="10px">
+  <div class="mr-auto">
+    <button mat-flat-button (click)="closeDialog()">Cancel</button>
+  </div>
+  <button mat-flat-button color="warn" (click)="saveSales()" [disabled]="data._isDeleted">Save</button>
+</mat-dialog-actions>

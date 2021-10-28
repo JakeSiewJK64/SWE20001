@@ -94,7 +94,7 @@ namespace CleanArchitecture.WebUI.Areas.Identity.Pages.Account
             var email = info.Principal.FindFirstValue(ClaimTypes.Email);
             if (!email.EndsWith("@gmail.com"))
             {
-                ErrorMessage = $"Error from external provider: Only BP Healthcare email allowed to login";
+                ErrorMessage = $"Error logging user in. Please contact support.";
                 return RedirectToPage("./Login", new { ReturnUrl = returnUrl });
             }
 

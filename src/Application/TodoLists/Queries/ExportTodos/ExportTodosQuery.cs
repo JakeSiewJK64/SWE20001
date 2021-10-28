@@ -36,7 +36,7 @@ namespace CleanArchitecture.Application.TodoLists.Queries.ExportTodos
                     .ProjectTo<TodoItemRecord>(_mapper.ConfigurationProvider)
                     .ToListAsync(cancellationToken);
 
-            vm.Content = _fileBuilder.BuildTodoItemsFile(records);
+            vm.Content = _fileBuilder.BuildCsvFile(records);
             vm.ContentType = "text/csv";
             vm.FileName = "TodoItems.csv";
 

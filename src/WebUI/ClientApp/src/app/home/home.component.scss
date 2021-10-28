@@ -1,3 +1,7 @@
+body {
+    overflow: scroll;
+}
+
 .add-sales-button {
     background: #2ecc71;
     color: #fff;
@@ -13,20 +17,58 @@
     background-color: #ecf0f1;
 }
 
-.abc {
+.search-button {
     height: 20%;
-    margin-top:1rem;
+    width: 8rem;
+    margin-top: 1rem;
     background: #2ecc71;
     color: #fff;
 }
 
-.abc:hover {
+.search-button:hover {
     cursor: pointer;
     background-color: #29a329;
 }
 
-  
-  .full-width {
+.full-width {
     width: 100%;
+}
 
-  }
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+.custom-container {
+    border-left: solid #2ecc71 5px;
+    border-top: solid #bdc3c7 1px;
+    border-right: solid #bdc3c7 1px;
+    border-bottom: solid #bdc3c7 1px;
+    border-radius: 10px;
+}
+
+.total-sales-container {
+    border-left: solid #e74c3c 5px;
+    border-top: solid #bdc3c7 1px;
+    border-right: solid #bdc3c7 1px;
+    border-bottom: solid #bdc3c7 1px;
+    border-radius: 10px;
+}
+
+.highest-sales-item-container {
+    border-left: solid #f1c40f 5px;
+    border-top: solid #bdc3c7 1px;
+    border-right: solid #bdc3c7 1px;
+    border-bottom: solid #bdc3c7 1px;
+    border-radius: 10px;
+}
+
+.highest-sales-itemtype-container {
+    border-left: solid #3498db 5px;
+    border-top: solid #bdc3c7 1px;
+    border-right: solid #bdc3c7 1px;
+    border-bottom: solid #bdc3c7 1px;
+    border-radius: 10px;
+}

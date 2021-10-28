@@ -1,22 +1,26 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using CleanArchitecture.Application.Common.Helpers;
 using CleanArchitecture.Application.Common.Interfaces;
+using CleanArchitecture.Application.Sales.Commands.GetSales;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace CleanArchitecture.Application.Sales.Commands.GenerateSalesReport
 {
-    public class ExportSalesReportQuery : IRequest<ExportSalesReportVm>
+    public class ExportSalesReportQuery : IRequest<(byte[], string)>
     {
         public DateTime Date { get; set; }
     }
 
-    public class ExportSalesReportQueryHandler : IRequestHandler<ExportSalesReportQuery, ExportSalesReportVm>
+    public class ExportSalesReportQueryHandler : IRequestHandler<ExportSalesReportQuery, (byte[], string)>
     {
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
@@ -29,19 +33,18 @@ namespace CleanArchitecture.Application.Sales.Commands.GenerateSalesReport
             _fileBuilder = fileBuilder;
         }
 
-        public async Task<ExportSalesReportVm> Handle(ExportSalesReportQuery request, CancellationToken cancellationToken)
+        public async Task<(byte[], string)> Handle(ExportSalesReportQuery request, CancellationToken cancellationToken)
         {
-            var vm = new ExportSalesReportVm();
             var records = await _context.SalesRecord
-                    .Where(d => d.SalesDate.Month == request.Date.Month)
-                    .ProjectTo<SalesReportFileRecord>(_mapper.ConfigurationProvider)
+                    .Where(d => d.SalesDate.Month == request.Date.Month 
+                        && d.SalesDate.Year == request.Date.Year
+                        && !d.IsDeleted)
+                    .ProjectTo<SalesDto>(_mapper.ConfigurationProvider)
                     .ToListAsync(cancellationToken);
+            var itemListings = await _context.Items.ToListAsync();
 
-            vm.Content = _fileBuilder.BuildTodoItemsFile(records);
-            vm.ContentType = "text/csv";
-            vm.FileName = "SalesReport.csv";
-
-            return await Task.FromResult(vm);
+            var csvFile = ReportServices.GenerateCSVReport(itemListings, records, request.Date);
+            return (csvFile.Item1, csvFile.Item2);
         }
     }
 }

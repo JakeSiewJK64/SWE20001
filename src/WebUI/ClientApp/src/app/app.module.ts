@@ -8,9 +8,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
-import { TodoComponent } from './todo/todo.component';
+// import { CounterComponent } from './counter/counter.component';
+// import { FetchDataComponent } from './fetch-data/fetch-data.component';
+// import { TodoComponent } from './todo/todo.component';
 import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.module';
 import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
@@ -27,9 +27,9 @@ import { EditSalesDetailsComponentComponent } from './sales/_dialogs/edit-sales-
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
-    TodoComponent,
+    // CounterComponent,
+    // FetchDataComponent,
+    // TodoComponent,
     InventoryComponent,
     SalesComponent,
     SalesDetailsComponentComponent,
@@ -43,12 +43,13 @@ import { EditSalesDetailsComponentComponent } from './sales/_dialogs/edit-sales-
     FormsModule,
     ApiAuthorizationModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'inventory', component: InventoryComponent },
-      { path: 'sales', component: SalesComponent },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'todo', component: TodoComponent, canActivate: [AuthorizeGuard] },
+      { path: '', pathMatch: 'full', redirectTo: 'home', },
+      { path: 'home', component: HomeComponent, canActivate: [AuthorizeGuard] },
+      { path: 'home/inventory', component: InventoryComponent, canActivate: [AuthorizeGuard] },
+      { path: 'home/sales', component: SalesComponent, canActivate: [AuthorizeGuard] },
+      // { path: 'home/counter', component: CounterComponent, canActivate: [AuthorizeGuard] },
+      // { path: 'home/fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
+      // { path: 'home/todo', component: TodoComponent, canActivate: [AuthorizeGuard] },
     ], { relativeLinkResolution: 'legacy' }),
     BrowserAnimationsModule,
     ModalModule.forRoot()
