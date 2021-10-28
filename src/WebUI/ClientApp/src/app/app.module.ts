@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
@@ -19,6 +18,7 @@ import { SalesComponent } from './sales/sales.component';
 import { SalesDetailsComponentComponent } from './sales/_dialogs/sales-details-component/sales-details-component.component';
 import { EditSalesDetailsComponentComponent } from './sales/_dialogs/edit-sales-details-component/edit-sales-details-component.component';
 import { NoPageComponent } from './NoPage/no-page/no-page.component';
+import { ItemDetailsComponentComponent } from './inventory-dialogs/item-details-component/item-details-component.component';
 
 
 @NgModule({
@@ -27,13 +27,11 @@ import { NoPageComponent } from './NoPage/no-page/no-page.component';
     NavMenuComponent,
     HomeComponent,
     NoPageComponent,
-    // CounterComponent,
-    // FetchDataComponent,
-    // TodoComponent,
     InventoryComponent,
     SalesComponent,
     SalesDetailsComponentComponent,
-    EditSalesDetailsComponentComponent
+    EditSalesDetailsComponentComponent,
+    ItemDetailsComponentComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -47,9 +45,6 @@ import { NoPageComponent } from './NoPage/no-page/no-page.component';
       { path: 'home', component: HomeComponent, canActivate: [AuthorizeGuard] },
       { path: 'home/inventory', component: InventoryComponent, canActivate: [AuthorizeGuard] },
       { path: 'home/sales', component: SalesComponent, canActivate: [AuthorizeGuard] },
-      // { path: 'home/counter', component: CounterComponent, canActivate: [AuthorizeGuard] },
-      // { path: 'home/fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
-      // { path: 'home/todo', component: TodoComponent, canActivate: [AuthorizeGuard] },
       { path: '**', pathMatch: 'full', 
         component: NoPageComponent },
     ], { relativeLinkResolution: 'legacy' }),
