@@ -8,7 +8,7 @@ namespace CleanArchitecture.Infrastructure.Files
 {
     public class CsvFileBuilder : ICsvFileBuilder
     {
-        public byte[] BuildTodoItemsFile<T>(IEnumerable<T> records)
+        public byte[] BuildCsvFile<T>(IEnumerable<T> records)
         {
             using var memoryStream = new MemoryStream();
             using (var streamWriter = new StreamWriter(memoryStream))

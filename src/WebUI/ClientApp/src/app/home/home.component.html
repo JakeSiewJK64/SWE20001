@@ -1,45 +1,61 @@
 <div class="demo-button-container w-100">
   <h1>Personal Healthcare Pharmacy Sales</h1>
   <p>Date: {{ date }}</p>
-  <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+  <div fxLayoutAlign="center center" fxLayout="column" *ngIf="isLoading">
+    <mat-spinner [diameter]="30"></mat-spinner>
+    <span>Loading Sales Records</span>
+  </div>
   <div *ngIf="!isLoading">
-    <div fxLayoutAlign="end end">
-      <button mat-raised-button (click)="openEditDialogNew()" class="add-sales-button my-2">
-        Add Data
-      </button>
+    <div fxLayout="row wrap" fxLayoutGap="10px">
+      <div class="container total-sales-container" fxFlex>
+        <div class="text-center p-3" fxLayout="column">
+          <h2>Total Sales This Month</h2>
+          <span>{{ totalSalesCurrentMonth }}</span>
+        </div>
+      </div>
+      <div class="container highest-sales-item-container" fxFlex>
+        <div class="text-center p-3" fxLayout="column">
+          <h2>Most Sold Item This Month</h2>
+          <span>{{ highestSellingItem }}</span>
+        </div>
+      </div>
+      <div class="container highest-sales-itemtype-container" fxFlex>
+        <div class="text-center p-3" fxLayout="column">
+          <h2>Most Sold Item Category This Month</h2>
+          <span>{{ highestSellingItemCategory }}</span>
+        </div>
+      </div>
     </div>
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%;">
-      <ng-container matColumnDef="Sales_ID">
-        <th mat-header-cell *matHeaderCellDef>Sales ID</th>
-        <td mat-cell *matCellDef="let element">{{ element._salesRecordId }}</td>
-      </ng-container>
-      <ng-container matColumnDef="Date">
-        <th mat-header-cell *matHeaderCellDef>Sales Date</th>
-        <td mat-cell *matCellDef="let element">{{ element._date | date: 'yyyy/MM/dd HH:mm:ss' }}</td>
-      </ng-container>
-      <ng-container matColumnDef="Employee_ID">
-        <th mat-header-cell *matHeaderCellDef>Employee ID</th>
-        <td mat-cell *matCellDef="let element">{{ element._employeeId }}</td>
-      </ng-container>
-      <ng-container matColumnDef="Remarks">
-        <th mat-header-cell *matHeaderCellDef>Remarks</th>
-        <td mat-cell *matCellDef="let element">{{ element._remarks }}</td>
-      </ng-container>
-      <ng-container matColumnDef="isDeleted">
-        <th mat-header-cell *matHeaderCellDef>Deleted</th>
-        <td mat-cell *matCellDef="let element">{{ element._isDeleted }}</td>
-      </ng-container>
-      <ng-container matColumnDef="CreatedBy">
-        <th mat-header-cell *matHeaderCellDef>Created By</th>
-        <td mat-cell *matCellDef="let element">{{ element.createdBy }}</td>
-      </ng-container>
-      <ng-container matColumnDef="LastModifiedBy">
-        <th mat-header-cell *matHeaderCellDef>Last Modified By</th>
-        <td mat-cell *matCellDef="let element">{{ element.lastModifiedBy }}</td>
-      </ng-container>
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="openEditDialog(row)" class="sales-record">
-      </tr>
-    </table>
+    <h1>Sales Forecast</h1>
+    <div fxLayout="row wrap" fxLayoutGap="10px">
+      <mat-form-field appearance="outline" fxFlex>
+        <mat-label>Product</mat-label>
+        <mat-select (selectionChange)="predictProductSales()" [(ngModel)]="productIdFilter">
+          <mat-option *ngFor="let item of itemList" [value]="item.itemId">
+            {{ item.itemName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline" fxFlex>
+        <mat-label>Item Categories</mat-label>
+        <mat-select (selectionChange)="predictItemTypeSales()" [(ngModel)]="productCategoryFilter">
+          <mat-option *ngFor="let category of itemCategoryLists | enumpipe" [value]="category.value">
+            {{ category.value | splitString }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row wrap" fxLayoutGap="10px">
+      <div class="custom-container" fxLayoutAlign="center center" fxLayout="column"
+        *ngIf="predictedProductSales != null" fxFlex>
+        <span class="m-2">Predicted Sales for : {{ productNameFilter }}</span>
+        <span class="m-1">{{ predictedProductSales }}</span>
+      </div>
+      <div class="custom-container" fxLayoutAlign="center center" fxLayout="column"
+        *ngIf="predictedItemCategorySales != null" fxFlex>
+        <span class="m-2">Predicted Sales for Item Type : {{ productCategoryFilter }}</span>
+        <span class="m-1">{{ predictedItemCategorySales }}</span>
+      </div>
+    </div>
   </div>
 </div>
