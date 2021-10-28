@@ -1,5 +1,45 @@
-<p>
-  item-details-component works!
-</p>
+<div fxLayout="column" fxFlexFill class="w-100">
+  <h1 mat-dialog-title >Add Item</h1>
+  <div>
+    <button mat-stroked-button>Picture?</button>
+    
+    <mat-form-field appearance="outline" fxFlex>
+      <mat-label>Remarks</mat-label>
+      <input matInput type="text" >
+    </mat-form-field>
+    
+  </div>
 
-<button mat-raised-button (click)="openEditItemDetailsDialog()">Edit</button>
+  <div fxLayout="row wrap" fxLayoutGap="5px">
+    <mat-form-field appearance="outline" fxFlex>
+      <mat-label>CreatedOn</mat-label>
+      <input matInput type="text" [readonly]="true">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" fxFlex>
+      <mat-label>CreatedBy</mat-label>
+      <input matInput type="text" [readonly]="true">
+    </mat-form-field>
+  </div>
+
+  <div fxLayout="row wrap" fxLayoutGap="5px">
+    <mat-form-field appearance="outline" fxFlex>
+      <mat-label>EditedBy</mat-label>
+      <input matInput type="text"  [readonly]="true">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" fxFlex>
+      <mat-label>EditedOn</mat-label>
+      <input matInput type="text" [readonly]="true">
+    </mat-form-field>
+  </div>
+
+  <div fxLayout="column">
+    <div fxLayoutAlign="end end">
+      <button mat-flat-button >Add Item</button>
+    </div>
+
+    
+
+  </div>
+</div>
