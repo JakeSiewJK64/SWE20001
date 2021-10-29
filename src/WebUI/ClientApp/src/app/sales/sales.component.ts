@@ -14,7 +14,7 @@ import { MatSort } from '@angular/material/sort';
 })
 export class SalesComponent implements OnInit {
   dialogref: any;
-  displayedColumns: string[] = ['Sales_ID', 'Employee_ID', 'Remarks', 'Date', 'CreatedBy', 'LastModifiedBy', 'isDeleted'];
+  displayedColumns: string[] = ['_salesRecordId','_salesDate','_createdBy','_editedBy','_remarks','_isDeleted','_editedOn'];
   dataSource: MatTableDataSource<SalesDto>;
   isLoading: boolean = false;
   filterCriteria: string;
@@ -46,6 +46,7 @@ export class SalesComponent implements OnInit {
 
   ngOnInit(): void {
     this.load();
+    //this.dataSource.sort = this.sort;
   }
 
   load() {

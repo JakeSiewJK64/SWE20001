@@ -30,34 +30,34 @@
     </button>
   </div>
   <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 mb-5" style="width: 100%;" >
-    <ng-container matColumnDef="Sales_ID">
+    <ng-container matColumnDef="_salesRecordId">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Sales ID</th>
       <td mat-cell *matCellDef="let element">{{ element._salesRecordId }}</td>
     </ng-container>
-    <ng-container matColumnDef="Date">
+    <ng-container matColumnDef="_salesDate">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Sales Date</th>
       <td mat-cell *matCellDef="let element">{{ element._salesDate | date: 'yyyy/MM/dd HH:mm:ss' }}</td>
     </ng-container>
-    <ng-container matColumnDef="CreatedBy">
+    <ng-container matColumnDef="_createdBy">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Created By</th>
       <td mat-cell *matCellDef="let element">{{ element._createdBy }}</td>
     </ng-container>
-    <ng-container matColumnDef="Employee_ID">
+    <ng-container matColumnDef="_editedBy">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Last Modified By</th>
       <td mat-cell *matCellDef="let element">{{ element._editedBy }}</td>
     </ng-container>
-    <ng-container matColumnDef="Remarks">
+    <ng-container matColumnDef="_remarks">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Remarks</th>
       <td mat-cell *matCellDef="let element">{{ element._remarks }}</td>
     </ng-container>
-    <ng-container matColumnDef="isDeleted">
+    <ng-container matColumnDef="_isDeleted">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
       <td mat-cell *matCellDef="let element">
         <span class="badge badge-pill badge-success" *ngIf="!element._isDeleted">Active</span>
         <span class="badge badge-pill badge-danger" *ngIf="element._isDeleted">Deleted</span>
       </td>
     </ng-container>
-    <ng-container matColumnDef="LastModifiedBy">
+    <ng-container matColumnDef="_editedOn">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Last Modified On</th>
       <td mat-cell *matCellDef="let element">{{ element._editedOn | date: 'yyyy/MM/dd HH:mm:ss' }}</td>
     </ng-container>
