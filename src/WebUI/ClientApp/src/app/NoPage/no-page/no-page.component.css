@@ -1,0 +1,12 @@
+h1 {
+  text-align: center;
+  font-size: 30px;
+}
+
+.error404-logo {
+  width: 25rem;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
