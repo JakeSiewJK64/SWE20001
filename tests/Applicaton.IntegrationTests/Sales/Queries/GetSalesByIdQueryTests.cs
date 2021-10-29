@@ -1,21 +1,20 @@
 ﻿using CleanArchitecture.Application.Sales.Commands.GetSales;
-using CleanArchitecture.Application.Sales.Queries.GetAllSalesCurrentMonthQuery;
 using CleanArchitecture.Application.Sales.Queries.GetAllSalesQuery;
+using CleanArchitecture.Application.Sales.Queries.GetSalesByIdQuery;
 using CleanArchitecture.Application.Sales.Queries.UpsertSalesCommand;
-using CleanArchitecture.Domain.Entities;
 using FluentAssertions;
 using NUnit.Framework;
 using System;
 using System.Threading.Tasks;
 
-namespace CleanArchitecture.Application.IntegrationTests.Sales
+namespace CleanArchitecture.Application.IntegrationTests.TodoItems.Commands
 {
     using static Testing;
 
-    public class GetAllSalesCurrentMonthQueryTests : TestBase
+    public class GetSalesByIdQueryTests : TestBase
     {
         [Test]
-        public async Task ShouldCreateSalesRecord()
+        public async Task ShouldGetCorrectSales()
         {
             DateTime todayDate = DateTime.Now;
             DateTime lastMonthDate = todayDate.AddMonths(-1);
@@ -31,20 +30,30 @@ namespace CleanArchitecture.Application.IntegrationTests.Sales
 
             SalesDto newSalesObj2 = new SalesDto();
             newSalesObj2._isDeleted = false;
-            newSalesObj2._remarks = "bad";
-            newSalesObj2._employeeId = "emp1";
+            newSalesObj2._remarks = "good";
+            newSalesObj2._employeeId = "emp2";
             newSalesObj2._salesDate = lastMonthDate;
             var salesId2 = await SendAsync(new UpsertSalesCommand
             {
                 salesObj = newSalesObj2
             });
 
-            var theSales = await SendAsync(new GetAllSalesCurrentMonthQuery
+            var allSales = await SendAsync(new GetAllSalesQuery
             {
-                TimeRange = todayDate
+
+            });
+            var firstSalesId = allSales[0]._salesRecordId;
+
+            var theSales = await SendAsync(new GetSalesByIdQuery
+            {
+                SearchCriteria = firstSalesId.ToString()
             });
 
-            theSales.Should().Equals(1);
+            theSales[0]._isDeleted.Should().Equals(newSalesObj._isDeleted);
+            theSales[0]._remarks.Should().Equals(newSalesObj._remarks);
+            theSales[0]._employeeId.Should().Equals(newSalesObj._employeeId);
+            theSales[0]._salesDate.Should().Equals(newSalesObj._salesDate);
+
         }
     }
 }
