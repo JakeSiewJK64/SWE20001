@@ -19,6 +19,7 @@ import { SalesComponent } from './sales/sales.component';
 import { SalesDetailsComponentComponent } from './sales/_dialogs/sales-details-component/sales-details-component.component';
 import { EditSalesDetailsComponentComponent } from './sales/_dialogs/edit-sales-details-component/edit-sales-details-component.component';
 import { NoPageComponent } from './NoPage/no-page/no-page.component';
+import { ItemDetailsComponentComponent } from './inventory-dialogs/item-details-component/item-details-component.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { NoPageComponent } from './NoPage/no-page/no-page.component';
     InventoryComponent,
     SalesComponent,
     SalesDetailsComponentComponent,
-    EditSalesDetailsComponentComponent
+    EditSalesDetailsComponentComponent,
+    ItemDetailsComponentComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
