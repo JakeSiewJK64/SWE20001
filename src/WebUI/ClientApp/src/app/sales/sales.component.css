@@ -34,13 +34,6 @@ body {
     width: 100%;
 }
 
-.footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-}
-
 .custom-container {
     border-left: solid #2ecc71 5px;
     border-top: solid #bdc3c7 1px;
