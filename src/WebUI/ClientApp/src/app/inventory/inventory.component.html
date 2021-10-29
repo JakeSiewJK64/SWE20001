@@ -6,7 +6,7 @@
     <div fxFlex fxLayout="row wrap" fxLayoutGap="10px">
       <mat-form-field appearance="outline" fxFlex (keydown.enter)="filterItems()">
         <mat-label>Search</mat-label>
-        <input type="text" matInput />
+        <input type="text" matInput [(ngModel)]="searchCriteria"/>
       </mat-form-field>
     </div>
     <button mat-flat-button color="warn" class="mb-4 search-button-item">Search</button>
