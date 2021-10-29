@@ -9,7 +9,7 @@ using CleanArchitecture.Application.Sales.Commands.DeleteSalesCommand;
 using System;
 using CleanArchitecture.Application.Sales.Queries.GetAllSalesQuery;
 
-namespace CleanArchitecture.Application.IntegrationTests.TodoItems.Commands
+namespace CleanArchitecture.Application.IntegrationTests.Sales
 {
     using static Testing;
 

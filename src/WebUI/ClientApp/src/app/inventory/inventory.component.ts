@@ -18,6 +18,7 @@ export class InventoryComponent implements OnInit {
   dataSource: MatTableDataSource<ItemsDto>;
   dialogref: any;
   isLoading: boolean = false;
+  searchCriteria: string;
   page: number;
   pageSize: number;
   totalRecord: number;
@@ -51,6 +52,18 @@ export class InventoryComponent implements OnInit {
   }
 
   filterItems() {
+    if(this.searchCriteria == null || this.searchCriteria == "") {
+      this.getItem();
+      return;
+    }
+    this.itemService.getItemsBySearchCriteriaQuery(this.searchCriteria).subscribe(x => {
+      this.dataSource = new MatTableDataSource(x);
+      console.log(this.dataSource);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+      this.totalRecord = x.length;
+      this.isLoading = false;
+    })
   }
 
   onPageChanged(pageEvent: any) {
