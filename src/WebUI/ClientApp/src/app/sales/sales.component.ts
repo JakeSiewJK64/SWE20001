@@ -2,10 +2,11 @@ import { SalesDetailsComponentComponent } from './_dialogs/sales-details-compone
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
-import { ExportSalesReportQuery, Item, ItemCategory, ItemsListClient, SalesDto, SalesListClient } from '../cleanarchitecture-api';
+import { ExportSalesReportQuery, Item, ItemCategory, ItemsDto, ItemsListClient, SalesDto, SalesListClient } from '../cleanarchitecture-api';
 import { TdDialogService } from '@covalent/core/dialogs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSort } from '@angular/material/sort';
 @Component({
   selector: 'app-sales',
   templateUrl: './sales.component.html',
@@ -14,7 +15,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class SalesComponent implements OnInit {
   dialogref: any;
   displayedColumns: string[] = ['Sales_ID', 'Employee_ID', 'Remarks', 'Date', 'CreatedBy', 'LastModifiedBy', 'isDeleted'];
-  dataSource: MatTableDataSource<SalesDto> = new MatTableDataSource<SalesDto>();
+  dataSource: MatTableDataSource<SalesDto>;
   isLoading: boolean = false;
   filterCriteria: string;
   itemList: Item[] = [];
@@ -34,6 +35,7 @@ export class SalesComponent implements OnInit {
 
   @ViewChild(MatTable) table: MatTable<SalesDto>;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(private salesService: SalesListClient,
     private snackbar: MatSnackBar,
@@ -46,20 +48,22 @@ export class SalesComponent implements OnInit {
     this.load();
   }
 
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator
-  }
-
   load() {
     this.isLoading = true;
     this.getItems();
+    this.dataSource = new MatTableDataSource<SalesDto>();
+    this.getSales();
     this.getTotalSalesCurrentMonth();
     this.getHighestSellingItem();
     this.getHighestSellingItemCategory();
+  }
+
+  getSales(){
     this.salesService.getAllSalesRecordsQuery().subscribe(x => {
       this.dataSource = new MatTableDataSource(x);
-      this.totalRecord = x.length;
       this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+      this.totalRecord = x.length;
       this.isLoading = false;
     });
   }

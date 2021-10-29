@@ -13,12 +13,10 @@ import { ItemsDto, ItemsListClient, ItemCategory, SalesDto, SalesItemListDto, Sa
 export class ItemDetailsComponentComponent implements OnInit {
   constructor(private saleService: SalesListClient,
     private ItemService: ItemsListClient,
-    // private dialogService: MatDialog,
     private authService: AuthorizeService,
     private userService: UserClient,
-   private dialogRef: MatDialogRef<ItemDetailsComponentComponent>,
+    private dialogRef: MatDialogRef<ItemDetailsComponentComponent>,
     private snackbar: MatSnackBar,
-   
   ) {
   }
 
@@ -46,7 +44,7 @@ export class ItemDetailsComponentComponent implements OnInit {
   }
 
   save() {
-   //remove unneeded 
+    //remove unneeded 
     this.model._itemCategory;
     this.model._quantity;
     this.model._batchId;
@@ -60,8 +58,8 @@ export class ItemDetailsComponentComponent implements OnInit {
     this.model._restockDate;
     this.model._expDate;
     this.model._isDeleted;
-    
-    
+
+
     this.ItemService.upsertItemsCommand(this.model).subscribe(x => {
       console.log(x);
       this.snackbar.open("Item Saved!", "OK", { duration: 5000 });
