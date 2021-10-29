@@ -9,6 +9,7 @@ using System;
 using CleanArchitecture.Application.Common.Models;
 using CleanArchitecture.Domain.Entities;
 using CleanArchitecture.Application.Items.Commands.UpsertItemsCommand;
+using CleanArchitecture.Application.Items.Queries.GetItemsBySearchCriteria;
 
 namespace CleanArchitecture.WebUI.Controllers
 {
@@ -21,5 +22,8 @@ namespace CleanArchitecture.WebUI.Controllers
         [HttpPost]
         public async Task<ActionResult<int>> UpsertItemsCommand(ItemsDto itemsDto)
            => Ok(await Mediator.Send(new UpsertItemsCommand { itemsObj = itemsDto }));
+        [HttpGet]
+        public async Task<ActionResult<List<ItemsDto>>> GetItemsBySearchCriteriaQuery(string searchCriteria)
+            => Ok(await Mediator.Send(new GetItemsBySearchCriteriaQuery { SearchCriteria = searchCriteria }));
     }
 }
