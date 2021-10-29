@@ -46,12 +46,12 @@ export class SalesComponent implements OnInit {
 
   ngOnInit(): void {
     this.load();
-    this.dataSource = new MatTableDataSource<ItemsDto>();
   }
 
   load() {
     this.isLoading = true;
     this.getItems();
+    this.dataSource = new MatTableDataSource<SalesDto>();
     this.getSales();
     this.getTotalSalesCurrentMonth();
     this.getHighestSellingItem();
