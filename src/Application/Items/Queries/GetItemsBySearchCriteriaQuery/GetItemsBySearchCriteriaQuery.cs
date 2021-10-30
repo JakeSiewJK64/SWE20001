@@ -40,14 +40,12 @@ namespace CleanArchitecture.Application.Items.Queries.GetItemsBySearchCriteria
             {
                 inventory = await _context.Items
                     .Where(x => x.ItemId == int.Parse(request.SearchCriteria) && !x.IsDeleted)
-                    .ProjectTo<Item>(_mapper.ConfigurationProvider)
                     .ToListAsync();
             }
             else
             {
                 inventory = await _context.Items
                     .Where(x => x.ItemName.Contains(request.SearchCriteria) && !x.IsDeleted)
-                    .ProjectTo<Item>(_mapper.ConfigurationProvider)
                     .ToListAsync();
             }
 
