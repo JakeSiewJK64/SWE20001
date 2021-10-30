@@ -1,37 +1,55 @@
-<h1 mat-dialog-title>{{ model._itemId != undefined || model._itemId != null ? 'Add' : 'Edit' }} Item</h1>
+<h1 mat-dialog-title>{{ model.itemId != undefined || model.itemId != null ? 'Add' : 'Edit' }} Item</h1>
 <div fxLayout="column" fxFlexFill class="w-100" fxLayoutGap="10px">
   <div fxLayoutAlign="center center">
-    <img draggable="false"
-      [src]="model._imageUrl != null ? model._imageUrl : 'https://cdn-icons.flaticon.com/png/512/5445/premium/5445197.png?token=exp=1635430649~hmac=b66952247852b78a822f279c167b2a4a'"
-      alt="" class="item-profile">
+    <div class="hoverable-container" fxLayoutAlign="center center" (click)="fileInput.click()">
+      <img draggable="false"
+        [src]="model.imageUrl != null ? model.imageUrl : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'"
+        alt="" class="item-profile">
+      <!-- 'https://cdn-icons.flaticon.com/png/512/5445/premium/5445197.png?token=exp=1635430649~hmac=b66952247852b78a822f279c167b2a4a'" -->
+      <span fxLayoutAlign="center center" class="upload-image">Upload Image</span>
+    </div>
   </div>
-  <div fxLayout="row wrap" fxLayoutGap="5px">
-    <mat-form-field appearance="outline" fxFlex>
+  <div fxLayout="row" fxLayoutGap="5px" fxFlex="100">
+    <mat-form-field appearance="outline" fxFlex="40">
       <mat-label>Item Name</mat-label>
-      <input matInput type="text" [(ngModel)]="model._itemName">
+      <input matInput type="text" [(ngModel)]="model.itemName">
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex>
       <mat-label>Quantity</mat-label>
-      <input matInput type="number" [(ngModel)]="model._quantity">
+      <input matInput type="number" [(ngModel)]="model.quantity">
+    </mat-form-field>
+    <mat-form-field appearance="outline" fxFlex>
+      <mat-label>Cost Price</mat-label>
+      <input matInput type="text" [(ngModel)]="model.costPrice">
+    </mat-form-field>
+    <mat-form-field appearance="outline" fxFlex>
+      <mat-label>Sell Price</mat-label>
+      <input matInput type="text" [(ngModel)]="model.sellPrice">
     </mat-form-field>
   </div>
   <div fxLayout="row wrap" fxLayoutGap="5px">
     <mat-form-field appearance="outline" fxFlex>
       <mat-label>Manufacturer</mat-label>
-      <input matInput type="text" [(ngModel)]="model._manufacturer_Id">
+      <input matInput type="text" [(ngModel)]="model.manufacturer_Id">
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex>
       <mat-label>Status</mat-label>
-      <input matInput type="text" [(ngModel)]="model._status">
+      <input matInput type="text" [(ngModel)]="model.status">
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex>
       <mat-label>Type</mat-label>
-      <input matInput type="text" [(ngModel)]="model._itemCategory">
+      <input matInput type="text" [(ngModel)]="model.itemCategory">
     </mat-form-field>
   </div>
-  <div fxLayout="row" fxLayoutAlign="start start">
-    <button mat-raised-button (click)="fileInput.click()" class="bg-success text-white">Insert Image</button>
+  <div fxLayout="row wrap" fxLayoutGap="5px">
+    <mat-form-field appearance="outline" fxFlex>
+      <mat-label>Remarks</mat-label>
+      <input matInput type="text" [(ngModel)]="model.remarks">
+    </mat-form-field>
   </div>
+  <!-- <div fxLayout="row" fxLayoutAlign="start start">
+    <button mat-raised-button (click)="fileInput.click()" class="bg-success text-white">Insert Image</button>
+  </div> -->
   <input style="display: none;" #fileInput type="file" (change)="uploadItemImage($event.target.files)" />
   <div fxLayout="row wrap" fxLayoutGap="5px">
     <mat-form-field appearance="outline" fxFlex>
