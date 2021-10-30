@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Add Item</h1>
+<h1 mat-dialog-title>{{ model._itemId != undefined || model._itemId != null ? 'Add' : 'Edit' }} Item</h1>
 <div fxLayout="column" fxFlexFill class="w-100" fxLayoutGap="10px">
   <div fxLayoutAlign="center center">
     <img draggable="false"

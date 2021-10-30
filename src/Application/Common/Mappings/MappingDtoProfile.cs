@@ -9,6 +9,8 @@ namespace CleanArchitecture.Application.Common.Mappings
         public MappingDtoProfile()
         {
             CreateMap<SalesRecord, SalesDto>();
+            CreateMap<Item, Item>();
+            
         }
     }
 }

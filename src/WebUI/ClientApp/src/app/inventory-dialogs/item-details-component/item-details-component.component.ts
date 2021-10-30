@@ -1,9 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AuthorizeService } from 'src/api-authorization/authorize.service';
-import { ItemsDto, ItemsListClient, ItemCategory, SalesDto, SalesItemListDto, SalesListClient, UserClient } from 'src/app/cleanarchitecture-api';
-//import { EditItemDetailsComponentComponent } from '../edit-item-details-component/edit-item-details-component.component';
+import { ItemsDto, ItemsListClient, ItemCategory } from 'src/app/cleanarchitecture-api';
 
 @Component({
   selector: 'app-item-details-component',
@@ -11,31 +9,27 @@ import { ItemsDto, ItemsListClient, ItemCategory, SalesDto, SalesItemListDto, Sa
   styleUrls: ['./item-details-component.component.css']
 })
 export class ItemDetailsComponentComponent implements OnInit {
-  constructor(private saleService: SalesListClient,
-    private ItemService: ItemsListClient,
-    private authService: AuthorizeService,
-    private userService: UserClient,
+  constructor(private itemService: ItemsListClient,
     private dialogRef: MatDialogRef<ItemDetailsComponentComponent>,
     private snackbar: MatSnackBar,
-  ) {
+    @Inject(MAT_DIALOG_DATA) public data: ItemsDto) {
   }
 
   displayedColumns: string[] = ['ItemID', 'ItemImage', 'Name', 'Type', 'Quantity'];
   dataSource: any;
   ItemType = ItemCategory;
-  empName: string = "";
   model: ItemsDto = new ItemsDto();
 
   ngOnInit() {
-    this.empName.length
     this.load();
   }
 
   load() {
+    if (this.data != undefined || this.data != null) this.model = this.data;
+    console.log(this.model);
   }
 
   uploadItemImage(files: File[]) {
-    console.log(files)
     const reader = new FileReader();
     reader.readAsDataURL(files[0]);
     reader.onload = (x) => {
@@ -44,7 +38,6 @@ export class ItemDetailsComponentComponent implements OnInit {
   }
 
   save() {
-    //remove unneeded 
     this.model._itemCategory;
     this.model._quantity;
     this.model._batchId;
@@ -58,9 +51,7 @@ export class ItemDetailsComponentComponent implements OnInit {
     this.model._restockDate;
     this.model._expDate;
     this.model._isDeleted;
-
-
-    this.ItemService.upsertItemsCommand(this.model).subscribe(x => {
+    this.itemService.upsertItemsCommand(this.model).subscribe(x => {
       console.log(x);
       this.snackbar.open("Item Saved!", "OK", { duration: 5000 });
       this.dialogRef.close();
