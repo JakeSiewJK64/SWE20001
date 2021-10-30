@@ -2,3 +2,29 @@
     width: 100px;
     height: auto;
 }
+
+img {
+    opacity: 1.0;
+    filter: alpha(opacity = 100);
+}
+
+.upload-image {
+    color: #808080;
+    position: absolute;
+    opacity: 0;
+}
+
+.hoverable-container {
+    position: relative;
+}
+
+.hoverable-container:hover img{
+    opacity: 0.5;
+    filter: alpha(opacity = 40);
+    cursor: pointer;
+}
+
+.hoverable-container:hover .upload-image{
+    opacity: 1.0;
+    cursor: pointer;
+}
