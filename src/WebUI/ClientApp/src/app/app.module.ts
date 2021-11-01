@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
@@ -28,9 +27,6 @@ import { ItemDetailsComponentComponent } from './inventory-dialogs/item-details-
     NavMenuComponent,
     HomeComponent,
     NoPageComponent,
-    // CounterComponent,
-    // FetchDataComponent,
-    // TodoComponent,
     InventoryComponent,
     SalesComponent,
     SalesDetailsComponentComponent,
@@ -49,9 +45,6 @@ import { ItemDetailsComponentComponent } from './inventory-dialogs/item-details-
       { path: 'home', component: HomeComponent, canActivate: [AuthorizeGuard] },
       { path: 'home/inventory', component: InventoryComponent, canActivate: [AuthorizeGuard] },
       { path: 'home/sales', component: SalesComponent, canActivate: [AuthorizeGuard] },
-      // { path: 'home/counter', component: CounterComponent, canActivate: [AuthorizeGuard] },
-      // { path: 'home/fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
-      // { path: 'home/todo', component: TodoComponent, canActivate: [AuthorizeGuard] },
       { path: '**', pathMatch: 'full', 
         component: NoPageComponent },
     ], { relativeLinkResolution: 'legacy' }),

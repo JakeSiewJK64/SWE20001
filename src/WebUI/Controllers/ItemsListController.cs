@@ -22,8 +22,9 @@ namespace CleanArchitecture.WebUI.Controllers
         [HttpPost]
         public async Task<ActionResult<int>> UpsertItemsCommand(ItemsDto itemsDto)
            => Ok(await Mediator.Send(new UpsertItemsCommand { itemsObj = itemsDto }));
+
         [HttpGet]
-        public async Task<ActionResult<List<ItemsDto>>> GetItemsBySearchCriteriaQuery(string searchCriteria)
+        public async Task<ActionResult<List<Item>>> GetItemsBySearchCriteriaQuery(string searchCriteria)
             => Ok(await Mediator.Send(new GetItemsBySearchCriteriaQuery { SearchCriteria = searchCriteria }));
     }
 }

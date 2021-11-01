@@ -1,12 +1,10 @@
-﻿using CleanArchitecture.Application;
-using CleanArchitecture.Domain.Entities;
+﻿using CleanArchitecture.Domain.Entities;
 using FluentAssertions;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using CleanArchitecture.Application.Sales.Queries.UpsertSalesCommand;
 using CleanArchitecture.Application.Sales.Commands.GetSales;
 using CleanArchitecture.Application.Sales.Commands.DeleteSalesCommand;
-using System;
 using CleanArchitecture.Application.Sales.Queries.GetAllSalesQuery;
 
 namespace CleanArchitecture.Application.IntegrationTests.Sales

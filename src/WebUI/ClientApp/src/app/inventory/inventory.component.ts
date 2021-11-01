@@ -58,7 +58,6 @@ export class InventoryComponent implements OnInit {
     }
     this.itemService.getItemsBySearchCriteriaQuery(this.searchCriteria).subscribe(x => {
       this.dataSource = new MatTableDataSource(x);
-      console.log(this.dataSource);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
       this.totalRecord = x.length;
@@ -76,6 +75,13 @@ export class InventoryComponent implements OnInit {
     this.dialogref = this.dialogservice.open(ItemDetailsComponentComponent, {
       width: '1000px',
       data: new ItemsDto()
+    })
+  }
+
+  openEditDialogExisting(item: ItemsDto) {
+    this.dialogref = this.dialogservice.open(ItemDetailsComponentComponent, {
+      width: '1000px',
+      data: item
     })
   }
 }

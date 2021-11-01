@@ -14,7 +14,7 @@ namespace CleanArchitecture.Application.Sales.Commands.GetSales
         public List<SalesItemListDto> _salesItemList
         {
             get { return _items.ToObject<List<SalesItemListDto>>(); }
-            set { }
+            set { _items = value.ToStringJSON(); }
         }
         public DateTime _salesDate { get; set; }
         public DateTime _editedOn { get; set; }

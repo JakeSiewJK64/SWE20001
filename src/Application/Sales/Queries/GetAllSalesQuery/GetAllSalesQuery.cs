@@ -37,18 +37,21 @@ namespace CleanArchitecture.Application.Sales.Queries.GetAllSalesQuery
                .ToListAsync(cancellationToken);
             foreach (SalesDto s in sales)
             {
-                var items = new List<SalesItemListDto>();
-                foreach (SalesItemListDto d in s._items.ToObject<List<SalesItemListDto>>())
+                if (s._items.Length > 0)
                 {
-                    d.Item = _context.Items.Where(x => x.ItemId.Equals(d.ItemId)).First();
-                    items.Add(new SalesItemListDto
+                    var items = new List<SalesItemListDto>();
+                    foreach (SalesItemListDto d in s._items.ToObject<List<SalesItemListDto>>())
                     {
-                        Item = d.Item,
-                        ItemId = d.ItemId,
-                        Quantity = d.Quantity
-                    });
+                        d.Item = _context.Items.Where(x => x.ItemId.Equals(d.ItemId)).First();
+                        items.Add(new SalesItemListDto
+                        {
+                            Item = d.Item,
+                            ItemId = d.ItemId,
+                            Quantity = d.Quantity
+                        });
+                    }
+                    s._items = items.ToStringJSON();
                 }
-                s._items = items.ToStringJSON();
             }
             return sales;
         }
