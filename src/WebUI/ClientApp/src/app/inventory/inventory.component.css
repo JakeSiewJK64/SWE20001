@@ -1,0 +1,8 @@
+.search-button-item {
+    background-color: #2ecc71;
+}
+
+.item-record:hover {
+    cursor: pointer;
+    background-color: #ecf0f1;
+}

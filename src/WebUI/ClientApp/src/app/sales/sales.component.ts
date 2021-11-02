@@ -6,6 +6,8 @@ import { ExportSalesReportQuery, Item, ItemCategory, ItemsListClient, SalesDto, 
 import { TdDialogService } from '@covalent/core/dialogs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSort } from '@angular/material/sort';
+import { AuthorizeService } from 'src/api-authorization/authorize.service';
 @Component({
   selector: 'app-sales',
   templateUrl: './sales.component.html',
@@ -13,8 +15,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class SalesComponent implements OnInit {
   dialogref: any;
-  displayedColumns: string[] = ['Sales_ID', 'Employee_ID', 'Remarks', 'Date', 'CreatedBy', 'LastModifiedBy', 'isDeleted'];
-  dataSource: MatTableDataSource<SalesDto> = new MatTableDataSource<SalesDto>();
+  displayedColumns: string[] = ['_salesRecordId','_salesDate','_createdBy','_editedBy','_remarks','_isDeleted','_editedOn'];
+  dataSource: MatTableDataSource<SalesDto>;
   isLoading: boolean = false;
   filterCriteria: string;
   itemList: Item[] = [];
@@ -27,6 +29,7 @@ export class SalesComponent implements OnInit {
   productCategoryFilter: string;
   predictedProductSales: number;
   predictedItemCategorySales: number;
+  isAdmin: boolean = false;
 
   highestSellingItem: string;
   highestSellingItemCategory: string;
@@ -34,10 +37,12 @@ export class SalesComponent implements OnInit {
 
   @ViewChild(MatTable) table: MatTable<SalesDto>;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(private salesService: SalesListClient,
     private snackbar: MatSnackBar,
     private itemService: ItemsListClient,
+    private authService: AuthorizeService,
     private tdDialogService: TdDialogService,
     private dialogservice: MatDialog) {
   }
@@ -46,20 +51,29 @@ export class SalesComponent implements OnInit {
     this.load();
   }
 
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator
-  }
-
   load() {
     this.isLoading = true;
     this.getItems();
+    this.dataSource = new MatTableDataSource<SalesDto>();
+    this.getSales();
+    this.getUser();
     this.getTotalSalesCurrentMonth();
     this.getHighestSellingItem();
     this.getHighestSellingItemCategory();
+  }
+
+  getUser(){
+    this.authService.getUser().subscribe(x => {
+      this.isAdmin = x.role == 'Administrator';
+    });
+  }
+
+  getSales(){
     this.salesService.getAllSalesRecordsQuery().subscribe(x => {
       this.dataSource = new MatTableDataSource(x);
-      this.totalRecord = x.length;
       this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+      this.totalRecord = x.length;
       this.isLoading = false;
     });
   }

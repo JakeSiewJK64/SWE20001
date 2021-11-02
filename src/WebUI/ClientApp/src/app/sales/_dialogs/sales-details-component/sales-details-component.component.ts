@@ -20,7 +20,6 @@ export class SalesDetailsComponentComponent implements OnInit {
 
   constructor(private saleService: SalesListClient,
     private authService: AuthorizeService,
-    private userService: UserClient,
     private dialogRef: MatDialogRef<SalesDetailsComponentComponent>,
     private dialogService: TdDialogService,
     private snackbar: MatSnackBar,
@@ -55,7 +54,7 @@ export class SalesDetailsComponentComponent implements OnInit {
       this.data._createdOn = new Date();
       this.salesDate = this.data._createdOn;
       this.authService.getUser().subscribe(x => {
-        if(x == null) return;
+        if (x == null) return;
         this.data._createdBy = x.name
       });
       this.data._salesItemList = new Array<SalesItemListDto>();
@@ -106,7 +105,6 @@ export class SalesDetailsComponentComponent implements OnInit {
     this.sendData._editedOn = new Date();
     this.sendData._isDeleted = this.data._isDeleted;
     this.saleService.upsertSalesCommand(this.sendData).subscribe(x => {
-      console.log(x);
       if (this.data._isDeleted) {
         this.snackbar.open("Sales deleted successfully!", "OK", { duration: 5000 });
         return;
