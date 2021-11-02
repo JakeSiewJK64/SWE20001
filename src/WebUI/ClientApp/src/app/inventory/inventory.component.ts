@@ -6,6 +6,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ItemsDto, ItemsListClient } from '../cleanarchitecture-api';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { AuthorizeService } from 'src/api-authorization/authorize.service';
 
 @Component({
   selector: 'app-inventory',
@@ -22,12 +23,14 @@ export class InventoryComponent implements OnInit {
   page: number;
   pageSize: number;
   totalRecord: number;
+  isAdmin: boolean = false;
 
   @ViewChild(MatTable) table: MatTable<ItemsDto>;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private dialogservice: MatDialog, 
+    private authService: AuthorizeService,
     private itemService: ItemsListClient) {
   }
 
@@ -38,7 +41,14 @@ export class InventoryComponent implements OnInit {
   load() {
     this.isLoading = true;
     this.getItem();
+    this.getUser();
     this.dataSource = new MatTableDataSource<ItemsDto>();
+  }
+
+  getUser() {
+    this.authService.getUser().subscribe(x => {
+      this.isAdmin = x.role == 'Administrator';
+    });
   }
 
   getItem() {
