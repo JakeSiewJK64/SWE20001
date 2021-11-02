@@ -6,11 +6,11 @@
       <h1>Sales Records</h1>
     </div>
     <div fxLayoutAlign="end end" fxLayoutGap="12px">
-      <button mat-raised-button (click)="openEditDialogNew()" class="add-sales-button my-2">
+      <button mat-raised-button *ngIf="isAdmin" (click)="openEditDialogNew()" class="add-sales-button my-2">
         <mat-icon>add</mat-icon>
         Add Data
       </button>
-      <button mat-raised-button (click)="generateCSV()" class="add-sales-button my-2">
+      <button mat-raised-button *ngIf="isAdmin" (click)="generateCSV()" class="add-sales-button my-2">
         <mat-icon>description</mat-icon>
         Generate CSV Report
       </button>

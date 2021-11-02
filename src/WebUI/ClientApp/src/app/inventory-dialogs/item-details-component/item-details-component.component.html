@@ -5,7 +5,6 @@
       <img draggable="false"
         [src]="model.imageUrl != null ? model.imageUrl : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'"
         alt="" class="item-profile">
-      <!-- 'https://cdn-icons.flaticon.com/png/512/5445/premium/5445197.png?token=exp=1635430649~hmac=b66952247852b78a822f279c167b2a4a'" -->
       <span fxLayoutAlign="center center" class="upload-image">Upload Image</span>
     </div>
   </div>
@@ -30,7 +29,7 @@
   <div fxLayout="row wrap" fxLayoutGap="5px">
     <mat-form-field appearance="outline" fxFlex>
       <mat-label>Manufacturer</mat-label>
-      <input matInput type="text" [(ngModel)]="model.manufacturer_Id">
+      <input matInput type="text" [(ngModel)]="model.manufacturerName">
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex>
       <mat-label>Status</mat-label>
@@ -47,9 +46,6 @@
       <input matInput type="text" [(ngModel)]="model.remarks">
     </mat-form-field>
   </div>
-  <!-- <div fxLayout="row" fxLayoutAlign="start start">
-    <button mat-raised-button (click)="fileInput.click()" class="bg-success text-white">Insert Image</button>
-  </div> -->
   <input style="display: none;" #fileInput type="file" (change)="uploadItemImage($event.target.files)" />
   <div fxLayout="row wrap" fxLayoutGap="5px">
     <mat-form-field appearance="outline" fxFlex>

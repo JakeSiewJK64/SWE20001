@@ -2,11 +2,12 @@ import { SalesDetailsComponentComponent } from './_dialogs/sales-details-compone
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
-import { ExportSalesReportQuery, Item, ItemCategory, ItemsDto, ItemsListClient, SalesDto, SalesListClient } from '../cleanarchitecture-api';
+import { ExportSalesReportQuery, Item, ItemCategory, ItemsListClient, SalesDto, SalesListClient } from '../cleanarchitecture-api';
 import { TdDialogService } from '@covalent/core/dialogs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
+import { AuthorizeService } from 'src/api-authorization/authorize.service';
 @Component({
   selector: 'app-sales',
   templateUrl: './sales.component.html',
@@ -28,6 +29,7 @@ export class SalesComponent implements OnInit {
   productCategoryFilter: string;
   predictedProductSales: number;
   predictedItemCategorySales: number;
+  isAdmin: boolean = false;
 
   highestSellingItem: string;
   highestSellingItemCategory: string;
@@ -40,13 +42,13 @@ export class SalesComponent implements OnInit {
   constructor(private salesService: SalesListClient,
     private snackbar: MatSnackBar,
     private itemService: ItemsListClient,
+    private authService: AuthorizeService,
     private tdDialogService: TdDialogService,
     private dialogservice: MatDialog) {
   }
 
   ngOnInit(): void {
     this.load();
-    //this.dataSource.sort = this.sort;
   }
 
   load() {
@@ -54,9 +56,16 @@ export class SalesComponent implements OnInit {
     this.getItems();
     this.dataSource = new MatTableDataSource<SalesDto>();
     this.getSales();
+    this.getUser();
     this.getTotalSalesCurrentMonth();
     this.getHighestSellingItem();
     this.getHighestSellingItemCategory();
+  }
+
+  getUser(){
+    this.authService.getUser().subscribe(x => {
+      this.isAdmin = x.role == 'Administrator';
+    });
   }
 
   getSales(){
