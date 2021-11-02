@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { TdDialogService } from '@covalent/core/dialogs';
 import { AuthorizeService } from 'src/api-authorization/authorize.service';
 import { ItemsDto, ItemsListClient, ItemCategory, Item } from 'src/app/cleanarchitecture-api';
 
@@ -13,6 +14,7 @@ export class ItemDetailsComponentComponent implements OnInit {
   constructor(private itemService: ItemsListClient,
     private authService: AuthorizeService,
     private dialogRef: MatDialogRef<ItemDetailsComponentComponent>,
+    private dialogService: TdDialogService,
     private snackbar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) private data: ItemsDto) {
   }
@@ -34,7 +36,6 @@ export class ItemDetailsComponentComponent implements OnInit {
       return;
     }
     this.model = new ItemsDto();
-    console.log(this.model);
   }
 
 
@@ -69,6 +70,13 @@ export class ItemDetailsComponentComponent implements OnInit {
     item._costPrice = this.model.costPrice;
     item._editedOn = new Date();
     item._manufacturerName = this.model.manufacturerName;
+    if(item._itemName.length <= 0) {
+      this.dialogService.openAlert({
+        title: "Oops!",
+        message: "Item name cannot be null!"
+      });
+      return;
+    }
     this.itemService.upsertItemsCommand(item).subscribe(x => {
       this.snackbar.open("Item Saved!", "OK", { duration: 5000 });
       this.dialogRef.close();
