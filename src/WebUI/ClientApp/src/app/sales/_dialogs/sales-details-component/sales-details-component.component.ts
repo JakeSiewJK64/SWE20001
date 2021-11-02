@@ -4,7 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTable } from '@angular/material/table';
 import { TdDialogService } from '@covalent/core/dialogs';
 import { AuthorizeService } from 'src/api-authorization/authorize.service';
-import { Item, ItemCategory, SalesDto, SalesItemListDto, SalesListClient, UserClient } from 'src/app/cleanarchitecture-api';
+import { Item, ItemCategory, ItemsDto, ItemsListClient, SalesDto, SalesItemListDto, SalesListClient, UserClient } from 'src/app/cleanarchitecture-api';
 import { EditSalesDetailsComponentComponent } from '../edit-sales-details-component/edit-sales-details-component.component';
 
 export class CustomSalesItemDto {
@@ -23,7 +23,8 @@ export class SalesDetailsComponentComponent implements OnInit {
     private dialogRef: MatDialogRef<SalesDetailsComponentComponent>,
     private dialogService: TdDialogService,
     private snackbar: MatSnackBar,
-    @Inject(MAT_DIALOG_DATA) public data: SalesDto) { this.getCreatedBy(); }
+    @Inject(MAT_DIALOG_DATA) public data: SalesDto,
+    private itemService: ItemsListClient) { this.getCreatedBy(); }
 
   @ViewChild(MatTable) private table: MatTable<SalesItemListDto>;
   displayedColumns: string[] = ['ItemID', 'ItemImage', 'Name', 'Type', 'Quantity', 'Remove'];
@@ -34,6 +35,9 @@ export class SalesDetailsComponentComponent implements OnInit {
   itemList: CustomSalesItemDto[] = Array<CustomSalesItemDto>()
   customItem: CustomSalesItemDto = new CustomSalesItemDto();
   empName: string = "";
+  item: SalesItemListDto[] = [];
+  itemHolder: ItemsDto;
+  hasError: boolean = false;
 
   ngOnInit() {
     this.empName.length
@@ -68,9 +72,25 @@ export class SalesDetailsComponentComponent implements OnInit {
       data: new SalesItemListDto()
     }).afterClosed().subscribe(x => {
       if (x == null || x == undefined) return;
-      this.dataSource.push(x);
-      this.table.renderRows();
-      this.snackbar.open("Item added successfully!", "OK", { duration: 5000 });
+      this.itemService.getItemsBySearchCriteriaQuery(x.itemId.toString()).subscribe(res => {
+        if (res[0].quantity - x.quantity < 0) {
+          this.hasError = true;
+          this.dialogService.openAlert({
+            message: "Insufficient stock",
+            title: "Oops!",
+            closeButton: "Ok"
+          })
+          return;
+        } else {
+          this.hasError = false;
+        }
+      })
+      if (this.hasError == false){
+        this.dataSource.push(x);
+        this.item.push(x);
+        this.table.renderRows();
+        this.snackbar.open("Item added successfully!", "OK", { duration: 5000 });
+      }
     })
   }
 
@@ -86,6 +106,14 @@ export class SalesDetailsComponentComponent implements OnInit {
       this.snackbar.open("Sales Items cannot be empty!", "OK", { duration: 5000 });
       return;
     }
+    this.item.forEach(x => {
+      this.itemHolder = new ItemsDto();
+      this.itemService.getItemsBySearchCriteriaQuery(x.itemId.toString()).subscribe(res => {
+        res[0].quantity -= x.quantity;
+      this.itemService.upsertItemsCommand(res[0]).subscribe(response => console.log(response));
+      })      
+    });
+
 
     this.data._salesItemList.forEach(x => {
       this.customItem = new CustomSalesItemDto()
