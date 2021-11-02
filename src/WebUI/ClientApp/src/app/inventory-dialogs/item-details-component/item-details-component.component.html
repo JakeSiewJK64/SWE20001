@@ -33,11 +33,19 @@
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex>
       <mat-label>Status</mat-label>
-      <input matInput type="text" [(ngModel)]="model.status">
+      <mat-select [(ngModel)]="model.status">
+        <mat-option *ngFor="let status of ItemStatus | enumpipe" [value]="status.key">
+          {{ status.value | splitString }}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex>
       <mat-label>Type</mat-label>
-      <input matInput type="text" [(ngModel)]="model.itemCategory">
+      <mat-select [(ngModel)]="model.itemCategory">
+        <mat-option *ngFor="let type of ItemType | enumpipe" [value]="type.key">
+          {{ type.value | splitString }}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
   </div>
   <div fxLayout="row wrap" fxLayoutGap="5px">

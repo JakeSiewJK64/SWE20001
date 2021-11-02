@@ -3,7 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TdDialogService } from '@covalent/core/dialogs';
 import { AuthorizeService } from 'src/api-authorization/authorize.service';
-import { ItemsDto, ItemsListClient, ItemCategory, Item } from 'src/app/cleanarchitecture-api';
+import { ItemsDto, ItemsListClient, ItemCategory, Item, Status } from 'src/app/cleanarchitecture-api';
 
 @Component({
   selector: 'app-item-details-component',
@@ -22,6 +22,7 @@ export class ItemDetailsComponentComponent implements OnInit {
   displayedColumns: string[] = ['ItemID', 'ItemImage', 'Name', 'Type', 'Quantity'];
   dataSource: any;
   ItemType = ItemCategory;
+  ItemStatus = Status;
   model: Item = new Item();
   empName: string = "";
 
