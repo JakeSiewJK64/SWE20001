@@ -49,22 +49,22 @@
   <input style="display: none;" #fileInput type="file" (change)="uploadItemImage($event.target.files)" />
   <div fxLayout="row wrap" fxLayoutGap="5px">
     <mat-form-field appearance="outline" fxFlex>
-      <mat-label>CreatedOn</mat-label>
-      <input matInput type="text" [readonly]="true">
+      <mat-label>Created On</mat-label>
+      <input matInput type="text" [readonly]="true" [(ngModel)]="model.createdOn">
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex>
-      <mat-label>CreatedBy</mat-label>
-      <input matInput type="text" [readonly]="true">
+      <mat-label>Created By</mat-label>
+      <input matInput type="text" [readonly]="true" [(ngModel)]="model.createdByWho">
     </mat-form-field>
   </div>
   <div fxLayout="row wrap" fxLayoutGap="5px">
     <mat-form-field appearance="outline" fxFlex>
-      <mat-label>EditedBy</mat-label>
-      <input matInput type="text" [readonly]="true">
+      <mat-label>Edited By</mat-label>
+      <input matInput type="text" [readonly]="true" [(ngModel)]="model.editedByWho">
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex>
-      <mat-label>EditedOn</mat-label>
-      <input matInput type="text" [readonly]="true">
+      <mat-label>Edited On</mat-label>
+      <input matInput type="text" [readonly]="true" [(ngModel)]="model.editedOn">
     </mat-form-field>
   </div>
   <div fxLayout="column">

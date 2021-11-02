@@ -48,6 +48,7 @@ export class EditSalesDetailsComponentComponent implements OnInit {
   }
 
   filterOptions(value: string): Item[] {
+    console.log(value);
     return this.itemOptions.filter(option => option.itemName.toLowerCase().includes(value.toLowerCase()));
   }
 
