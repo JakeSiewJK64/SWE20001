@@ -27,22 +27,9 @@ export class ItemDetailsComponentComponent implements OnInit {
   load() {
     if (this.data != undefined || this.data != null) {
       this.model = this.data;
-      // this.model.itemId = this.data._itemId;
-      // this.model.itemName = this.data._itemName;
-      // this.model.manufacturerName = this.data._manufacturerName;
-      // this.model.manufacturer_Id = this.data._manufacturer_Id;
-      // this.model.costPrice = this.data._costPrice;
-      // this.model.sellPrice = this.data._sellPrice;
-      // this.model.status= this.data._status;
-      // this.model.remarks = this.data._remarks;
-      // this.model.itemCategory = this.data._itemCategory;
-      // this.model.quantity = this.data._quantity;
-      // this.model.batchId = this.data._batchId;
-      // this.model.imageUrl = this.data._imageUrl;
-      // this.model.restockDate = this.data._restockDate;
-      // this.model.expDate = this.data._expDate;
-      // this.model.isDeleted = this.data._isDeleted;
+      return;
     }
+    this.model = new ItemsDto();
     console.log(this.model);
   }
 
@@ -55,9 +42,16 @@ export class ItemDetailsComponentComponent implements OnInit {
   }
 
   save(){
-    console.log(this.model);
-    this.itemService.upsertItemsCommand(this.model).subscribe(x => {
-      console.log(x);
+    var item = new ItemsDto();
+    item._itemId = this.model.itemId;
+    item._isDeleted = this.model.isDeleted;
+    item._itemName = this.model.itemName;
+    item._imageUrl = this.model.imageUrl;
+    item._quantity = this.model.quantity;
+    item._remarks = this.model.remarks;
+    item._sellPrice = this.model.sellPrice;
+    item._costPrice = this.model.costPrice;
+    this.itemService.upsertItemsCommand(item).subscribe(x => {
       this.snackbar.open("Item Saved!", "OK", { duration: 5000 });
       this.dialogRef.close();
     })
