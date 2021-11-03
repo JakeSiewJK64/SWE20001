@@ -19,8 +19,6 @@ import { SalesDetailsComponentComponent } from './sales/_dialogs/sales-details-c
 import { EditSalesDetailsComponentComponent } from './sales/_dialogs/edit-sales-details-component/edit-sales-details-component.component';
 import { NoPageComponent } from './NoPage/no-page/no-page.component';
 import { ItemDetailsComponentComponent } from './inventory-dialogs/item-details-component/item-details-component.component';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
 
 
 @NgModule({
@@ -51,13 +49,7 @@ import { environment } from '../environments/environment';
         component: NoPageComponent },
     ], { relativeLinkResolution: 'legacy' }),
     BrowserAnimationsModule,
-    ModalModule.forRoot(),
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production,
-      
-      // used to register sw immediately. Project has too much stuff for angular to consider it stable.
-      registrationStrategy: 'registerImmediately'
-    })
+    ModalModule.forRoot()
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },
