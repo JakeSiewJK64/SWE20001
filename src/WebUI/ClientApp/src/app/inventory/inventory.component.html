@@ -46,10 +46,10 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="item-record" (click)="openEditDialogExisting(row)"></tr>
     </table>
   </div>
+  <span *ngIf="dataSource.data?.length <= 0">
+    No items found
+  </span>
 </div>
-<span *ngIf="dataSource.data?.length <= 0">
-  No items found
-</span>
 <footer class="footer" *ngIf="!isLoading">
   <mat-paginator class="mat-paginator--stick-bottom" showFirstLastButtons [pageSizeOptions]="[5, 10, 25, 100]"
     (page)="onPageChanged($event)" [length]="totalRecord" [pageSize]="pageSize">
