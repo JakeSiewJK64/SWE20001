@@ -50,7 +50,7 @@
     No items found
   </span>
 </div>
-<footer class="footer" *ngIf="!isLoading">
+<footer class="footer">
   <mat-paginator class="mat-paginator--stick-bottom" showFirstLastButtons [pageSizeOptions]="[5, 10, 25, 100]"
     (page)="onPageChanged($event)" [length]="totalRecord" [pageSize]="pageSize">
   </mat-paginator>
