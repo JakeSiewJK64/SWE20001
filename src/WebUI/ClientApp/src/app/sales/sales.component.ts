@@ -56,7 +56,7 @@ export class SalesComponent implements OnInit {
   }
 
   load() {
-    if(this.startDate != null && this.endDate != null) this.isLoading = true;
+    this.isLoading = true;
     this.getItems();
     this.dataSource = new MatTableDataSource<SalesDto>();
     this.getSales();
