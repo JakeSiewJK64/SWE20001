@@ -18,6 +18,8 @@ namespace CleanArchitecture.Application.Sales.Queries.GetAllSalesQuery
 {
     public class GetAllSalesQuery : IRequest<List<SalesDto>>
     {
+        public DateTime startDate { get; set; }
+        public DateTime endDate { get; set; }
     }
 
     public class GetSalesQueryHandler : IRequestHandler<GetAllSalesQuery, List<SalesDto>>
@@ -33,8 +35,16 @@ namespace CleanArchitecture.Application.Sales.Queries.GetAllSalesQuery
 
         public async Task<List<SalesDto>> Handle(GetAllSalesQuery request, CancellationToken cancellationToken)
         {
-            var sales = await _context.SalesRecord.ProjectTo<SalesDto>(_mapper.ConfigurationProvider)
-               .ToListAsync(cancellationToken);
+            if (request.startDate == null || request.endDate == null)
+            {
+                DateTime date = DateTime.Today;
+                request.startDate = new DateTime(date.Year, date.Month, 1);
+                request.endDate = request.startDate.AddMonths(1).AddDays(-1);
+            }
+            var sales = await _context.SalesRecord
+                .Where(x => x.SalesDate < request.endDate && x.SalesDate > request.startDate)
+                .ProjectTo<SalesDto>(_mapper.ConfigurationProvider)
+                .ToListAsync(cancellationToken);
             foreach (SalesDto s in sales)
             {
                 if (s._items.Length > 0)

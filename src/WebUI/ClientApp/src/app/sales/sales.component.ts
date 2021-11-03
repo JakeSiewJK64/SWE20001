@@ -21,7 +21,9 @@ export class SalesComponent implements OnInit {
   filterCriteria: string;
   itemList: Item[] = [];
   itemCategoryLists = ItemCategory;
-  date: Date = new Date();
+  date = new Date();
+  startDate: Date;
+  endDate: Date;
   page: number;
   pageSize: number;
   totalRecord: number;
@@ -48,6 +50,8 @@ export class SalesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.startDate = new Date(this.date.getFullYear(), this.date.getMonth(), 1);
+    this.endDate = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 0)
     this.load();
   }
 
@@ -69,7 +73,7 @@ export class SalesComponent implements OnInit {
   }
 
   getSales(){
-    this.salesService.getAllSalesRecordsQuery().subscribe(x => {
+    this.salesService.getAllSalesRecordsQuery(this.startDate, this.endDate).subscribe(x => {
       this.dataSource = new MatTableDataSource(x);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;

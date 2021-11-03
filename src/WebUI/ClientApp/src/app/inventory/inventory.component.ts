@@ -41,6 +41,7 @@ export class InventoryComponent implements OnInit {
 
   load() {
     this.isLoading = true;
+    this.searchCriteria = '';
     this.getItem();
     this.getUser();
     this.dataSource = new MatTableDataSource<ItemsDto>();
