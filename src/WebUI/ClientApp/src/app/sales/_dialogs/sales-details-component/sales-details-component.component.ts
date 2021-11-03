@@ -131,7 +131,6 @@ export class SalesDetailsComponentComponent implements OnInit {
     this.sendData._salesRecordId = this.data._salesRecordId;
     this.sendData._editedOn = new Date();
     this.sendData._isDeleted = this.data._isDeleted;
-    console.log(this.sendData);
     this.saleService.upsertSalesCommand(this.sendData).subscribe(x => {
       if (this.data._isDeleted) {
         this.snackbar.open("Sales deleted successfully!", "OK", { duration: 5000 });

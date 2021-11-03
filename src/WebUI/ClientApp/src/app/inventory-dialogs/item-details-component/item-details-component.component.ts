@@ -69,6 +69,8 @@ export class ItemDetailsComponentComponent implements OnInit {
     item._sellPrice = this.model.sellPrice;
     item._costPrice = this.model.costPrice;
     item._editedOn = new Date();
+    item._itemCategory = this.model.itemCategory;
+    item._status = this.model.status;
     item._manufacturerName = this.model.manufacturerName;
     if(item._itemName.length <= 0) {
       this.dialogService.openAlert({
