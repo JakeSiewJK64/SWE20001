@@ -4,7 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTable } from '@angular/material/table';
 import { TdDialogService } from '@covalent/core/dialogs';
 import { AuthorizeService } from 'src/api-authorization/authorize.service';
-import { Item, ItemCategory, SalesDto, SalesItemListDto, SalesListClient, UserClient } from 'src/app/cleanarchitecture-api';
+import { Item, ItemCategory, ItemsDto, ItemsListClient, SalesDto, SalesItemListDto, SalesListClient, UserClient } from 'src/app/cleanarchitecture-api';
 import { EditSalesDetailsComponentComponent } from '../edit-sales-details-component/edit-sales-details-component.component';
 
 export class CustomSalesItemDto {
@@ -20,11 +20,11 @@ export class SalesDetailsComponentComponent implements OnInit {
 
   constructor(private saleService: SalesListClient,
     private authService: AuthorizeService,
-    private userService: UserClient,
     private dialogRef: MatDialogRef<SalesDetailsComponentComponent>,
     private dialogService: TdDialogService,
     private snackbar: MatSnackBar,
-    @Inject(MAT_DIALOG_DATA) public data: SalesDto) { this.getCreatedBy(); }
+    @Inject(MAT_DIALOG_DATA) public data: SalesDto,
+    private itemService: ItemsListClient) { this.getCreatedBy(); }
 
   @ViewChild(MatTable) private table: MatTable<SalesItemListDto>;
   displayedColumns: string[] = ['ItemID', 'ItemImage', 'Name', 'Type', 'Quantity', 'Remove'];
@@ -35,6 +35,9 @@ export class SalesDetailsComponentComponent implements OnInit {
   itemList: CustomSalesItemDto[] = Array<CustomSalesItemDto>()
   customItem: CustomSalesItemDto = new CustomSalesItemDto();
   empName: string = "";
+  item: SalesItemListDto[] = [];
+  itemHolder: ItemsDto;
+  hasError: boolean = false;
 
   ngOnInit() {
     this.empName.length
@@ -55,7 +58,7 @@ export class SalesDetailsComponentComponent implements OnInit {
       this.data._createdOn = new Date();
       this.salesDate = this.data._createdOn;
       this.authService.getUser().subscribe(x => {
-        if(x == null) return;
+        if (x == null) return;
         this.data._createdBy = x.name
       });
       this.data._salesItemList = new Array<SalesItemListDto>();
@@ -69,9 +72,25 @@ export class SalesDetailsComponentComponent implements OnInit {
       data: new SalesItemListDto()
     }).afterClosed().subscribe(x => {
       if (x == null || x == undefined) return;
-      this.dataSource.push(x);
-      this.table.renderRows();
-      this.snackbar.open("Item added successfully!", "OK", { duration: 5000 });
+      this.itemService.getItemsBySearchCriteriaQuery(x.itemId.toString()).subscribe(res => {
+        if (res[0].quantity - x.quantity < 0) {
+          this.dialogService.openAlert({
+            message: "Insufficient stock",
+            title: "Oops!",
+            closeButton: "Ok"
+          });
+          this.hasError = true;
+          return;
+        } else {
+          this.hasError = false;
+        }
+      });
+      if (this.hasError == false){
+        this.dataSource.push(x);
+        this.item.push(x);
+        this.table.renderRows();
+        this.snackbar.open("Item added successfully!", "OK", { duration: 5000 });
+      }
     })
   }
 
@@ -87,15 +106,22 @@ export class SalesDetailsComponentComponent implements OnInit {
       this.snackbar.open("Sales Items cannot be empty!", "OK", { duration: 5000 });
       return;
     }
-
+    this.item.forEach(x => {
+      this.itemService.deductItemCommand(x.itemId, x.quantity).subscribe(x => {
+      }, err => {
+        this.dialogService.openAlert({
+          title: "Oops!",
+          message: err
+        });
+      });
+    });
     this.data._salesItemList.forEach(x => {
       this.customItem = new CustomSalesItemDto()
       this.customItem.itemId = x.itemId
       this.customItem.quantity = x.quantity
       this.itemList.push(this.customItem)
-    })
+    });
     this.data._items = JSON.stringify(this.itemList).replace('"', '\"');
-    this.sendData._salesItemList = [];
     this.sendData._remarks = this.data._remarks;
     this.sendData._salesDate = this.salesDate;
     this.sendData._employeeId = this.data._employeeId;
@@ -106,7 +132,6 @@ export class SalesDetailsComponentComponent implements OnInit {
     this.sendData._editedOn = new Date();
     this.sendData._isDeleted = this.data._isDeleted;
     this.saleService.upsertSalesCommand(this.sendData).subscribe(x => {
-      console.log(x);
       if (this.data._isDeleted) {
         this.snackbar.open("Sales deleted successfully!", "OK", { duration: 5000 });
         return;

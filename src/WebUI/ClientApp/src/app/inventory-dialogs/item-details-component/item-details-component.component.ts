@@ -1,7 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ItemsDto, ItemsListClient, ItemCategory, Item } from 'src/app/cleanarchitecture-api';
+import { TdDialogService } from '@covalent/core/dialogs';
+import { AuthorizeService } from 'src/api-authorization/authorize.service';
+import { ItemsDto, ItemsListClient, ItemCategory, Item, Status } from 'src/app/cleanarchitecture-api';
 
 @Component({
   selector: 'app-item-details-component',
@@ -10,7 +12,9 @@ import { ItemsDto, ItemsListClient, ItemCategory, Item } from 'src/app/cleanarch
 })
 export class ItemDetailsComponentComponent implements OnInit {
   constructor(private itemService: ItemsListClient,
+    private authService: AuthorizeService,
     private dialogRef: MatDialogRef<ItemDetailsComponentComponent>,
+    private dialogService: TdDialogService,
     private snackbar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) private data: ItemsDto) {
   }
@@ -18,32 +22,27 @@ export class ItemDetailsComponentComponent implements OnInit {
   displayedColumns: string[] = ['ItemID', 'ItemImage', 'Name', 'Type', 'Quantity'];
   dataSource: any;
   ItemType = ItemCategory;
+  ItemStatus = Status;
   model: Item = new Item();
+  empName: string = "";
 
   ngOnInit() {
     this.load();
   }
 
   load() {
+    this.getUser();
     if (this.data != undefined || this.data != null) {
       this.model = this.data;
-      // this.model.itemId = this.data._itemId;
-      // this.model.itemName = this.data._itemName;
-      // this.model.manufacturerName = this.data._manufacturerName;
-      // this.model.manufacturer_Id = this.data._manufacturer_Id;
-      // this.model.costPrice = this.data._costPrice;
-      // this.model.sellPrice = this.data._sellPrice;
-      // this.model.status= this.data._status;
-      // this.model.remarks = this.data._remarks;
-      // this.model.itemCategory = this.data._itemCategory;
-      // this.model.quantity = this.data._quantity;
-      // this.model.batchId = this.data._batchId;
-      // this.model.imageUrl = this.data._imageUrl;
-      // this.model.restockDate = this.data._restockDate;
-      // this.model.expDate = this.data._expDate;
-      // this.model.isDeleted = this.data._isDeleted;
+      return;
     }
-    console.log(this.model);
+    this.model = new ItemsDto();
+  }
+
+  getUser() {
+    this.authService.getUser().subscribe(x => {
+      this.empName = x.name;
+    });
   }
 
   uploadItemImage(files: File[]) {
@@ -55,11 +54,38 @@ export class ItemDetailsComponentComponent implements OnInit {
   }
 
   save(){
-    console.log(this.model);
-    this.itemService.upsertItemsCommand(this.model).subscribe(x => {
-      console.log(x);
+    var item = new ItemsDto();
+    if(this.model.itemId <= 0 || this.model.itemId == null || this.model.itemId == undefined) {
+      item._createdBy = this.empName;
+      item._createdOn = new Date();
+    }
+    item._itemId = this.model.itemId;
+    item._isDeleted = this.model.isDeleted;
+    item._itemName = this.model.itemName;
+    item._imageUrl = this.model.imageUrl;
+    item._quantity = this.model.quantity;
+    item._remarks = this.model.remarks;
+    item._editedBy = this.empName;
+    item._sellPrice = this.model.sellPrice;
+    item._costPrice = this.model.costPrice;
+    item._editedOn = new Date();
+    item._itemCategory = this.model.itemCategory;
+    item._status = this.model.status;
+    item._manufacturerName = this.model.manufacturerName;
+    if(item._itemName.length <= 0) {
+      this.dialogService.openAlert({
+        title: "Oops!",
+        message: "Item name cannot be null!"
+      });
+      return;
+    }
+    this.itemService.upsertItemsCommand(item).subscribe(x => {
       this.snackbar.open("Item Saved!", "OK", { duration: 5000 });
       this.dialogRef.close();
-    })
+    });
+  }
+
+  close() {
+    this.dialogRef.close();
   }
 }

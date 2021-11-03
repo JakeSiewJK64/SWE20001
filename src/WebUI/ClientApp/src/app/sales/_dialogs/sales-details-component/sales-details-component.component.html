@@ -80,5 +80,5 @@
   <div class="mr-auto">
     <button mat-flat-button (click)="closeDialog()">Cancel</button>
   </div>
-  <button mat-flat-button color="warn" (click)="saveSales()" [disabled]="data._isDeleted">Save</button>
+  <button mat-flat-button color="warn" (click)="saveSales()" [disabled]="data._isDeleted || hasError">Save</button>
 </mat-dialog-actions>
