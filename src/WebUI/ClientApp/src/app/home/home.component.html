@@ -3,7 +3,7 @@
   <p>Date: {{ date }}</p>
   <div fxLayoutAlign="center center" fxLayout="column" *ngIf="isLoading">
     <mat-spinner [diameter]="30"></mat-spinner>
-    <span>Loading Sales Records</span>
+    <span>Loading Data</span>
   </div>
   <div *ngIf="!isLoading">
     <div fxLayout="row wrap" fxLayoutGap="10px">
@@ -12,18 +12,21 @@
           <h2>Total Sales This Month</h2>
           <span>{{ totalSalesCurrentMonth ? totalSalesCurrentMonth : 0 }}</span>
         </div>
+        <mat-icon fxFlex="50" style="font-size: 120px; color: rgb(192, 57, 43);">shopping_basket</mat-icon>
       </div>
       <div class="container highest-sales-item-container" fxFlex>
         <div class="text-center p-3" fxLayout="column">
           <h2>Most Sold Item This Month</h2>
           <span>{{ highestSellingItem ? highestSellingItem : 0 }}</span>
         </div>
+        <mat-icon fxFlex="50" style="font-size: 120px; color: rgb(39, 174, 96)">store</mat-icon>
       </div>
       <div class="container highest-sales-itemtype-container" fxFlex>
         <div class="text-center p-3" fxLayout="column">
           <h2>Most Sold Item Category This Month</h2>
           <span>{{ highestSellingItemCategory ? highestSellingItemCategory : 0 }}</span>
         </div>
+        <mat-icon fxFlex="50" style="font-size: 120px; color: rgb(41, 128, 185)">pie_chart</mat-icon>
       </div>
     </div>
     <h1>Sales Forecast</h1>

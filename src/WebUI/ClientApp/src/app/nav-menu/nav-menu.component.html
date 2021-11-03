@@ -1,9 +1,16 @@
 <header>
-  <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+  <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-orange border-bottom box-shadow mb-3">
     <div class="container">
       <div [routerLink]="['/']" class="home-def-button">
         <img src="../../assets/images/logo-pharmacy.png" class="pharmacy-logo" alt="" />
-        <a class="navbar-brand">People Health Pharmacy</a>
+        <a class="navbar-brand">
+          People Health Pharmacy
+          <sup>
+            <div class="badge badge-dark">
+              <strong>beta</strong>
+            </div>
+          </sup>
+        </a>
       </div>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse"
         aria-label="Toggle navigation" [attr.aria-expanded]="isExpanded" (click)="toggle()">

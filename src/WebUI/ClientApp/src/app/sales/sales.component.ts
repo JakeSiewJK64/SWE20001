@@ -15,7 +15,7 @@ import { AuthorizeService } from 'src/api-authorization/authorize.service';
 })
 export class SalesComponent implements OnInit {
   dialogref: any;
-  displayedColumns: string[] = ['_salesRecordId','_salesDate','_createdBy','_editedBy','_remarks','_isDeleted','_editedOn'];
+  displayedColumns: string[] = ['_salesRecordId', '_salesDate', '_remarks', '_editedOn', '_isDeleted'];
   dataSource: MatTableDataSource<SalesDto>;
   isLoading: boolean = false;
   filterCriteria: string;
@@ -66,7 +66,7 @@ export class SalesComponent implements OnInit {
     this.getHighestSellingItemCategory();
   }
 
-  getUser(){
+  getUser() {
     this.authService.getUser().subscribe(x => {
       this.isAdmin = x.role == 'Administrator';
     });
