@@ -1,8 +1,8 @@
 <h1 mat-dialog-title>{{ model.itemId != undefined || model.itemId != null ? 'Edit' : 'Add' }} Item</h1>
-<div fxLayout="column" fxFlexFill class="w-100" fxLayoutGap="10px">
+<div fxLayout="column" fxFlexFill class="w-100" fxLayoutGap="5px">
   <div fxLayoutAlign="center center">
     <div class="hoverable-container" fxLayoutAlign="center center" (click)="fileInput.click()">
-      <img draggable="false"
+      <img draggable="false" style="max-height: 120px;"
         [src]="model.imageUrl != null ? model.imageUrl : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'"
         alt="" class="item-profile">
       <span fxLayoutAlign="center center" class="upload-image">Upload Image</span>
@@ -19,11 +19,11 @@
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex>
       <mat-label>Cost Price</mat-label>
-      <input matInput type="text" [(ngModel)]="model.costPrice">
+      <input matInput type="number" [(ngModel)]="model.costPrice">
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex>
       <mat-label>Sell Price</mat-label>
-      <input matInput type="text" [(ngModel)]="model.sellPrice">
+      <input matInput type="number" [(ngModel)]="model.sellPrice">
     </mat-form-field>
   </div>
   <div fxLayout="row wrap" fxLayoutGap="5px">

@@ -6,30 +6,30 @@
     <span>Loading Data</span>
   </div>
   <div *ngIf="!isLoading">
-    <div fxLayout="row wrap" fxLayoutGap="10px">
+    <div fxLayout="row wrap" class="w-100" fxLayoutGap="10px">
       <div class="container total-sales-container" fxFlex>
-        <div class="text-center p-3" fxLayout="column">
-          <h2>Total Sales This Month</h2>
-          <span>{{ totalSalesCurrentMonth }}</span>
+        <div class="text-center p-3" fxLayout="column" fxFlex="50">
+          <h2 fxFlex="100">Total Sales This Month</h2>
+          <span>{{ totalSalesCurrentMonth ? totalSalesCurrentMonth : 0 }}</span>
         </div>
-        <mat-icon fxFlex="50" style="font-size: 120px; color: rgb(192, 57, 43);">shopping_basket</mat-icon>
+          <mat-icon fxFlex="50" class="default-cursor" style="font-size: 120px; color: rgb(192, 57, 43);">shopping_basket</mat-icon>
       </div>
       <div class="container highest-sales-item-container" fxFlex>
         <div class="text-center p-3" fxLayout="column">
           <h2>Most Sold Item This Month</h2>
-          <span>{{ highestSellingItem }}</span>
+          <span>{{ highestSellingItem ? highestSellingItem : 0 }}</span>
         </div>
-        <mat-icon fxFlex="50" style="font-size: 120px; color: rgb(39, 174, 96)">store</mat-icon>
+        <mat-icon fxFlex="50" class="default-cursor" style="font-size: 120px; color: rgb(39, 174, 96)">store</mat-icon>
       </div>
       <div class="container highest-sales-itemtype-container" fxFlex>
         <div class="text-center p-3" fxLayout="column">
           <h2>Most Sold Item Category This Month</h2>
-          <span>{{ highestSellingItemCategory }}</span>
+          <span>{{ highestSellingItemCategory ? highestSellingItemCategory : 0 }}</span>
         </div>
-        <mat-icon fxFlex="50" style="font-size: 120px; color: rgb(41, 128, 185)">pie_chart</mat-icon>
+        <mat-icon fxFlex="50" class="default-cursor" style="font-size: 120px; color: rgb(41, 128, 185)">pie_chart</mat-icon>
       </div>
     </div>
-    <h1>Sales Forecast</h1>
+    <h1 class="pt-3">Sales Forecast</h1>
     <div fxLayout="row wrap" fxLayoutGap="10px">
       <mat-form-field appearance="outline" fxFlex>
         <mat-label>Product</mat-label>

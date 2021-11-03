@@ -25,7 +25,7 @@ export class EditSalesDetailsComponentComponent implements OnInit {
   itemOptions: Item[] = [];
   itemQuantity: number;
   isValid: boolean = true;
-  selectedItem: Item = new Item();
+  selectedItem: Item;
   errorMessage: string;
 
   ngOnInit() {
@@ -45,6 +45,7 @@ export class EditSalesDetailsComponentComponent implements OnInit {
   }
 
   selectItem(item: Item) {
+    this.selectedItem = new Item();
     this.selectedItem = item;
   }
 
@@ -52,16 +53,25 @@ export class EditSalesDetailsComponentComponent implements OnInit {
     return this.itemOptions.filter(option => option.itemName.toLowerCase().includes(value.toLowerCase()));
   }
 
-  checkItemQuantity() {
-    if (this.selectedItem.quantity - this.itemQuantity < 0) {
+  checkItem() {
+    if (this.selectedItem == null){
       this.dialogService.openAlert({
         title: "Oops!",
-        message: "The item is insufficient!"
+        message: "The item does not exist!"
       });
-      this.errorMessage = "Insufficient quantity for item " + this.selectedItem.itemName;
       this.isValid = false;
     } else {
       this.isValid = true;
+      if (this.selectedItem.quantity - this.itemQuantity < 0) {
+        this.dialogService.openAlert({
+          title: "Oops!",
+          message: "The item is insufficient!"
+        });
+        this.errorMessage = "Insufficient quantity for item " + this.selectedItem.itemName;
+        this.isValid = false;
+      } else {
+        this.isValid = true;
+      }
     }
   }
 
