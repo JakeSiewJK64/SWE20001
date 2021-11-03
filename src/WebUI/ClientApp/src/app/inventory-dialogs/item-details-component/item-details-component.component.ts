@@ -39,7 +39,6 @@ export class ItemDetailsComponentComponent implements OnInit {
     this.model = new ItemsDto();
   }
 
-
   getUser() {
     this.authService.getUser().subscribe(x => {
       this.empName = x.name;
@@ -82,5 +81,9 @@ export class ItemDetailsComponentComponent implements OnInit {
       this.snackbar.open("Item Saved!", "OK", { duration: 5000 });
       this.dialogRef.close();
     });
+  }
+
+  close() {
+    this.dialogRef.close();
   }
 }

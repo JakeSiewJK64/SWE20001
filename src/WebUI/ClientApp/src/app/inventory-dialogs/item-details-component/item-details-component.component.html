@@ -75,9 +75,14 @@
       <input matInput type="text" [readonly]="true" [(ngModel)]="model.editedOn">
     </mat-form-field>
   </div>
-  <div fxLayout="column">
-    <div fxLayoutAlign="end end">
-      <button mat-flat-button (click)="save()">Save</button>
-    </div>
+  <div fxLayout="row wrap">
+    <button mat-flat-button (click)="close()" class="mr-auto">
+      <mat-icon>close</mat-icon>
+      Cancel
+    </button>
+    <button mat-flat-button (click)="save()" color="warn" class="ml-auto">
+      <mat-icon>save</mat-icon>
+      Save
+    </button>
   </div>
 </div>
