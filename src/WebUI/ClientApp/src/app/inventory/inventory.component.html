@@ -2,9 +2,9 @@
 <p>Date: {{ date }}</p>
 <div fxLayoutAlign="center center" fxLayout="column" *ngIf="isLoading">
   <mat-spinner [diameter]="30"></mat-spinner>
-  <span>Loading Data</span>
+  <span>Loading Inventory Items</span>
 </div>
-<div class="w-100" fxLayout="column wrap" fxLayoutGap="10px">
+<div class="w-100" fxLayout="column wrap" fxLayoutGap="10px" *ngIf="!isLoading">
   <div fxLayoutAlign="end end" fxLayout="column wrap">
     <button mat-raised-button color="warn" *ngIf="isAdmin" (click)="openAddItemDialog()">
       <mat-icon>add</mat-icon>
@@ -47,7 +47,7 @@
     </table>
   </div>
 </div>
-<footer class="footer">
+<footer class="footer" *ngIf="!isLoading">
   <mat-paginator class="mat-paginator--stick-bottom" showFirstLastButtons [pageSizeOptions]="[5, 10, 25, 100]"
     (page)="onPageChanged($event)" [length]="totalRecord" [pageSize]="pageSize">
   </mat-paginator>
