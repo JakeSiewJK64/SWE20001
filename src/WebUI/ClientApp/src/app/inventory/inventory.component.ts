@@ -24,6 +24,7 @@ export class InventoryComponent implements OnInit {
   pageSize: number;
   totalRecord: number;
   isAdmin: boolean = false;
+  date: Date = new Date();
 
   @ViewChild(MatTable) table: MatTable<ItemsDto>;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;

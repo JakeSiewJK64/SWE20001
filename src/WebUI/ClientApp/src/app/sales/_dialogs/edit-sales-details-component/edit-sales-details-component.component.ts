@@ -15,7 +15,6 @@ export class EditSalesDetailsComponentComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: SalesItemListDto,
-    private salesClient: SalesListClient,
     private itemClient: ItemsListClient,
     private dialogService: TdDialogService,
     private dialogRef: MatDialogRef<EditSalesDetailsComponentComponent>) {
@@ -25,7 +24,9 @@ export class EditSalesDetailsComponentComponent implements OnInit {
   options: Observable<Item[]>;
   itemOptions: Item[] = [];
   itemQuantity: number;
+  isValid: boolean = true;
   selectedItem: Item = new Item();
+  errorMessage: string;
 
   ngOnInit() {
     this.load();
@@ -51,11 +52,26 @@ export class EditSalesDetailsComponentComponent implements OnInit {
     return this.itemOptions.filter(option => option.itemName.toLowerCase().includes(value.toLowerCase()));
   }
 
+  checkItemQuantity() {
+    if (this.selectedItem.quantity - this.itemQuantity < 0) {
+      this.dialogService.openAlert({
+        title: "Oops!",
+        message: "The item is insufficient!"
+      });
+      this.errorMessage = "Insufficient quantity for item " + this.selectedItem.itemName;
+      this.isValid = false;
+    } else {
+      this.isValid = true;
+    }
+  }
+
   save() {
-    this.data.item = this.selectedItem;
-    this.data.quantity = this.itemQuantity;
-    this.data.itemId = this.data.item.itemId;
-    this.dialogRef.close(this.data);
+    if (this.isValid) {
+      this.data.item = this.selectedItem;
+      this.data.quantity = this.itemQuantity;
+      this.data.itemId = this.data.item.itemId;
+      this.dialogRef.close(this.data);
+    }
   }
 
   cancel() {

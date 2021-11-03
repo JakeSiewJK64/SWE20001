@@ -74,17 +74,17 @@ export class SalesDetailsComponentComponent implements OnInit {
       if (x == null || x == undefined) return;
       this.itemService.getItemsBySearchCriteriaQuery(x.itemId.toString()).subscribe(res => {
         if (res[0].quantity - x.quantity < 0) {
-          this.hasError = true;
           this.dialogService.openAlert({
             message: "Insufficient stock",
             title: "Oops!",
             closeButton: "Ok"
-          })
+          });
+          this.hasError = true;
           return;
         } else {
           this.hasError = false;
         }
-      })
+      });
       if (this.hasError == false){
         this.dataSource.push(x);
         this.item.push(x);
@@ -107,22 +107,21 @@ export class SalesDetailsComponentComponent implements OnInit {
       return;
     }
     this.item.forEach(x => {
-      this.itemHolder = new ItemsDto();
-      this.itemService.getItemsBySearchCriteriaQuery(x.itemId.toString()).subscribe(res => {
-        res[0].quantity -= x.quantity;
-      this.itemService.upsertItemsCommand(res[0]).subscribe(response => console.log(response));
-      })      
+      this.itemService.deductItemCommand(x.itemId, x.quantity).subscribe(x => {
+      }, err => {
+        this.dialogService.openAlert({
+          title: "Oops!",
+          message: err
+        });
+      });
     });
-
-
     this.data._salesItemList.forEach(x => {
       this.customItem = new CustomSalesItemDto()
       this.customItem.itemId = x.itemId
       this.customItem.quantity = x.quantity
       this.itemList.push(this.customItem)
-    })
+    });
     this.data._items = JSON.stringify(this.itemList).replace('"', '\"');
-    this.sendData._salesItemList = [];
     this.sendData._remarks = this.data._remarks;
     this.sendData._salesDate = this.salesDate;
     this.sendData._employeeId = this.data._employeeId;
