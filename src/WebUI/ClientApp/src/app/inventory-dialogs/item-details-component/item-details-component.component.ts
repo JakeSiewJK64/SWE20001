@@ -28,6 +28,7 @@ export class ItemDetailsComponentComponent implements OnInit {
   empName: string = "";
   editorConfig: AngularEditorConfig = {
     height: '5rem',
+    editable: true
   }
 
   ngOnInit() {
