@@ -33,7 +33,7 @@
       <mat-icon>refresh</mat-icon>
     </button>
   </div>
-  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 mb-5" style="width: 100%;" >
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 mb-5" style="width: 100%;">
     <ng-container matColumnDef="_salesRecordId">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Sales ID</th>
       <td mat-cell *matCellDef="let element">{{ element._salesRecordId }}</td>
