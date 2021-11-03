@@ -85,7 +85,7 @@ export class InventoryComponent implements OnInit {
 
   openAddItemDialog() {
     this.dialogref = this.dialogservice.open(ItemDetailsComponentComponent, {
-      width: '1000px',
+      width: '1200px',
       data: new ItemsDto()
     }).afterClosed().subscribe(x => {
       this.load();
@@ -94,7 +94,7 @@ export class InventoryComponent implements OnInit {
 
   openEditDialogExisting(item: ItemsDto) {
     this.dialogref = this.dialogservice.open(ItemDetailsComponentComponent, {
-      width: '1000px',
+      width: '1200px',
       data: item
     }).afterClosed().subscribe(x => {
       this.load();

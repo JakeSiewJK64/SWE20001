@@ -178,7 +178,10 @@ export class SalesComponent implements OnInit {
     this.dialogref = this.dialogservice.open(SalesDetailsComponentComponent, {
       width: '1000px',
       data: new SalesDto()
-    })
+    }).afterClosed().subscribe(x => {
+      this.load();
+      this.isLoading = false;
+    });
   }
 
   openSalesDetailsDialog() {
