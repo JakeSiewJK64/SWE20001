@@ -48,9 +48,7 @@
       </mat-select>
     </mat-form-field>
   </div>
-  <div fxLayout="row wrap" fxLayoutGap="5px">
-    <angular-editor matInput [(ngModel)]="model.remarks"></angular-editor>
-  </div>
+  <angular-editor matInput [(ngModel)]="model.remarks" [config]="editorConfig"></angular-editor>
   <input style="display: none;" #fileInput type="file" (change)="uploadItemImage($event.target.files)" />
   <div fxLayout="row wrap" fxLayoutGap="5px">
     <mat-form-field appearance="outline" fxFlex>

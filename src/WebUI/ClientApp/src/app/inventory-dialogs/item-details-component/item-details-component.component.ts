@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TdDialogService } from '@covalent/core/dialogs';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { AuthorizeService } from 'src/api-authorization/authorize.service';
 import { ItemsDto, ItemsListClient, ItemCategory, Item, Status } from 'src/app/cleanarchitecture-api';
 
@@ -25,6 +26,9 @@ export class ItemDetailsComponentComponent implements OnInit {
   ItemStatus = Status;
   model: Item = new Item();
   empName: string = "";
+  editorConfig: AngularEditorConfig = {
+    height: '5rem',
+  }
 
   ngOnInit() {
     this.load();
