@@ -97,7 +97,6 @@ export class InventoryComponent implements OnInit {
       width: '1200px',
       data: item
     }).afterClosed().subscribe(x => {
-      this.load();
     });
   }
 }

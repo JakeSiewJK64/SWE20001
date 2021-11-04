@@ -179,7 +179,6 @@ export class SalesComponent implements OnInit {
       maxHeight: '600px',
       data: data
     }).afterClosed().subscribe(x => {
-      this.load();
       this.isLoading = false;
     });
   }
