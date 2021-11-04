@@ -15,7 +15,9 @@ export class CurrentMonthSalesReportViewDialogComponent implements OnInit {
   displayedColumns: string[] = ['_salesId', '_salesDate', '_remarks', '_editedOn', '_isDeleted'];
   displayedColumnsItems: string[] = ['_itemId', '_itemImage', '_itemName', '_quantity'];
   isLoading: boolean = true;
+  totalRevenue: number = 0;
   itemSalesItemList = new Array<SalesItemListDto>();
+  date: Date = new Date();
   itemSalesSummary: MatTableDataSource<SalesItemListDto> = new MatTableDataSource();
   constructor(private salesService: SalesListClient,
     private dialogService: TdDialogService,
@@ -69,8 +71,7 @@ export class CurrentMonthSalesReportViewDialogComponent implements OnInit {
         var itemId: number = this.itemSalesItemList[i].itemId;
         var item = this.itemSalesItemList[i].item;
         var quantity: number = 0;
-
-        if(itemList.includes(itemId)) continue;
+        if (itemList.includes(itemId)) continue;
 
         for (let j = 0; j < this.itemSalesItemList.length; j++) {
           if (itemId == this.itemSalesItemList[j].itemId) {
@@ -85,6 +86,7 @@ export class CurrentMonthSalesReportViewDialogComponent implements OnInit {
             quantity: quantity
           }));
         }
+        this.totalRevenue += item.sellPrice * quantity;
         itemList.push(itemId);
       }
       this.isLoading = false;

@@ -37,8 +37,7 @@ namespace CleanArchitecture.Application.Sales.Commands.GenerateSalesReport
         {
             var records = await _context.SalesRecord
                     .Where(d => d.SalesDate.Month == request.Date.Month 
-                        && d.SalesDate.Year == request.Date.Year
-                        && !d.IsDeleted)
+                        && d.SalesDate.Year == request.Date.Year)
                     .ProjectTo<SalesDto>(_mapper.ConfigurationProvider)
                     .ToListAsync(cancellationToken);
             var itemListings = await _context.Items.ToListAsync();

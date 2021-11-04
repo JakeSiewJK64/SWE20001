@@ -77,7 +77,7 @@ export class SalesComponent implements OnInit {
     this.dialogservice.open(CurrentMonthSalesReportViewDialogComponent, {
       maxHeight: '800px',
       height: '800px',
-      width: '1000px',
+      width: '90%',
       maxWidth: '1000px',
     });
   }
