@@ -8,6 +8,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { AuthorizeService } from 'src/api-authorization/authorize.service';
+import { CurrentMonthSalesReportViewDialogComponent } from './_dialogs/current-month-sales-report-view-dialog/current-month-sales-report-view-dialog.component';
 @Component({
   selector: 'app-sales',
   templateUrl: './sales.component.html',
@@ -69,6 +70,15 @@ export class SalesComponent implements OnInit {
   getUser() {
     this.authService.getUser().subscribe(x => {
       this.isAdmin = x.role == 'Administrator';
+    });
+  }
+
+  openViewCurrentMonthSalesDialog() {
+    this.dialogservice.open(CurrentMonthSalesReportViewDialogComponent, {
+      maxHeight: '800px',
+      height: '800px',
+      width: '1000px',
+      maxWidth: '1000px',
     });
   }
 

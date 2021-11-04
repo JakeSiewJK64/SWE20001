@@ -19,6 +19,7 @@ import { SalesDetailsComponentComponent } from './sales/_dialogs/sales-details-c
 import { EditSalesDetailsComponentComponent } from './sales/_dialogs/edit-sales-details-component/edit-sales-details-component.component';
 import { NoPageComponent } from './NoPage/no-page/no-page.component';
 import { ItemDetailsComponentComponent } from './inventory-dialogs/item-details-component/item-details-component.component';
+import { CurrentMonthSalesReportViewDialogComponent } from './sales/_dialogs/current-month-sales-report-view-dialog/current-month-sales-report-view-dialog.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { ItemDetailsComponentComponent } from './inventory-dialogs/item-details-
     SalesComponent,
     SalesDetailsComponentComponent,
     EditSalesDetailsComponentComponent,
-    ItemDetailsComponentComponent
+    ItemDetailsComponentComponent,
+    CurrentMonthSalesReportViewDialogComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

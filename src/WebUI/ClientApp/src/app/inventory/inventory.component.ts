@@ -1,6 +1,6 @@
 import { MatDialog } from '@angular/material/dialog';
 import { ItemDetailsComponentComponent } from '../inventory-dialogs/item-details-component/item-details-component.component';
-import { ItemCategory } from 'src/app/cleanarchitecture-api';
+import { Item, ItemCategory } from 'src/app/cleanarchitecture-api';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ItemsDto, ItemsListClient } from '../cleanarchitecture-api';
@@ -30,7 +30,7 @@ export class InventoryComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private dialogservice: MatDialog, 
+  constructor(private dialogservice: MatDialog,
     private authService: AuthorizeService,
     private itemService: ItemsListClient) {
   }
@@ -64,7 +64,7 @@ export class InventoryComponent implements OnInit {
   }
 
   filterItems() {
-    if(this.searchCriteria == null || this.searchCriteria == "") {
+    if (this.searchCriteria == null || this.searchCriteria == "") {
       this.getItem();
       return;
     }
