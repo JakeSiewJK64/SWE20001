@@ -67,7 +67,7 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
       <td mat-cell *matCellDef="let element">
         <span class="badge badge-pill badge-success" *ngIf="!element._isDeleted">Active</span>
-        <span class="badge badge-pill badge-danger" *ngIf="element._isDeleted">Deleted</span>
+        <span class="badge badge-pill badge-danger" *ngIf="element._isDeleted">Inactive</span>
       </td>
     </ng-container>
     <ng-container matColumnDef="_editedOn">
