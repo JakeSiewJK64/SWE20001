@@ -5,6 +5,7 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { MaterialModule } from './material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 import { SplitStringPipe } from './services/splitstring.service';
 import { EnumpipeService } from './services/enumpipe.service';
 import { CovalentModule } from './covalent.module';
@@ -15,6 +16,7 @@ import { CovalentModule } from './covalent.module';
         FormsModule,
         ReactiveFormsModule,
         CdkTableModule,
+        AngularEditorModule,
         MaterialModule,
         CovalentModule,
         RouterModule,
@@ -27,6 +29,7 @@ import { CovalentModule } from './covalent.module';
     exports: [
         CovalentModule,
         CommonModule,
+        AngularEditorModule,
         FlexLayoutModule,
         EnumpipeService,
         SplitStringPipe,

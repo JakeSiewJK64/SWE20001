@@ -1,11 +1,10 @@
-<h1 mat-dialog-title>{{ model.itemId != undefined || model.itemId != null ? 'Add' : 'Edit' }} Item</h1>
-<div fxLayout="column" fxFlexFill class="w-100" fxLayoutGap="10px">
+<h1 mat-dialog-title>{{ model.itemId != undefined || model.itemId != null ? 'Edit' : 'Add' }} Item</h1>
+<div fxLayout="column" fxFlexFill class="w-100" fxLayoutGap="5px">
   <div fxLayoutAlign="center center">
     <div class="hoverable-container" fxLayoutAlign="center center" (click)="fileInput.click()">
-      <img draggable="false"
+      <img draggable="false" style="max-height: 120px;"
         [src]="model.imageUrl != null ? model.imageUrl : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'"
         alt="" class="item-profile">
-      <!-- 'https://cdn-icons.flaticon.com/png/512/5445/premium/5445197.png?token=exp=1635430649~hmac=b66952247852b78a822f279c167b2a4a'" -->
       <span fxLayoutAlign="center center" class="upload-image">Upload Image</span>
     </div>
   </div>
@@ -20,60 +19,65 @@
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex>
       <mat-label>Cost Price</mat-label>
-      <input matInput type="text" [(ngModel)]="model.costPrice">
+      <input matInput type="number" [(ngModel)]="model.costPrice">
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex>
       <mat-label>Sell Price</mat-label>
-      <input matInput type="text" [(ngModel)]="model.sellPrice">
+      <input matInput type="number" [(ngModel)]="model.sellPrice">
     </mat-form-field>
   </div>
   <div fxLayout="row wrap" fxLayoutGap="5px">
     <mat-form-field appearance="outline" fxFlex>
       <mat-label>Manufacturer</mat-label>
-      <input matInput type="text" [(ngModel)]="model.manufacturer_Id">
+      <input matInput type="text" [(ngModel)]="model.manufacturerName">
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex>
       <mat-label>Status</mat-label>
-      <input matInput type="text" [(ngModel)]="model.status">
+      <mat-select [(ngModel)]="model.status">
+        <mat-option *ngFor="let status of ItemStatus | enumpipe" [value]="status.key">
+          {{ status.value | splitString }}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex>
       <mat-label>Type</mat-label>
-      <input matInput type="text" [(ngModel)]="model.itemCategory">
+      <mat-select [(ngModel)]="model.itemCategory">
+        <mat-option *ngFor="let type of ItemType | enumpipe" [value]="type.key">
+          {{ type.value | splitString }}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
   </div>
-  <div fxLayout="row wrap" fxLayoutGap="5px">
-    <mat-form-field appearance="outline" fxFlex>
-      <mat-label>Remarks</mat-label>
-      <input matInput type="text" [(ngModel)]="model.remarks">
-    </mat-form-field>
-  </div>
-  <!-- <div fxLayout="row" fxLayoutAlign="start start">
-    <button mat-raised-button (click)="fileInput.click()" class="bg-success text-white">Insert Image</button>
-  </div> -->
+  <angular-editor matInput [(ngModel)]="model.remarks" [config]="editorConfig"></angular-editor>
   <input style="display: none;" #fileInput type="file" (change)="uploadItemImage($event.target.files)" />
   <div fxLayout="row wrap" fxLayoutGap="5px">
     <mat-form-field appearance="outline" fxFlex>
-      <mat-label>CreatedOn</mat-label>
-      <input matInput type="text" [readonly]="true">
+      <mat-label>Created On</mat-label>
+      <input matInput type="text" [readonly]="true" [(ngModel)]="model.createdOn">
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex>
-      <mat-label>CreatedBy</mat-label>
-      <input matInput type="text" [readonly]="true">
+      <mat-label>Created By</mat-label>
+      <input matInput type="text" [readonly]="true" [(ngModel)]="model.createdByWho">
     </mat-form-field>
   </div>
   <div fxLayout="row wrap" fxLayoutGap="5px">
     <mat-form-field appearance="outline" fxFlex>
-      <mat-label>EditedBy</mat-label>
-      <input matInput type="text" [readonly]="true">
+      <mat-label>Edited By</mat-label>
+      <input matInput type="text" [readonly]="true" [(ngModel)]="model.editedByWho">
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex>
-      <mat-label>EditedOn</mat-label>
-      <input matInput type="text" [readonly]="true">
+      <mat-label>Edited On</mat-label>
+      <input matInput type="text" [readonly]="true" [(ngModel)]="model.editedOn">
     </mat-form-field>
   </div>
-  <div fxLayout="column">
-    <div fxLayoutAlign="end end">
-      <button mat-flat-button (click)="save()">Save</button>
-    </div>
+  <div fxLayout="row wrap">
+    <button mat-flat-button (click)="close()" class="mr-auto">
+      <mat-icon>close</mat-icon>
+      Cancel
+    </button>
+    <button mat-flat-button (click)="save()" color="warn" class="ml-auto">
+      <mat-icon>save</mat-icon>
+      Save
+    </button>
   </div>
 </div>

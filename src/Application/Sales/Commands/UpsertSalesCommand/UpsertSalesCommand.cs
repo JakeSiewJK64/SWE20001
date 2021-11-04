@@ -40,7 +40,7 @@ namespace CleanArchitecture.Application.Sales.Queries.UpsertSalesCommand
                 CreatedOn = request.salesObj._createdOn,
                 EditedBy = request.salesObj._editedBy,
                 IsDeleted = request.salesObj._isDeleted,
-                Items = request.salesObj._salesItemList.ToStringJSON()
+                Items = request.salesObj._items
             };
             var exists = await _context.SalesRecord.AnyAsync(x => x.SalesRecordId.Equals(salesToAdd.SalesRecordId), cancellationToken);
             if (exists) _context.SalesRecord.Update(salesToAdd);

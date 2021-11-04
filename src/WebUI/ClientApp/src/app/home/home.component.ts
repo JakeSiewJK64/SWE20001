@@ -57,7 +57,7 @@ export class HomeComponent implements OnInit {
     this.getTotalSalesCurrentMonth();
     this.getHighestSellingItem();
     this.getHighestSellingItemCategory();
-    this.salesService.getAllSalesRecordsQuery().subscribe(x => {
+    this.salesService.getAllSalesRecordsQuery(undefined, undefined).subscribe(x => {
       this.dataSource = new MatTableDataSource(x);
       this.totalRecord = x.length;
       this.dataSource.paginator = this.paginator;

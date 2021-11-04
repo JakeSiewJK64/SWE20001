@@ -10,6 +10,7 @@ using CleanArchitecture.Application.Common.Models;
 using CleanArchitecture.Domain.Entities;
 using CleanArchitecture.Application.Items.Commands.UpsertItemsCommand;
 using CleanArchitecture.Application.Items.Queries.GetItemsBySearchCriteria;
+using CleanArchitecture.Application.Items.Commands.DeductItemCommand;
 
 namespace CleanArchitecture.WebUI.Controllers
 {
@@ -26,5 +27,9 @@ namespace CleanArchitecture.WebUI.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Item>>> GetItemsBySearchCriteriaQuery(string searchCriteria)
             => Ok(await Mediator.Send(new GetItemsBySearchCriteriaQuery { SearchCriteria = searchCriteria }));
+
+        [HttpGet]
+        public async Task<ActionResult<List<Item>>> DeductItemCommand(int ItemId, int Quantity)
+            => Ok(await Mediator.Send(new DeductItemCommand { ItemId = ItemId, Quantity = Quantity }));
     }
 }

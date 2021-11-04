@@ -54,13 +54,15 @@ body {
     border-top: solid #bdc3c7 1px;
     border-right: solid #bdc3c7 1px;
     border-bottom: solid #bdc3c7 1px;
+    background: rgb(231, 76, 60, 0.5);
     border-radius: 10px;
 }
 
 .highest-sales-item-container {
-    border-left: solid #f1c40f 5px;
+    border-left: solid rgb(46, 204, 113) 5px;
     border-top: solid #bdc3c7 1px;
     border-right: solid #bdc3c7 1px;
+    background: rgb(46, 204, 113, 0.5);
     border-bottom: solid #bdc3c7 1px;
     border-radius: 10px;
 }
@@ -68,7 +70,12 @@ body {
 .highest-sales-itemtype-container {
     border-left: solid #3498db 5px;
     border-top: solid #bdc3c7 1px;
+    background-color: rgb(41, 128, 185, 0.5);
     border-right: solid #bdc3c7 1px;
     border-bottom: solid #bdc3c7 1px;
     border-radius: 10px;
+}
+
+.default-cursor {
+    cursor: default;
 }

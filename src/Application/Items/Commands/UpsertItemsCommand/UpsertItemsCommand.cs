@@ -45,6 +45,10 @@ namespace CleanArchitecture.Application.Items.Commands.UpsertItemsCommand
                 RestockDate = request.itemsObj._restockDate,
                 ExpDate = request.itemsObj._expDate,
                 IsDeleted = request.itemsObj._isDeleted,
+                EditedOn = request.itemsObj._editedOn,
+                EditedByWho = request.itemsObj._editedBy,
+                CreatedByWho = request.itemsObj._createdBy,
+                CreatedOn = request.itemsObj._createdOn
             };
             var exists = await _context.Items.AnyAsync(x => x.ItemId.Equals(itemsToAdd.ItemId), cancellationToken);
             if (exists) _context.Items.Update(itemsToAdd);

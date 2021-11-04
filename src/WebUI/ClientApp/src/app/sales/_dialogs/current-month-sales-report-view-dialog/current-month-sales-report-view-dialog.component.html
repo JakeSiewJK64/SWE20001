@@ -1,0 +1,94 @@
+<h1 mat-dialog-title> {{ date | date: 'MMMM' }} Sales Report </h1>
+<mat-dialog-content fxLayout="column wrap" fxLayoutGap="10px">
+    <div fxLayoutAlign="center center" fxLayout="column" *ngIf="isLoading">
+        <mat-spinner [diameter]="30"></mat-spinner>
+        <span>Loading Data</span>
+    </div>
+    <div *ngIf="!isLoading">
+        <div fxLayout="row wrap">
+            <mat-icon class="pt-1">paid</mat-icon>
+            <h1>Total Revenue: MYR {{ totalRevenue }}</h1>
+            <button mat-flat-button (click)="generateCSV()" style="background-color: #2ecc71; color: white"
+                class="ml-auto">
+                <mat-icon>description</mat-icon>
+                Generate Report
+            </button>
+        </div>
+        <div fxLayout="row wrap">
+            <mat-icon class="pt-1">toll</mat-icon>
+            <h1>Total Sales: {{ dataSource.data?.length }}</h1>
+        </div>
+        <table *ngIf="dataSource.data?.length > 0" mat-table [dataSource]="dataSource" matSort
+            class="mat-elevation-z0 mb-5" style="width: 100%;">
+            <ng-container matColumnDef="_salesId">
+                <th mat-header-cell *matHeaderCellDef>ID</th>
+                <td mat-cell *matCellDef="let row">
+                    <a href="#" class="badge badge-primary">
+                        {{ row._salesRecordId }}
+                    </a>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="_salesDate">
+                <th mat-header-cell *matHeaderCellDef>Sales Date</th>
+                <td mat-cell *matCellDef="let row">{{ row._salesDate | date: 'yyyy/MM/dd HH:mm:ss' }}</td>
+            </ng-container>
+            <ng-container matColumnDef="_remarks">
+                <th mat-header-cell *matHeaderCellDef>Remarks</th>
+                <td mat-cell *matCellDef="let row">{{ row._remarks }}</td>
+            </ng-container>
+            <ng-container matColumnDef="_isDeleted">
+                <th mat-header-cell *matHeaderCellDef>Status</th>
+                <td mat-cell *matCellDef="let row">
+                    <span class="badge badge-pill badge-success" *ngIf="!row._isDeleted">Active</span>
+                    <span class="badge badge-pill badge-danger" *ngIf="row._isDeleted">Inactive</span>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="_editedOn">
+                <th mat-header-cell *matHeaderCellDef>Last Modified On</th>
+                <td mat-cell *matCellDef="let row">{{ row._editedOn | date: 'yyyy/MM/dd HH:mm:ss' }}</td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="sales-record">
+            </tr>
+        </table>
+        <div fxLayoutAlign="start start">
+            <div fxLayout="row wrap">
+                <mat-icon class="pt-1">shopping_cart</mat-icon>
+                <h1>Total Items Purchased: {{ itemSalesSummary.data.length }}</h1>
+            </div>
+        </div>
+        <div fxLayout="row wrap">
+            <h1>Items Summary</h1>
+        </div>
+        <table *ngIf="itemSalesSummary.data?.length > 0" mat-table [dataSource]="itemSalesSummary"
+            class="mat-elevation-z0 mb-5 item-table" style="width: 100%;">
+            <ng-container matColumnDef="_itemImage">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let row">
+                    <img [src]="row.item.imageUrl" alt="" draggable="false">
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="_itemId">
+                <th mat-header-cell *matHeaderCellDef>ID</th>
+                <td mat-cell *matCellDef="let row">{{ row.item.itemId }}</td>
+            </ng-container>
+            <ng-container matColumnDef="_itemName">
+                <th mat-header-cell *matHeaderCellDef>Item Name</th>
+                <td mat-cell *matCellDef="let row">{{ row.item.itemName }}</td>
+            </ng-container>
+            <ng-container matColumnDef="_quantity">
+                <th mat-header-cell *matHeaderCellDef>Quantity</th>
+                <td mat-cell *matCellDef="let row">{{ row.quantity }}</td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsItems"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsItems;" class="sales-record">
+            </tr>
+        </table>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-flat-button mat-dialog-close class="ml-auto">
+        <mat-icon>close</mat-icon>
+        Dismiss
+    </button>
+</mat-dialog-actions>

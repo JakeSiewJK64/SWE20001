@@ -8,6 +8,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { AuthorizeService } from 'src/api-authorization/authorize.service';
+import { CurrentMonthSalesReportViewDialogComponent } from './_dialogs/current-month-sales-report-view-dialog/current-month-sales-report-view-dialog.component';
 @Component({
   selector: 'app-sales',
   templateUrl: './sales.component.html',
@@ -15,13 +16,15 @@ import { AuthorizeService } from 'src/api-authorization/authorize.service';
 })
 export class SalesComponent implements OnInit {
   dialogref: any;
-  displayedColumns: string[] = ['_salesRecordId','_salesDate','_createdBy','_editedBy','_remarks','_isDeleted','_editedOn'];
+  displayedColumns: string[] = ['_salesRecordId', '_salesDate', '_remarks', '_editedOn', '_isDeleted'];
   dataSource: MatTableDataSource<SalesDto>;
   isLoading: boolean = false;
   filterCriteria: string;
   itemList: Item[] = [];
   itemCategoryLists = ItemCategory;
-  date: Date = new Date();
+  date = new Date();
+  startDate: Date;
+  endDate: Date;
   page: number;
   pageSize: number;
   totalRecord: number;
@@ -48,11 +51,13 @@ export class SalesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.startDate = new Date(this.date.getFullYear(), this.date.getMonth(), 1);
+    this.endDate = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 0)
     this.load();
   }
 
   load() {
-    this.isLoading = true;
+    if(this.startDate != null && this.endDate != null) this.isLoading = true;
     this.getItems();
     this.dataSource = new MatTableDataSource<SalesDto>();
     this.getSales();
@@ -62,14 +67,23 @@ export class SalesComponent implements OnInit {
     this.getHighestSellingItemCategory();
   }
 
-  getUser(){
+  getUser() {
     this.authService.getUser().subscribe(x => {
       this.isAdmin = x.role == 'Administrator';
     });
   }
 
+  openViewCurrentMonthSalesDialog() {
+    this.dialogservice.open(CurrentMonthSalesReportViewDialogComponent, {
+      maxHeight: '800px',
+      height: '800px',
+      width: '90%',
+      maxWidth: '1000px',
+    });
+  }
+
   getSales(){
-    this.salesService.getAllSalesRecordsQuery().subscribe(x => {
+    this.salesService.getAllSalesRecordsQuery(this.startDate, this.endDate).subscribe(x => {
       this.dataSource = new MatTableDataSource(x);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -165,7 +179,6 @@ export class SalesComponent implements OnInit {
       maxHeight: '600px',
       data: data
     }).afterClosed().subscribe(x => {
-      this.load();
       this.isLoading = false;
     });
   }
@@ -174,7 +187,10 @@ export class SalesComponent implements OnInit {
     this.dialogref = this.dialogservice.open(SalesDetailsComponentComponent, {
       width: '1000px',
       data: new SalesDto()
-    })
+    }).afterClosed().subscribe(x => {
+      this.load();
+      this.isLoading = false;
+    });
   }
 
   openSalesDetailsDialog() {

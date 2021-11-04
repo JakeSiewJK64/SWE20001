@@ -1,0 +1,6 @@
+.profile-container {
+    width: 3rem;
+    height: auto;
+    border-radius: 50%;
+    cursor: pointer;
+  }

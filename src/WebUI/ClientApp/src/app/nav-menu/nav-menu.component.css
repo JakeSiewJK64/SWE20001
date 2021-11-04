@@ -7,10 +7,15 @@ a.navbar-brand {
 html {
   font-size: 14px;
 }
+
 @media (min-width: 768px) {
   html {
     font-size: 16px;
   }
+}
+
+.bg-orange {
+  background-color: rgb(241, 196, 15, 1) !important;
 }
 
 .box-shadow {
@@ -21,6 +26,21 @@ html {
   width: 3rem;
   height: auto;
   margin: 5px;
+}
+
+@media (min-width: 768px) {
+  .link-active {
+    border-bottom: 3px green solid;
+    margin-bottom: -1.3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .link-active {
+    background-color: rgb(46, 204, 113, .1);
+    border-left: 3px green solid;
+    margin-bottom: -0.3rem;
+  }
 }
 
 .home-def-button {

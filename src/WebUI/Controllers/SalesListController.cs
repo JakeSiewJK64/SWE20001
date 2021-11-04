@@ -20,8 +20,8 @@ namespace CleanArchitecture.WebUI.Controllers
     public class SalesListController : ApiController
     {
         [HttpGet]
-        public async Task<ActionResult<List<SalesDto>>> GetAllSalesRecordsQuery()
-            => Ok(await Mediator.Send(new GetAllSalesQuery()));
+        public async Task<ActionResult<List<SalesDto>>> GetAllSalesRecordsQuery(DateTime startDate, DateTime endDate)
+            => Ok(await Mediator.Send(new GetAllSalesQuery { startDate = startDate, endDate = endDate}));
 
         [HttpGet]
         public async Task<ActionResult<List<SalesDto>>> GetSalesBySearchCriteriaQuery(string searchCriteria)
