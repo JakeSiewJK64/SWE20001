@@ -56,7 +56,7 @@
       </div>
       <div class="custom-container" fxLayoutAlign="center center" fxLayout="column"
         *ngIf="predictedItemCategorySales != null" fxFlex>
-        <span class="m-2">Predicted Sales for Item Type : {{ productCategoryFilter }}</span>
+        <span class="m-2">Predicted Sales for Item Type : {{ productCategoryFilter | splitString }}</span>
         <span class="m-1">{{ predictedItemCategorySales }}</span>
       </div>
     </div>

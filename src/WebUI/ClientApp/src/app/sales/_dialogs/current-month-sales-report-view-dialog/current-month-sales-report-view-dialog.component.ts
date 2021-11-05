@@ -86,7 +86,7 @@ export class CurrentMonthSalesReportViewDialogComponent implements OnInit {
             quantity: quantity
           }));
         }
-        this.totalRevenue += item.sellPrice * quantity;
+        this.totalRevenue += Math.round(item.sellPrice * quantity);
         itemList.push(itemId);
       }
       this.isLoading = false;

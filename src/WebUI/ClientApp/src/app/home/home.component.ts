@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit {
   productCategoryFilter: string;
   predictedProductSales: number;
   predictedItemCategorySales: number;
+  productNameFilter: string;
 
   highestSellingItem: string;
   highestSellingItemCategory: string;
@@ -78,6 +79,9 @@ export class HomeComponent implements OnInit {
   }
 
   predictProductSales() {
+    this.itemService.getItemsBySearchCriteriaQuery(this.productIdFilter.toString()).subscribe(x => {
+      this.productNameFilter = x[0].itemName;
+    })
     this.salesService.predictSalesOfItemForNextMonthQuery(this.productIdFilter, new Date()).subscribe(x => {
       this.predictedProductSales = x;
     })
