@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
-import { ExportSalesReportQuery, Item, ItemCategory, ItemsListClient, SalesDto, SalesListClient } from '../cleanarchitecture-api';
+import { ExportSalesReportQuery, Item, ItemCategory, ItemsDto, ItemsListClient, SalesDto, SalesListClient, Status } from '../cleanarchitecture-api';
 import { SalesDetailsComponentComponent } from '../sales/_dialogs/sales-details-component/sales-details-component.component';
 import { TdDialogService } from '@covalent/core/dialogs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-home',
@@ -13,9 +14,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  displayedColumns: string[] = ['Sales_ID', 'Employee_ID', 'Remarks', 'Date', 'CreatedBy', 'LastModifiedBy', 'isDeleted'];
-  dataSource: MatTableDataSource<SalesDto> = new MatTableDataSource<SalesDto>();
+  displayedColumns: string[] = ['itemId', 'itemName', 'itemCategory', 'status', 'quantity'];
+  dataSource: MatTableDataSource<ItemsDto>;
   dialogref: any;
+  ItemType = ItemCategory;
+  ItemStatus = Status;
   isLoading: boolean = false;
   filterCriteria: string;
   itemList: Item[] = [];
@@ -29,13 +32,13 @@ export class HomeComponent implements OnInit {
   predictedProductSales: number;
   predictedItemCategorySales: number;
   productNameFilter: string;
-
   highestSellingItem: string;
   highestSellingItemCategory: string;
   totalSalesCurrentMonth: number;
 
-  @ViewChild(MatTable) table: MatTable<SalesDto>;
+  @ViewChild(MatTable) table: MatTable<ItemsDto>;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(private salesService: SalesListClient,
     private snackbar: MatSnackBar,
@@ -54,16 +57,11 @@ export class HomeComponent implements OnInit {
 
   load() {
     this.isLoading = true;
+    this.dataSource = new MatTableDataSource<ItemsDto>();
     this.getItems();
     this.getTotalSalesCurrentMonth();
     this.getHighestSellingItem();
     this.getHighestSellingItemCategory();
-    this.salesService.getAllSalesRecordsQuery(undefined, undefined).subscribe(x => {
-      this.dataSource = new MatTableDataSource(x);
-      this.totalRecord = x.length;
-      this.dataSource.paginator = this.paginator;
-      this.isLoading = false;
-    });
   }
 
   getTotalSalesCurrentMonth() {
@@ -141,6 +139,16 @@ export class HomeComponent implements OnInit {
   getItems() {
     this.itemService.getAllItemsQuery().subscribe(x => {
       this.itemList = x;
+      this.dataSource = new MatTableDataSource();
+      x.forEach(y => {
+        if(y.status == 4){
+          this.dataSource.data.push(y);
+        }
+      });
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+      this.totalRecord = this.dataSource.data.length;
+      this.isLoading = false;
     });
   }
 
