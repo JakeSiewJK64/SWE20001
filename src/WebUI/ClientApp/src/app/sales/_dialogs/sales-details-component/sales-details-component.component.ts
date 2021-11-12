@@ -75,7 +75,7 @@ export class SalesDetailsComponentComponent implements OnInit {
       this.itemService.getItemsBySearchCriteriaQuery(x.itemId.toString()).subscribe(res => {
         if (res[0].quantity - x.quantity < 0) {
           if(res[0].quantity < 20) res[0].status = Status.LowStock;
-          else res[0].status = Status.Stable;
+          else res[0].status = Status.Normal;
           this.dialogService.openAlert({
             message: "Insufficient stock",
             title: "Oops!",
