@@ -18,7 +18,7 @@
     <div fxFlex fxLayout="row wrap" fxLayoutGap="10px">
       <mat-form-field appearance="outline" fxFlex (keydown.enter)="filterItems()">
         <mat-label>Search</mat-label>
-        <input type="text" matInput [(ngModel)]="searchCriteria"/>
+        <input type="text" matInput [(ngModel)]="searchCriteria" />
       </mat-form-field>
     </div>
     <button mat-raised-button color="warn" class="mb-4" (click)="filterItems()">
@@ -46,9 +46,13 @@
         <td mat-cell *matCellDef="let item"> {{ ItemType[item.itemCategory] }} </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="item-record" (click)="openEditDialogExisting(row)"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="item-record"
+        (click)="openEditDialogExisting(row)"></tr>
     </table>
   </div>
+  <span *ngIf="dataSource.data?.length <= 0">
+    No items found
+  </span>
 </div>
 <footer class="footer">
   <mat-paginator class="mat-paginator--stick-bottom" showFirstLastButtons [pageSizeOptions]="[5, 10, 25, 100]"
