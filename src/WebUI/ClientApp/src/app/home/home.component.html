@@ -63,6 +63,7 @@
       </div>
     </div>
   </div>
+ 
   <mat-card class="mat-elevation-z3" *ngIf="dataSource.data.length != 0" class="low-stock">
     <div fxLayoutAlign="center center">
       <img src="../../assets/images/low_critical.png" alt="" draggable="false">
@@ -79,7 +80,10 @@
         </ng-container>
         <ng-container matColumnDef="status">
           <th mat-header-cell *matHeaderCellDef> Status </th>
-          <td mat-cell *matCellDef="let item"> {{ ItemStatus[item.status] | splitString }} </td>
+          <td mat-cell *matCellDef="let item"> 
+          <span class="badge badge-pill badge-danger" *ngIf="ItemStatus[item.status] == 'OutOfStock'">Out of Stock</span>
+          <span class="badge badge-pill badge-warning" *ngIf="ItemStatus[item.status] == 'LowStock'">Low Stock</span>
+        </td>
         </ng-container>
         <ng-container matColumnDef="quantity">
           <th mat-header-cell *matHeaderCellDef> Quantity </th>
@@ -97,4 +101,5 @@
       </mat-paginator>
     </div>
   </mat-card>
+  
 </div>
