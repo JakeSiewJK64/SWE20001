@@ -75,7 +75,9 @@ export class ItemDetailsComponentComponent implements OnInit {
     item._costPrice = this.model.costPrice;
     item._editedOn = new Date();
     item._itemCategory = this.model.itemCategory;
-    item._status = this.model.status;
+    if(this.model.quantity > 20) {item._status = Status.Normal}
+    else if (this.model.quantity > 0 && this.model.quantity <= 20) {item._status = Status.LowStock}
+    else item._status = Status.OutOfStock;
     item._manufacturerName = this.model.manufacturerName;
     if(item._itemName.length <= 0) {
       this.dialogService.openAlert({

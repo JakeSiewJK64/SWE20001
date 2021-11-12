@@ -29,6 +29,9 @@ namespace CleanArchitecture.Application.Items.Commands.DeductItemCommand
             if(item == null) throw new Exception($"Item with id {request.ItemId} does not exist or has run out!");
             if(item.Quantity - request.Quantity < 0) throw new Exception($"Insufficient quantity for item {item.ItemName}");
             item.Quantity -= request.Quantity;
+            if (item.Quantity <= 20) item.Status = Domain.Enums.Status.LowStock;
+            if (item.Quantity == 0) item.Status = Domain.Enums.Status.OutOfStock;
+            if (item.Quantity > 20) item.Status = Domain.Enums.Status.Normal;
             _context.Items.Update(item);
             return await _context.SaveChangesAsync(cancellationToken);
         }

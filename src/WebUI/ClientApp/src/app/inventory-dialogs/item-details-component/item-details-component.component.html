@@ -33,7 +33,8 @@
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex>
       <mat-label>Status</mat-label>
-      <mat-select [(ngModel)]="model.status">
+    
+      <mat-select [(ngModel)]="model.status" [disabled]="true">
         <mat-option *ngFor="let status of ItemStatus | enumpipe" [value]="status.key">
           {{ status.value | splitString }}
         </mat-option>
