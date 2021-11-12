@@ -38,7 +38,6 @@ export class HomeComponent implements OnInit {
 
   @ViewChild(MatTable) table: MatTable<ItemsDto>;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
 
   constructor(private salesService: SalesListClient,
     private snackbar: MatSnackBar,
@@ -146,7 +145,6 @@ export class HomeComponent implements OnInit {
         }
       });
       this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
       this.totalRecord = this.dataSource.data.length;
       this.isLoading = false;
     });
