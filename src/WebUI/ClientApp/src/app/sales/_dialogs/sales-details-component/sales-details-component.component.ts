@@ -4,7 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTable } from '@angular/material/table';
 import { TdDialogService } from '@covalent/core/dialogs';
 import { AuthorizeService } from 'src/api-authorization/authorize.service';
-import { Item, ItemCategory, ItemsDto, ItemsListClient, SalesDto, SalesItemListDto, SalesListClient, UserClient } from 'src/app/cleanarchitecture-api';
+import { Item, ItemCategory, ItemsDto, ItemsListClient, SalesDto, SalesItemListDto, SalesListClient, Status, UserClient } from 'src/app/cleanarchitecture-api';
 import { EditSalesDetailsComponentComponent } from '../edit-sales-details-component/edit-sales-details-component.component';
 
 export class CustomSalesItemDto {
@@ -74,6 +74,8 @@ export class SalesDetailsComponentComponent implements OnInit {
       if (x == null || x == undefined) return;
       this.itemService.getItemsBySearchCriteriaQuery(x.itemId.toString()).subscribe(res => {
         if (res[0].quantity - x.quantity < 0) {
+          if(res[0].quantity < 20) res[0].status = Status.LowStock;
+          else res[0].status = Status.Stable;
           this.dialogService.openAlert({
             message: "Insufficient stock",
             title: "Oops!",
