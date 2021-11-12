@@ -8,7 +8,10 @@
   No items found
 </span>
 <div class="w-100" fxLayout="column wrap" fxLayoutGap="10px">
-  <div fxLayoutAlign="end end" fxLayout="column wrap">
+  <div fxLayoutAlign="end end" fxLayout="row wrap">
+    <button mat-icon-button (click)="load()" class="mt-3 mr-3">
+      <mat-icon>refresh</mat-icon>
+    </button>
     <button mat-raised-button color="warn" *ngIf="isAdmin" (click)="openAddItemDialog()">
       <mat-icon>add</mat-icon>
       Add Item
@@ -24,9 +27,6 @@
     <button mat-raised-button color="warn" class="mb-4" (click)="filterItems()">
       <mat-icon>search</mat-icon>
       Search
-    </button>
-    <button mat-icon-button (click)="load()" class="mt-3 mb-5">
-      <mat-icon>refresh</mat-icon>
     </button>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%;" matSort>
       <ng-container matColumnDef="itemId">

@@ -56,6 +56,7 @@ export class HomeComponent implements OnInit {
 
   load() {
     this.isLoading = true;
+
     this.dataSource = new MatTableDataSource<ItemsDto>();
     this.getItems();
     this.getTotalSalesCurrentMonth();
@@ -146,6 +147,7 @@ export class HomeComponent implements OnInit {
       });
       this.dataSource.paginator = this.paginator;
       this.totalRecord = this.dataSource.data.length;
+      if(this.totalRecord > 0) this.snackbar.open("There are items on low!", "OK", { duration: 5000, verticalPosition: 'top', horizontalPosition: 'center'});
       this.isLoading = false;
     });
   }
