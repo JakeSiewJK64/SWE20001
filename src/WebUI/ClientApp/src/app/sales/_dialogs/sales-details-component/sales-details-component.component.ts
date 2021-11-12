@@ -108,6 +108,7 @@ export class SalesDetailsComponentComponent implements OnInit {
       this.snackbar.open("Sales Items cannot be empty!", "OK", { duration: 5000 });
       return;
     }
+    if(this.data._salesRecordId == 0 || this.data._salesRecordId == undefined){
     this.item.forEach(x => {
       this.itemService.deductItemCommand(x.itemId, x.quantity).subscribe(x => {
       }, err => {
@@ -117,6 +118,7 @@ export class SalesDetailsComponentComponent implements OnInit {
         });
       });
     });
+  }
     this.data._salesItemList.forEach(x => {
       this.customItem = new CustomSalesItemDto()
       this.customItem.itemId = x.itemId
