@@ -141,7 +141,7 @@ export class HomeComponent implements OnInit {
       this.itemList = x;
       this.dataSource = new MatTableDataSource();
       x.forEach(y => {
-        if(y.status == 4){
+        if(y.status == 4 || y.status == 1){
           this.dataSource.data.push(y);
         }
       });

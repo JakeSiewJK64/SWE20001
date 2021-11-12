@@ -75,12 +75,18 @@ export class ItemDetailsComponentComponent implements OnInit {
     item._costPrice = this.model.costPrice;
     item._editedOn = new Date();
     item._itemCategory = this.model.itemCategory;
-    item._status = this.model.status;
+    if(this.model.quantity > 20) {item._status = Status.Normal}
+    else if (this.model.quantity > 0 && this.model.quantity <= 20) {item._status = Status.LowStock}
+    else item._status = Status.OutOfStock;
     item._manufacturerName = this.model.manufacturerName;
-    if(item._itemName.length <= 0) {
+    if(item._itemName == undefined || item._itemName.length <= 0
+      || item._quantity == undefined || item._quantity < 0
+      || item._status == undefined
+      || item._itemCategory == undefined
+      || item._manufacturerName == undefined) {
       this.dialogService.openAlert({
         title: "Oops!",
-        message: "Item name cannot be null!"
+        message: "Please check item values are correctly entered!"
       });
       return;
     }

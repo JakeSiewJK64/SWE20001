@@ -74,8 +74,6 @@ export class SalesDetailsComponentComponent implements OnInit {
       if (x == null || x == undefined) return;
       this.itemService.getItemsBySearchCriteriaQuery(x.itemId.toString()).subscribe(res => {
         if (res[0].quantity - x.quantity < 0) {
-          if(res[0].quantity < 20) res[0].status = Status.LowStock;
-          else res[0].status = Status.Normal;
           this.dialogService.openAlert({
             message: "Insufficient stock",
             title: "Oops!",
@@ -108,6 +106,7 @@ export class SalesDetailsComponentComponent implements OnInit {
       this.snackbar.open("Sales Items cannot be empty!", "OK", { duration: 5000 });
       return;
     }
+    if(this.data._salesRecordId == 0 || this.data._salesRecordId == undefined){
     this.item.forEach(x => {
       this.itemService.deductItemCommand(x.itemId, x.quantity).subscribe(x => {
       }, err => {
@@ -117,6 +116,7 @@ export class SalesDetailsComponentComponent implements OnInit {
         });
       });
     });
+  }
     this.data._salesItemList.forEach(x => {
       this.customItem = new CustomSalesItemDto()
       this.customItem.itemId = x.itemId

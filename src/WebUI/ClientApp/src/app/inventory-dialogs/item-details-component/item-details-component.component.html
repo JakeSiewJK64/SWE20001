@@ -11,29 +11,30 @@
   <div fxLayout="row" fxLayoutGap="5px" fxFlex="100">
     <mat-form-field appearance="outline" fxFlex="40">
       <mat-label>Item Name</mat-label>
-      <input matInput type="text" [(ngModel)]="model.itemName">
+      <input matInput type="text" [(ngModel)]="model.itemName" required>
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex>
       <mat-label>Quantity</mat-label>
-      <input matInput type="number" [(ngModel)]="model.quantity">
+      <input matInput type="number" [(ngModel)]="model.quantity" required>
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex>
       <mat-label>Cost Price</mat-label>
-      <input matInput type="number" [(ngModel)]="model.costPrice">
+      <input matInput type="number" [(ngModel)]="model.costPrice" required>
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex>
       <mat-label>Sell Price</mat-label>
-      <input matInput type="number" [(ngModel)]="model.sellPrice">
+      <input matInput type="number" [(ngModel)]="model.sellPrice" required>
     </mat-form-field>
   </div>
   <div fxLayout="row wrap" fxLayoutGap="5px">
     <mat-form-field appearance="outline" fxFlex>
       <mat-label>Manufacturer</mat-label>
-      <input matInput type="text" [(ngModel)]="model.manufacturerName">
+      <input matInput type="text" [(ngModel)]="model.manufacturerName" required>
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex>
       <mat-label>Status</mat-label>
-      <mat-select [(ngModel)]="model.status">
+    
+      <mat-select [(ngModel)]="model.status" [disabled]="true">
         <mat-option *ngFor="let status of ItemStatus | enumpipe" [value]="status.key">
           {{ status.value | splitString }}
         </mat-option>
