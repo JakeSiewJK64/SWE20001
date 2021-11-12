@@ -40,8 +40,8 @@
     <mat-form-field appearance="outline" fxFlex>
       <mat-label>Enter a date range</mat-label>
       <mat-date-range-input [rangePicker]="picker">
-        <input matStartDate [(ngModel)]="startDate">
-        <input matEndDate [(ngModel)]="endDate" (dateChange)="load()">
+        <input matStartDate [(ngModel)]="startDate" [readonly]="true">
+        <input matEndDate [(ngModel)]="endDate" (dateChange)="load()" [readonly]="true">
       </mat-date-range-input>
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-date-range-picker #picker></mat-date-range-picker>

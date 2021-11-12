@@ -10,6 +10,8 @@ namespace CleanArchitecture.Domain.Enums
         OutOfStock = 1,
         Stale = 2,
         SellingFast = 3,
+        LowStock = 4,
+        Normal = 5
     }
 
     public enum ItemCategory
