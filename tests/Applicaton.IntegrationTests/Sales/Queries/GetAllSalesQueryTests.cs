@@ -39,7 +39,8 @@ namespace CleanArchitecture.Application.IntegrationTests.Sales
 
             var theSales = await SendAsync(new GetAllSalesQuery
             {
-
+                startDate = System.DateTime.Now.Date.AddMonths(-2),
+                endDate = System.DateTime.Now.Date.AddDays(1)
             });
 
             theSales[0]._isDeleted.Should().Equals(newSalesObj._isDeleted);

@@ -40,7 +40,8 @@ namespace CleanArchitecture.Application.IntegrationTests.Sales
 
             var allSales = await SendAsync(new GetAllSalesQuery
             {
-
+                startDate = System.DateTime.Now.Date.AddMonths(-2),
+                endDate = System.DateTime.Now.Date.AddDays(1)
             });
             var firstSalesId = allSales[0]._salesRecordId;
 

@@ -17,12 +17,13 @@ namespace CleanArchitecture.Application.IntegrationTests.Sales
         {
             var salesId = await SendAsync(new UpsertSalesCommand
             {
-                salesObj = new SalesDto()
+                salesObj = new SalesDto{ _salesDate = System.DateTime.Now }
             });
 
             var theSales = await SendAsync(new GetAllSalesQuery
             {
-
+                startDate = System.DateTime.Now.Date.AddDays(-1),
+                endDate = System.DateTime.Now.Date.AddDays(1)
             });
             var theSalesId = theSales[0]._salesRecordId;
 
@@ -36,12 +37,13 @@ namespace CleanArchitecture.Application.IntegrationTests.Sales
         {
             var salesId = await SendAsync(new UpsertSalesCommand
             {
-                salesObj = new SalesDto()
+                salesObj = new SalesDto { _salesDate = System.DateTime.Now }
             });
 
             var theSales = await SendAsync(new GetAllSalesQuery
             {
-
+                startDate = System.DateTime.Now.Date.AddDays(-1),
+                endDate = System.DateTime.Now.Date.AddDays(1)
             });
             var theSalesId = theSales[0]._salesRecordId;
 

@@ -53,7 +53,7 @@ namespace CleanArchitecture.Application.Sales.Queries.GetSalesByIdQuery
             
             foreach (SalesDto s in sales)
             {
-                if (s._items.Length > 0)
+                if (s._items != null && s._items.Length > 0)
                 {
                     var items = new List<SalesItemListDto>();
                     foreach (SalesItemListDto d in s._items.ToObject<List<SalesItemListDto>>())
